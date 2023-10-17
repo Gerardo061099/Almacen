@@ -1,9 +1,9 @@
 <?php
 //datos del servidor
 $host = "localhost";//servidor
-$userdb = "root";//usuario
-$claveus = "root";//clavepass
-$nombredb = "bodega";//db bodega
+$userdb = "stacks";//usuario
+$claveus = "stacks147852369";//clavepass
+$nombredb = "almacen";//db bodega
 //tablas BD
 $tbu_db1 = "usuarios";
 $tbcat_db3 = "categorias";
