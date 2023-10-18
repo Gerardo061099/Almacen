@@ -1,5 +1,5 @@
 <?php
-    include("abrir_conexion.php");
+    include("php/abrir_conexion.php");
     $Descripcion = $_POST['descripcion'];
     $Material = $_POST['material'];
     if ($Descripcion != "" || $Material != "") {
@@ -8,6 +8,6 @@
     }else {
         echo "Los datos recibidos estan vacios";
     }
-    include("cerrar_conexion.php");
+    include("php/cerrar_conexion.php");
 ?>
 

@@ -21,14 +21,14 @@ ob_start();
             $_SESSION['sesion']=2;
         }
         else{
-            include("abrir_conexion.php");
+            include("php/abrir_conexion.php");
             $_SESSION['sesion']=3;
             $resultado = mysqli_query($conexion,"SELECT * FROM $tbu_db1 WHERE user = '$mail' AND pass = PASSWORD('$pwd')");
             while($consulta = mysqli_fetch_array($resultado)){
                 //echo "Bienvenido ".$consulta['user']." has iniciado sesion";
                 $_SESSION['sesion']=1;
             }
-            include("cerrar_conexion.php");
+            include("php/cerrar_conexion.php");
         }
     }
     if ($_SESSION['sesion']<>1) {
@@ -71,7 +71,7 @@ ob_start();
                 </div>
                 <div class="separador"></div>
             <?php
-                include("abrir_conexion.php");// conexion con la BD
+                include("php/abrir_conexion.php");// conexion con la BD
                 $resultados = mysqli_query($conexion,"SELECT h.id_herramienta,h.Nombre,c.material,c.descripcion,g.Num_gavilanes,m.Ancho,m.Largo,h.cantidad,h.fecha_hora FROM $tbherr_db7 h inner join $tbcat_db3 c on h.id_categoria = c.id_categoria inner join $tbgav_db6 g on h.id_gavilanes = g.id_gav inner join $tbmed_db9 m on h.id_medidas = m.id_medidas WHERE NOMBRE = 'CORTADOR' ORDER BY h.id_herramienta");
                 //Unimos tabla Herramientas con categorias y medidas
                 echo "
@@ -105,7 +105,7 @@ ob_start();
                             </tr>
                         </tbody>";
                 }
-                include("cerrar_conexion.php");
+                include("php/cerrar_conexion.php");
                 echo "
                     </table>
                 ";
@@ -113,12 +113,12 @@ ob_start();
             </div>
         </div>
         <?php
-        include("abrir_conexion.php");
+        include("php/abrir_conexion.php");
         $consulta = mysqli_query($conexion,"SELECT COUNT(*) as cortadores FROM $tbherr_db7 WHERE Nombre = 'Cortador'");
         while ($resultado = mysqli_fetch_array($consulta)){
             $n_cortadores = $resultado['cortadores'];
         }
-        include("cerrar_conexion.php");
+        include("php/cerrar_conexion.php");
         ?>
         <div class="informacion_piezas">
             <div class="informacion_p">
@@ -129,7 +129,7 @@ ob_start();
                     </button>'; ?> 
                 </p>
                 <?php
-                include("abrir_conexion.php");
+                include("php/abrir_conexion.php");
                 $query = mysqli_query($conexion,"SELECT COUNT(*) as brocas FROM $tbherr_db7 WHERE Nombre = 'Broca'");
                 while ($row = mysqli_fetch_array($query)){
                     $n_broca = $row['brocas'];
@@ -146,7 +146,6 @@ ob_start();
                 </div>
             <div class="separador"></div>
             <?php
-                include("abrir_conexion.php");// conexion con la BD
                 $resultados = mysqli_query($conexion,"SELECT h.id_herramienta,h.Nombre,c.material,c.descripcion,g.Num_gavilanes,m.Ancho,m.Largo,h.cantidad,h.fecha_hora FROM $tbherr_db7 h inner join $tbcat_db3 c on h.id_categoria = c.id_categoria inner join $tbgav_db6 g on h.id_gavilanes = g.id_gav inner join $tbmed_db9 m on h.id_medidas = m.id_medidas WHERE NOMBRE = 'Broca' ORDER BY h.id_herramienta");
                 //Unimos tabla Herramientas con categorias y medidas
                 echo "
@@ -180,7 +179,7 @@ ob_start();
                             </tr>
                         </tbody>";
                 }
-                include("cerrar_conexion.php");
+                include("php/cerrar_conexion.php");
                 echo "
                     </table>
                 ";

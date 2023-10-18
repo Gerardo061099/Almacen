@@ -1,5 +1,5 @@
 <?php
-        include("abrir_conexion.php");
+        include("php/abrir_conexion.php");
         //ajax
         $nombre = $_POST['nombre'];
         $cantidad = $_POST['cantidad'];
@@ -18,7 +18,7 @@
         }else {
                 mysqli_query($conexion, "INSERT INTO $tbherr_db7 (id_categoria,nombre,id_gavilanes,id_medidas,cantidad_minima,cantidad,fecha_hora) values ('$categoria','$nombre','$n_gavilanes','$medidas','$cantidadm','$cantidad',now())");
                 echo "Insercion exitosa";
-        include("cerrar_conexion.php");
+        include("php/cerrar_conexion.php");
         }
     
 ?>

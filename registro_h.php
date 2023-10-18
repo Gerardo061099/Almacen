@@ -25,14 +25,14 @@ ob_start();
             $_SESSION['sesion']=2;
         }
         else{
-            include("abrir_conexion.php");
+            include("php/abrir_conexion.php");
             $_SESSION['sesion']=3;
             $resultado = mysqli_query($conexion,"SELECT * FROM $tbu_db1 WHERE user = '$mail' AND pass = PASSWORD('$pwd')");
             while($consulta = mysqli_fetch_array($resultado)){
                 //echo "Bienvenido ".$consulta['user']." has iniciado sesion";
                 $_SESSION['sesion']=1;
             }
-            include("cerrar_conexion.php");
+            include("php/cerrar_conexion.php");
         }
     }
     if ($_SESSION['sesion']<>1) {
@@ -78,14 +78,14 @@ ob_start();
                                         <select id="gavilanes" id="gavilanes" class="form-control">
                                             <option selected>Choose...</option>
                                             <?php
-                                                include("abrir_conexion.php");
+                                                include("php/abrir_conexion.php");
                                                 //realizamos una consulta a la DB
                                                 $query = $conexion -> query ("SELECT * FROM $tbgav_db6 ORDER BY Num_gavilanes");
                                                 //mostramos los datos obtenidos mediante etiquetas de HTML
                                                     while ($valores = mysqli_fetch_array($query)) {
                                                         echo ('<option value="'.$valores['id_Gav'].'">'.$valores['Num_gavilanes'].'</option>');
                                                     }
-                                                include("cerrar_conexion.php");
+                                                include("php/cerrar_conexion.php");
                                             ?>
                                         </select>
                                 </div>
@@ -94,12 +94,12 @@ ob_start();
                                         <select id="medidas" class="form-control">
                                             <option selected>Choose...</option>
                                             <?php
-                                                include("abrir_conexion.php");
+                                                include("php/abrir_conexion.php");
                                                 $query = $conexion -> query ("SELECT * FROM $tbmed_db9");
                                                     while ($valores = mysqli_fetch_array($query)) {
                                                         echo ('<option value="'.$valores['id_Medidas'].'">'.$valores['Ancho'].' x '.$valores['Largo'].'</option>');
                                                     }
-                                                include("cerrar_conexion.php");
+                                                include("php/cerrar_conexion.php");
                                             ?>
                                         </select>
                                 </div>

@@ -16,6 +16,8 @@ $tbmed_db9 = "medidas";
 $tbsoli_db10 = "solicitud";
 //conexion
 $conexion = new mysqli($host,$userdb,$claveus,$nombredb);
+
+$charset = mysqli_set_charset( $conexion, 'utf8' );
 //En caso de haber datos erroneos del servidor
 if ($conexion->connect_errno) {
     echo "Problemas de conexion con el servidor...";

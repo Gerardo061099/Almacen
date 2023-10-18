@@ -26,14 +26,14 @@ ob_start();
             $_SESSION['sesion']=2;
         }
         else{
-            include("abrir_conexion.php");
+            include("php/abrir_conexion.php");
             $_SESSION['sesion']=3;
             $resultado = mysqli_query($conexion,"SELECT * FROM $tbu_db1 WHERE user = '$mail' AND pass = PASSWORD('$pwd')");
             while($consulta = mysqli_fetch_array($resultado)){
                 //echo "Bienvenido ".$consulta['user']." has iniciado sesion";
                 $_SESSION['sesion']=1;
             }
-            include("cerrar_conexion.php");
+            include("php/cerrar_conexion.php");
         }
     }
     if ($_SESSION['sesion']<>1) {

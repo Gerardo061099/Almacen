@@ -1,5 +1,5 @@
 <?php
-include("abrir_conexion.php");
+include("php/abrir_conexion.php");
 $id_herramienta = $_POST['N_herramienta'];
 $id_maquina = $_POST['N_maquina'];
 $cantidad = $_POST['cantidad'];//4
@@ -33,4 +33,5 @@ if ($id_herramienta != "Choose..." && $id_maquina != "Choose..." && $cantidad !=
 else {
     echo "Agunos datos están vacios";
 }
+include('php/cerrar_conexion.php');
 ?>

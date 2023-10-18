@@ -23,14 +23,14 @@ ob_start();
             $_SESSION['sesion']=2;
         }
         else{
-            include("abrir_conexion.php");
+            include("php/abrir_conexion.php");
             $_SESSION['sesion']=3;
             $resultado = mysqli_query($conexion,"SELECT * FROM $tbu_db1 WHERE user = '$mail' AND pass = PASSWORD('$pwd')");
             while($consulta = mysqli_fetch_array($resultado)){
                 //echo "Bienvenido ".$consulta['user']." has iniciado sesion";
                 $_SESSION['sesion']=1;
             }
-            include("cerrar_conexion.php");
+            include("php/cerrar_conexion.php");
         }
     }
     if ($_SESSION['sesion']<>1) {
@@ -58,12 +58,12 @@ ob_start();
                                 <select class="custom-select" id="herramienta">
                                     <option selected>Choose...</option>
                                     <?php
-                                        include("abrir_conexion.php");
+                                        include("php/abrir_conexion.php");
                                         $consulta = mysqli_query($conexion,"SELECT h.id_herramienta,h.Nombre,c.material,c.descripcion,m.Ancho,m.Largo FROM $tbherr_db7 h inner join $tbcat_db3 c on h.id_categoria = c.id_categoria inner join $tbmed_db9 m on h.id_medidas = m.id_medidas ORDER BY h.id_herramienta ");
                                         while ($res = mysqli_fetch_array($consulta)){
                                             echo '<option value='.$res['id_herramienta'].'>'.$res['Nombre'].' '.$res['material'].' '.$res['descripcion'].' '.$res['Ancho'].' x '.$res['Largo'].'</option>';
                                         }
-                                        include("cerrar_conexion.php");
+                                        include("php/cerrar_conexion.php");
                                     ?>
                                 </select>
                             </div>
@@ -72,12 +72,12 @@ ob_start();
                                 <select class="custom-select" id="maquina">
                                     <option selected>Choose...</option>
                                     <?php
-                                        include("abrir_conexion.php");
+                                        include("php/abrir_conexion.php");
                                         $con = mysqli_query($conexion,"SELECT id_Maquinaria,Nombre FROM $tbmaq_db8");
                                         while ($resul = mysqli_fetch_array($con)){
                                             echo '<option value='.$resul['id_Maquinaria'].'>'.$resul['Nombre'].'</option>';
                                         }
-                                        include("cerrar_conexion.php");
+                                        include("php/cerrar_conexion.php");
                                     ?>
                                 </select>
                             </div>

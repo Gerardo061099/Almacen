@@ -24,14 +24,14 @@ ob_start();
             $_SESSION['sesion']=2;
         }
         else{
-            include("abrir_conexion.php");
+            include("php/abrir_conexion.php");
             $_SESSION['sesion']=3;
             $resultado = mysqli_query($conexion,"SELECT * FROM $tbu_db1 WHERE user = '$mail' AND pass = PASSWORD('$pwd')");
             while($consulta = mysqli_fetch_array($resultado)){
                 //echo "Bienvenido ".$consulta['user']." has iniciado sesion";
                 $_SESSION['sesion']=1;
             }
-            include("cerrar_conexion.php");
+            include("php/cerrar_conexion.php");
         }
     }
     if ($_SESSION['sesion']<>1) {
@@ -43,8 +43,8 @@ ob_start();
         <a class="navbar-brand" href="pagina_principal.php">
             ALUXSA S.A de C.V
         </a>
-        <a class="navbar-brand" href="add_user.php">
-            <img src="img/add_user1.png" alt="">
+        <a class="navbar-brand" href="pagina_principal.php">
+            <img src="img/home.png" alt="">
         </a>
     </nav>
     <center>
@@ -64,12 +64,12 @@ ob_start();
                                 <select class="custom-select" id="id_h">
                                 <option selected>Choose...</option>
                                     <?php
-                                    include("abrir_conexion.php");
+                                    include("php/abrir_conexion.php");
                                     $query = $conexion -> query ("SELECT * FROM $tbherr_db7");
                                         while ($valores = mysqli_fetch_array($query)) {
                                             echo ('<option value="'.$valores['id_Herramienta'].'">'.$valores['id_Herramienta'].'</option>');
                                         }
-                                    include("cerrar_conexion.php");
+                                    include("php/cerrar_conexion.php");
                                     ?>
                                 </select>
                             </div>
@@ -99,12 +99,12 @@ ob_start();
                                     <select class="custom-select" id="medida_b" name="medida">
                                         <option selected>Choose...</option>
                                         <?php
-                                        include("abrir_conexion.php");
+                                        include("php/abrir_conexion.php");
                                         $consulta = mysqli_query($conexion,"SELECT m.ancho FROM $tbherr_db7 h INNER JOIN $tbmed_db9 m WHERE h.id_Medidas = m.id_Medidas ORDER BY h.id_herramienta");
                                             while($res = mysqli_fetch_array($consulta)){
                                                 echo '<option value="'.$res['ancho'].'">'.$res['ancho'].'</option>';   
                                             }
-                                        include("cerrar_conexion.php");
+                                        include("php/cerrar_conexion.php");
                                         ?>
                                     </select>
                                 </div>
@@ -121,29 +121,29 @@ ob_start();
                         <li class="list-group-item"><a class="navbar-brand" href="#">
                             <?php
                                 //Contamos la cantidad que hay en el almacen
-                                include("abrir_conexion.php");
+                                include("php/abrir_conexion.php");
                                 $resul = mysqli_query($conexion,"SELECT Count(id_herramienta) as herramientas FROM $tbherr_db7");
                                 while($consulta = mysqli_fetch_array($resul)){
-                                    echo "  <button type=\"button\" class=\"btn btn-primary\">
+                                    echo "  <button type=\"button\" class=\"btn btn-primary btn-sm\">
                                                 <strong>N° Piesas:</strong> <span class=\"badge badge-light\">".$consulta['herramientas']."</span>
                                             </button>
                                         ";
                                 }
-                                include("cerrar_conexion.php");
+                                include("php/cerrar_conexion.php");
                             ?>
                         </a></li>
                         <li class="list-group-item"><a class="navbar-brand" href="herramienta_agotada.php">
                             <?php
                                 //Contamos la cantidad que hay en el almacen
-                                include("abrir_conexion.php");
+                                include("php/abrir_conexion.php");
                                 $resul = mysqli_query($conexion,"SELECT Count(id_herramienta) as faltantes FROM $tbherr_db7 WHERE cantidad < Cantidad_Minima");
                                 while($consulta = mysqli_fetch_array($resul)){
-                                    echo "  <button type=\"button\" class=\"btn btn-danger\">
+                                    echo "  <button type=\"button\" class=\"btn btn-danger btn-sm\">
                                                 <strong>Agotadas:</strong> <span class=\"badge badge-light\">".$consulta['faltantes']."</span>
                                             </button>
                                         ";
                                 }
-                                include("cerrar_conexion.php");
+                                include("php/cerrar_conexion.php");
                             ?></a>
                         </li>
                     </ul>
@@ -157,7 +157,7 @@ ob_start();
                     </div>
                     <div class="tabla-herramientas">
                         <?php
-                            include("abrir_conexion.php");// conexion con la BD
+                            include("php/abrir_conexion.php");// conexion con la BD
                             $resultados = mysqli_query($conexion,"SELECT h.id_herramienta,h.Nombre,c.material,c.descripcion,g.Num_gavilanes,m.Ancho,m.Largo,h.cantidad_minima,h.cantidad,h.fecha_hora FROM $tbherr_db7 h inner join $tbcat_db3 c on h.id_categoria = c.id_categoria inner join $tbgav_db6 g on h.id_gavilanes = g.id_gav inner join $tbmed_db9 m on h.id_medidas = m.id_medidas ORDER BY h.id_herramienta");
                             //Unimos tabla Herramientas con categorias y medidas
                             echo "
@@ -175,7 +175,8 @@ ob_start();
                                                 <th><center>Cantidad</center></th>
                                                 <th><center>Fecha</center></th>
                                                 <th><center>Estado</center></th>
-                                                <th><center></center></th>
+                                                <th><center>Borrar</center></th>
+                                                <th><center>Editar</center></th>
                                             </tr>
                                         </thead>
                                 ";
@@ -214,50 +215,49 @@ ob_start();
                                         ?>
                                         </center></th>
                                         <th><center><a class="btn btn-danger btn-sm" href="eliminar.php?id=<?php echo $consulta['id_herramienta']?>" role="button">Eliminar</a></center></th>
+                                        <th><center><a class="btn btn-warning btn-sm" href="#" role="button">Editar</a></center></th>
                                     </tr>
                                 </tbody>
                             <?php
                             }
-                            include("cerrar_conexion.php");
+                            include("php/cerrar_conexion.php");
                             ?>
                                 </table><br>
                     </div>
             </div>
         </div>
     </center>
+    <div class="contador-h">
+        <div style="background: #2E4053; border-radius: 5px; "><center><h1 style="color: white;">Resultados</h1></center></div>
             <?php
-                include("abrir_conexion.php");
-                if (isset($_POST['buscar'])) {
-                    $her = $_POST['herramienta'];
-                    $med = $_POST['medida'];
-                    if ($her != 'Choose...' && $med != 'Choose...') {
-                        $consult = mysqli_query($conexion, "SELECT h.id_herramienta,h.Nombre,c.Descripcion,c.Material,g.Num_gavilanes,m.Ancho,m.Largo,h.Cantidad,h.rutaimg FROM $tbherr_db7 h inner join $tbcat_db3 c on h.id_categoria = c.id_categoria inner join $tbgav_db6 g on h.id_gavilanes = g.id_gav inner join $tbmed_db9 m on h.id_medidas = m.id_medidas WHERE Nombre LIKE '%$her%' AND Ancho LIKE '%$med%' ORDER BY h.id_herramienta");                    
-            ?>
-                    <div class="contador-h">
-                        <div style="background: #2E4053; border-radius: 5px; "><center><h1 style="color: white;">Resultados</h1></center></div>
-                            <?php
-                            while($consulta = mysqli_fetch_array($consult)) {
-                            ?>
-                            <div class="conten">
-                            <img src="<?php echo $consulta['rutaimg'];?>" id="imgs" alt="imagen no encontrada">
-                                <div class = "infor">
-                                    <h1 class="subt">Caracteristicas</h1>
-                                    <p><?php echo "# ".$consulta['id_herramienta']." Nombre: ".$consulta['Nombre']." de ".$consulta['Material']." ".$consulta['Descripcion'];?></p>
-                                    <p><?php echo "Medidas: ".$consulta['Ancho']." Ancho x ".$consulta['Largo']." Largo";?></p>
-                                    <p><?php echo"gavilanes: ".$consulta['Num_gavilanes']." Cantidad: ".$consulta['Cantidad'];?></p>
-                                </div>
-                            </div>
-                            <?php
-                                echo '
-                                <script>
-                                swal({
-                                    title: "Busqueda exitosa!!",
-                                    text: "Para ver los resultados deslice hacia arriba",
-                                    icon: "success"
-                                });
-                                </script>';
-                            }
-                    }else {
+            include("php/abrir_conexion.php");
+            if (isset($_POST['buscar'])) {
+                $her = $_POST['herramienta'];
+                $med = $_POST['medida'];
+                if ($her != 'Choose...' && $med != 'Choose...') {
+                    $consult = mysqli_query($conexion, "SELECT h.id_herramienta,h.Nombre,c.Descripcion,c.Material,g.Num_gavilanes,m.Ancho,m.Largo,h.Cantidad,h.rutaimg FROM $tbherr_db7 h inner join $tbcat_db3 c on h.id_categoria = c.id_categoria inner join $tbgav_db6 g on h.id_gavilanes = g.id_gav inner join $tbmed_db9 m on h.id_medidas = m.id_medidas WHERE Nombre LIKE '%$her%' AND Ancho LIKE '%$med%' ORDER BY h.id_herramienta");  
+                    while($consulta = mysqli_fetch_array($consult)) {
+                    ?>
+                    <div class="conten">
+                    <img src="<?php echo $consulta['rutaimg'];?>" id="imgs" alt="imagen no encontrada">
+                        <div class = "infor">
+                            <h1 class="subt">Caracteristicas</h1>
+                            <p><?php echo "# ".$consulta['id_herramienta']." Nombre: ".$consulta['Nombre']." de ".$consulta['Material']." ".$consulta['Descripcion'];?></p>
+                            <p><?php echo "Medidas: ".$consulta['Ancho']." Ancho x ".$consulta['Largo']." Largo";?></p>
+                            <p><?php echo"gavilanes: ".$consulta['Num_gavilanes']." Cantidad: ".$consulta['Cantidad'];?></p>
+                        </div>
+                    </div>
+                    <?php
+                        echo '
+                        <script>
+                        swal({
+                            title: "Busqueda exitosa!!",
+                            text: "Para ver los resultados deslice hacia arriba",
+                            icon: "success"
+                        });
+                        </script>';
+                    }
+                }else {
                     echo '
                     <script>
                         swal({
@@ -267,23 +267,13 @@ ob_start();
                         });
                     </script>';
                     }
-                    include("cerrar_conexion.php");
-                }
-                            ?>
-                    </div>
-    <nav aria-label="Page navigation example" style="margin: 10px 10px;">
-        <ul class="pagination justify-content-center">
-            <li class="page-item">
-                <a class="page-link" href="pagina_principal.php"><-</a>
-            </li>
-            <li class="page-item disabled"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="registros.php">2</a></li>
-            <li class="page-item"><a class="page-link" href="herramienta_agotada.php">3</a></li>
-            <li class="page-item">
-                <a class="page-link" href="registros.php">-></a>
-            </li>
-        </ul>
-    </nav>
+                include("php/cerrar_conexion.php");
+            } else {
+                echo '<div class="d-flex justify-content-center"><div class="alert alert-secondary " role="alert">Aquí se muestran los resultados de tu busqueda!!</div></div>';
+            }
+            ?>
+    </div>
+    
 </body>
 <script src="js/app.js"></script>
 </html>

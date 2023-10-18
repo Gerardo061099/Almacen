@@ -1,5 +1,5 @@
 <?php
-include("abrir_conexion.php");
+include("php/abrir_conexion.php");
 $nombre =$_POST['Nombre'];
 $apellidos =$_POST['Apellidos'];
 $n_empleado =$_POST['N_empleado'];
@@ -15,7 +15,7 @@ if ($nombre != "" && $apellidos != "" && $n_empleado != "" && $genero != "" ) {
         }else{
             echo "Tratamos de obtener los datos del empleado, pero no fue posible terminar el proceso.";
         }
-        include("cerrar_conexion.php");
+        include("php/cerrar_conexion.php");
 }
 else {
     echo "La insercion no se pudo ejecutar";

@@ -1,5 +1,5 @@
 <?php
-include("abrir_conexion.php");
+include("php/abrir_conexion.php");
 //variables obtenidas por metodo $ajax
 $id_h=$_POST['numero_h'];
 $cantidadn =$_POST['can'];
@@ -20,5 +20,5 @@ if ($id_h!="" && $cantidadn!="") {
 else {
     echo "ocurrio un error";
 }
-include("cerrar_conexion.php");
+include("php/cerrar_conexion.php");
 ?>

@@ -1,5 +1,5 @@
 <?php
-include("abrir_conexion.php");
+include("php/abrir_conexion.php");
 //Recibimos la variable id
 //realizamos una validadcion para saber si el documento .php esta recibiendo el valor id
 $id = $_GET['id'];
@@ -18,5 +18,5 @@ if ($id != "") {//validamos si la variable id esta vacia
         </script>";
     }
 }
-include("cerrar_conexion.php");
+include("php/cerrar_conexion.php");
 ?>

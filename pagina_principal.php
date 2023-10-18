@@ -23,7 +23,7 @@ ob_start();
             $_SESSION['sesion']=2;
         }
         else{
-            include("abrir_conexion.php");
+            include("php/abrir_conexion.php");
             $_SESSION['sesion']=3;
             $resultado = mysqli_query($conexion,"SELECT * FROM $tbu_db1 WHERE user = '$mail' AND pass = PASSWORD('$pwd')");
             while($consulta = mysqli_fetch_array($resultado)){
@@ -31,7 +31,7 @@ ob_start();
                 //echo "Bienvenido ".$consulta['user']." has iniciado sesion";
                 $_SESSION['sesion']=1;
             }
-            include("cerrar_conexion.php");
+            include("php/cerrar_conexion.php");
         }
     }
     if ($_SESSION['sesion']<>1) {
@@ -66,10 +66,15 @@ ob_start();
         <form name="form_reloj">
             <input type="text" name="reloj" size="10" onfocus="window.document.form_reloj.reloj.blur()" style="background-color : #283747; color : White; font-family : Verdana, Arial, Helvetica; font-size : 12pt; text-align : center;">
         </form>
-        <a class="navbar-brand" href="cerrar_sesion.php">
-        <img src="img/log-out.png" alt="">
-        </a>
-        
+        <div class="dropdown dropleft">
+            <button class="btn btn-dark" type="button" data-toggle="dropdown" aria-expanded="false">
+                <i class="fa-solid fa-ellipsis-vertical"></i>
+            </button>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="add_user.php"><i class="fa-solid fa-user-plus"></i>  Agregar usuario</a>
+                <a class="dropdown-item" href="cerrar_sesion.php"><i class="fa-solid fa-right-from-bracket"></i> Cerrar sesion</a>
+            </div>
+        </div>
     </nav>
     <center>
         <div class="box-1">
@@ -117,5 +122,12 @@ ob_start();
         </div>
     </div>
     </center>
+    
+    <script src="https://kit.fontawesome.com/282ec8cabc.js" crossorigin="anonymous"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+
 </body>
 </html>

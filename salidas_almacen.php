@@ -24,14 +24,14 @@ ob_start();
             $_SESSION['sesion']=2;
         }
         else{
-            include("abrir_conexion.php");
+            include("php/abrir_conexion.php");
             $_SESSION['sesion']=3;
             $resultado = mysqli_query($conexion,"SELECT * FROM $tbu_db1 WHERE user = '$mail' AND pass = PASSWORD('$pwd')");
             while($consulta = mysqli_fetch_array($resultado)){
                 //echo "Bienvenido ".$consulta['user']." has iniciado sesion";
                 $_SESSION['sesion']=1;
             }
-            include("cerrar_conexion.php");
+            include("php/cerrar_conexion.php");
         }
     }
     if ($_SESSION['sesion']<>1) {
@@ -48,18 +48,19 @@ ob_start();
         </a>
     </nav>
     <?php
-            include ("abrir_conexion.php");
+            include ("php/abrir_conexion.php");
             $consulta = mysqli_query($conexion, "SELECT Count(id_solicitud) AS solicitud FROM $tbdet_db4 where id_solicitud = (SELECT MAX(id_solicitud) FROM $tbdet_db4)");
             $resultado = mysqli_fetch_array($consulta);
+            include("php/cerrar_conexion.php");
     ?>
     <div class="box-registros">
         <div class="contenedor_registros">
             <div class="card" style="width: 18rem;">
                 <ul class="list-group list-group-flush">
                 <?php
-                        include ("abrir_conexion.php");
-                        $query = mysqli_query($conexion, "SELECT Nombre,Apellidos,N_Empleado FROM $tbem_db5 WHERE id_empleado = (SELECT MAX(id_empleado) FROM $tbem_db5)");
-                        $resul = mysqli_fetch_array($query);
+                include ("php/abrir_conexion.php");
+                    $query = mysqli_query($conexion, "SELECT Nombre,Apellidos,N_Empleado FROM $tbem_db5 WHERE id_empleado = (SELECT MAX(id_empleado) FROM $tbem_db5)");
+                    $resul = mysqli_fetch_array($query);
                 ?>
                     <li class="list-group-item"><img src="img/profile.png" alt="Sin respuesta del servidor"> <?php echo $resul['Nombre']." ".$resul['Apellidos'];?></li>
                     <li class="list-group-item">Número de empleado: <?php echo $resul['N_Empleado'];?></li>
@@ -67,11 +68,12 @@ ob_start();
                 </ul>
                 <div class="card-footer">
                     <?php
-                        include("abrir_conexion.php");
                         $consulta = mysqli_query($conexion, "SELECT MAX(id_solicitud) AS solicitud FROM $tbsoli_db10");
                         $res = mysqli_fetch_array($consulta);
                     ?>
-                    Número de solicitud: <?php  echo $res['solicitud']; ?>
+                    Número de solicitud: <?php  echo $res['solicitud']; 
+                    include('php/cerrar_conexion.php')
+                    ?>
                 </div>
             </div>
         </div>
@@ -81,7 +83,7 @@ ob_start();
                             </div>
                             <div class="tb_h">
                                 <?php
-                                    include("abrir_conexion.php");// conexion con la BD
+                                    include("php/abrir_conexion.php");// conexion con la BD
                                     $resultados = mysqli_query($conexion,"SELECT s.id_solicitud,e.nombre as solicitante,e.apellidos,h.Nombre as herramienta,c.Descripcion,c.Material,g.Num_gavilanes AS Gav,m.Largo,m.Ancho,d.cantidad,s.Fecha from $tbsoli_db10 s inner join $tbdet_db4 d on s.id_solicitud = d.id_solicitud inner join $tbherr_db7 h on d.id_herramientas = h.id_herramienta inner join $tbcat_db3 c on h.id_categoria = c.id_categoria inner join $tbgav_db6 g on h.id_gavilanes = g.id_gav inner join $tbmed_db9 m on h.id_medidas = m.id_medidas inner join $tbem_db5 e on s.id_empleado = e.id_empleado;");
                                     //Unimos tabla Herramientas con categorias y medidas
                                     echo "
@@ -122,9 +124,9 @@ ob_start();
                                 ?>
                                     <?php
                                     }
-                                    include("cerrar_conexion.php");
+                                    include("php/cerrar_conexion.php");
                                     ?>
-                                        </table><br>
+                                    </table><br>
             </div>
         </div>
     </div>

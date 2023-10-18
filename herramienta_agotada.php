@@ -24,14 +24,14 @@ ob_start();
             $_SESSION['sesion']=2;
         }
         else{
-            include("abrir_conexion.php");
+            include("php/abrir_conexion.php");
             $_SESSION['sesion']=3;
             $resultado = mysqli_query($conexion,"SELECT * FROM $tbu_db1 WHERE user = '$mail' AND pass = PASSWORD('$pwd')");
             while($consulta = mysqli_fetch_array($resultado)){
                 //echo "Bienvenido ".$consulta['user']." has iniciado sesion";
                 $_SESSION['sesion']=1;
             }
-            include("cerrar_conexion.php");
+            include("php/cerrar_conexion.php");
         }
     }
     if ($_SESSION['sesion']<>1) {
@@ -53,7 +53,7 @@ ob_start();
             <h1 class="subtitulo2">Herramientas Agotadas</h1>
                 <div class="tb">
                 <?php
-                    include("abrir_conexion.php");// conexion con la BD
+                    include("php/abrir_conexion.php");// conexion con la BD
                     $resultados = mysqli_query($conexion,"SELECT h.id_herramienta,h.Nombre,c.material,c.descripcion,g.Num_gavilanes,m.Ancho,m.Largo,h.cantidad_minima,h.cantidad,h.fecha_hora FROM $tbherr_db7 h inner join categorias c on h.id_categoria = c.id_categoria inner join gavilanes g on h.id_gavilanes = g.id_gav inner join medidas m on h.id_medidas = m.id_medidas  WHERE cantidad < Cantidad_Minima ORDER BY id_herramienta");
                     //Unimos tabla Herramientas con categorias y medidas
                 ?>
@@ -91,7 +91,7 @@ ob_start();
                             }?>
                         </table><br>
                         <?php
-                        include("cerrar_conexion.php");
+                        include("php/cerrar_conexion.php");
                         ?>
                 </div>
             </div>

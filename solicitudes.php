@@ -23,14 +23,14 @@ ob_start();
             $_SESSION['sesion']=2;
         }
         else{
-            include("abrir_conexion.php");
+            include("php/abrir_conexion.php");
             $_SESSION['sesion']=3;
             $resultado = mysqli_query($conexion,"SELECT * FROM $tbu_db1 WHERE user = '$mail' AND pass = PASSWORD('$pwd')");
             while($consulta = mysqli_fetch_array($resultado)){
                 //echo "Bienvenido ".$consulta['user']." has iniciado sesion";
                 $_SESSION['sesion']=1;
             }
-            include("cerrar_conexion.php");
+            include("php/cerrar_conexion.php");
         }
     }
     if ($_SESSION['sesion']<>1) {
@@ -47,39 +47,39 @@ ob_start();
             </div>
         </div>
     <div class="aside1">
-                <div class="contenedor" style="border-left: #48C9B0 7px solid;">
-                    <div class="aside">
-                        <form>
-                            <img src="img/documents.png" alt=""><!-- from. Realizar una solicitud -->
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="nombre">Nombre :</label>
-                                    <input type="text" class="form-control" id="nombre" placeholder="">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="cantidad">Apellidos:</label>
-                                    <input type="text" class="form-control" id="ap">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="cantidad">N° Empleado:</label>
-                                    <input type="text" class="form-control" id="n_empleado" maxlength="5">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="genero">Genero:</label>
-                                    <select class="custom-select" id="genero">
-                                        <option selected>Choose...</option>
-                                        <option value="Hombre">Hombre</option>
-                                        <option value="Mujer">Mujer</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <input type="submit" value="Siguiente" class="btn btn-outline-info" onclick="subirsolicitud(event)">
-                            <a class="btn btn-danger" href="pagina_principal.php" role="button">Cancelar</a>
-                            <br><br>
-                            <div id="cargar"></div>
-                        </form>
+        <div class="contenedor" style="border-left: #48C9B0 7px solid;">
+            <div class="aside">
+                <form>
+                    <img src="img/documents.png" alt=""><!-- from. Realizar una solicitud -->
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="nombre">Nombre :</label>
+                            <input type="text" class="form-control" id="nombre" placeholder="">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="cantidad">Apellidos:</label>
+                            <input type="text" class="form-control" id="ap">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="cantidad">N° Empleado:</label>
+                            <input type="text" class="form-control" id="n_empleado" maxlength="5">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="genero">Genero:</label>
+                            <select class="custom-select" id="genero">
+                                <option selected>Choose...</option>
+                                <option value="Hombre">Hombre</option>
+                                <option value="Mujer">Mujer</option>
+                            </select>
+                        </div>
                     </div>
-                </div>
+                    <input type="submit" value="Siguiente" class="btn btn-outline-info" onclick="subirsolicitud(event)">
+                    <a class="btn btn-danger" href="pagina_principal.php" role="button">Cancelar</a>
+                    <br><br>
+                    <div id="cargar"></div>
+                </form>
+            </div>
+        </div>
     </div>
     
 </body>
