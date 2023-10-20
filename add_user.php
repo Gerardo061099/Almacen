@@ -38,20 +38,20 @@
             }
     ?>
     <header>
-        <nav class="navbar navbar-dark bg-dark">
+        <nav class="navbar navbar-dark bg-dark ">
             <a class="navbar-brand" href="pagina_principal.php">
                 ALUXSA S.A de C.V
             </a>
         </nav>
     </header>
-    <main class="px-3 py-3">
+    <main class="px-3 py-1">
         <header class="box-1">
             <div class="encabesado">
                 <h1 class="titulo">Agregar Usuario</h1>
             </div>
         </header>
-        <article class="d-felx">
-            <div class=" justify-content-start">
+        <article class=" pb-2">
+            <div class="">
                 <button type="button" class="btn btn-dark" id="btn_open_modal"><i class="fa-regular fa-square-plus"></i></button>
             </div>
             <!-- Modal -->
@@ -59,54 +59,55 @@
                 <div class="modal-dialog">
                     <div class="modal-content bg-dark text-white">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                            <h5 class="modal-title" id="modal_title"></h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form>
+                            <form id="frm_add_user">
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label for="nombre_u">Nombre</label>
-                                        <input type="text" class="form-control" id="nombre_u">
+                                        <input type="text" class="form-control form-control-sm" id="nombre_u">
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="apellidos_u">Apellidos</label>
-                                        <input type="password" class="form-control" id="apellidos_u">
+                                        <input type="text" class="form-control form-control-sm" id="apellidos_u">
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="num_e">N° Empleado</label>
-                                    <input type="text" class="form-control" id="num_e">
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label for="email_u">Email</label>
-                                        <input type="email" class="form-control" id="email_u" placeholder="1234 Main St">
+                                        <input type="text" class="form-control form-control-sm" id="email_u" placeholder="1234 Main St">
                                     </div>
-                                    <div class="form-group col-md-2">
+                                    <div class="form-group col-md-6">
                                         <label for="pass_u">Password</label>
-                                        <input type="text" class="form-control" id="pass_u">
+                                        <input type="password" class="form-control form-control-sm" id="pass_u">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-4">
+                                        <label for="num_e">N° Empleado</label>
+                                        <input type="number" class="form-control form-control-sm" id="num_e" min="1">
                                     </div>
                                     <div class="form-group col-md-4">
-                                        <label for="inputState">State</label>
-                                        <select id="inputState" class="form-control">
+                                        <label for="estado_u">State</label>
+                                        <select id="estado_u" class="form-control form-control-sm">
                                             <option selected>Choose...</option>
-                                            <option>...</option>
+                                            <option value="Activo">Activo</option>
+                                            <option value="Inactivo">Inactivo</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="gridCheck">
-                                    <label class="form-check-label" for="gridCheck">
-                                        Show Password
-                                    </label>
+                                        <input class="form-check-input" type="checkbox" id="gridCheck">
+                                        <label class="form-check-label" for="gridCheck">Show Password</label>
                                     </div>
                                 </div>
                                 <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary btn-sm">Save changes</button>
+                                <button type="submit" class="btn btn-primary btn-sm">Agregar</button>
                             </form>
                         </div>
                     </div>
@@ -142,19 +143,21 @@
             </table>
         </section>
     </main>
+    <!--
     <footer class="w-100 h-100 " style="background-color: aliceblue;">
         ALUXSA S.A DE C.V Todos los Derechos Reservados
     </footer>
-
+        -->
     <script src="https://kit.fontawesome.com/282ec8cabc.js" crossorigin="anonymous"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-        <!--CDN swal(sweatalert)-->
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <!--CDN swal(sweatalert)-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
     
     <script src="https://cdn.datatables.net/v/bs4/dt-1.13.6/datatables.min.js"></script>
+
     <script type="module" src="js/tabla_usuarios.js"></script>
 </body>
 </html>
