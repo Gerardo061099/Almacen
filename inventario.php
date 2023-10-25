@@ -186,6 +186,16 @@
                                         </thead>
                                 ";
                                 while($consulta = mysqli_fetch_array($resultados)) {
+                                    $datos = $consulta['id_herramienta'] ||
+                                            $consulta['Nombre'] ||
+                                            $consulta['material'] ||
+                                            $consulta['descripcion'] ||
+                                            $consulta['Num_gavilanes'] ||
+                                            $consulta['Ancho'] ||
+                                            $consulta['Largo'] ||
+                                            $consulta['cantidad_minima'] ||
+                                            $consulta['cantidad'] ||
+                                            $consulta['fecha_hora'];
                                 echo 
                                 "<tbody class=\"body-tb\">
                                     <tr>
@@ -220,7 +230,7 @@
                                         ?>
                                         </center></th>
                                         <th><center><a class="btn btn-danger btn-sm" href="eliminar.php?id=<?php echo $consulta['id_herramienta']?>" role="button">Eliminar</a></center></th>
-                                        <th><center><a class="btn btn-warning btn-sm" href="#" role="button">Editar</a></center></th>
+                                        <th><center><a class="btn btn-warning btn-sm" role="button" onclick="Update_infousers(<?php echo $datos?>)">Editar</a></center></th>
                                     </tr>
                                 </tbody>
                             <?php
@@ -229,6 +239,35 @@
                             ?>
                                 </table><br>
                     </div>
+            </div>
+        </div>
+        <div class="modal fade" id="ModalEditar" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="">
+                            <div class="form-row">
+                                <div class="col">
+                                    <input type="text" id="nombremodal" class="form-control" placeholder="First name">
+                                </div>
+                                <div class="col">
+                                    <input type="text" id="apellidosmodal" class="form-control" placeholder="Last name">
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
             </div>
         </div>
     </center>
@@ -287,7 +326,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
     <script type="module" src="js/app.js"></script>
+    <script src="js/funciones_herramientas.js"></script>
     <script type="module" src="js/buscar_app.js"></script>
-    <script type="module" src="js/funcion.js"></script>
 </body>
 </html>
