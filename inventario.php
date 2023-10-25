@@ -1,3 +1,21 @@
+<?php
+//importante
+    session_start();
+    include("php/abrir_conexion.php");
+    if (isset($_SESSION['id'])) {
+        $id = $_SESSION['id'];
+        $queryUser = mysqli_query($conexion,"SELECT user FROM $tbu_db1 WHERE id_us = $id");
+        $result = mysqli_fetch_assoc($queryUser);
+
+        $user = null;
+        if (mysqli_num_rows($queryUser) > 0) {
+            $user = $result;
+            $_SESSION['usuario'] = $user['user'];
+        }
+    } else {
+        header('Location: login.php');
+    }
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -9,43 +27,32 @@
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/styles.css">    
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script><!--CDN swal(sweatalert)-->
-    <script src="extensions/auto-refresh/bootstrap-table-auto-refresh.js"></script>
+    <!-----------CDN swal(sweatalert)------------->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body class="pag">
-<?php
-session_start();
-ob_start();
-    if (isset($_POST['btn1'])) {
-        $_SESSION['sesion']=0;//No a inisiado sesion
-        $mail = $_POST['user'];
-        $pwd = $_POST['pass'];
-        if ($mail == "" || $pwd == "") {//Revisamos si algun campo está vacio
-            $_SESSION['sesion']=2;
-        }
-        else{
-            include("php/abrir_conexion.php");
-            $_SESSION['sesion']=3;
-            $resultado = mysqli_query($conexion,"SELECT * FROM $tbu_db1 WHERE user = '$mail' AND pass = PASSWORD('$pwd')");
-            while($consulta = mysqli_fetch_array($resultado)){
-                //echo "Bienvenido ".$consulta['user']." has iniciado sesion";
-                $_SESSION['sesion']=1;
-            }
-            include("php/cerrar_conexion.php");
-        }
-    }
-    if ($_SESSION['sesion']<>1) {
-        header("Location:index.php");
-    }
-?>
     <!-- Image and text -->
     <nav class="navbar navbar-dark bg-dark">
         <a class="navbar-brand" href="pagina_principal.php">
             ALUXSA S.A de C.V
         </a>
-        <a class="navbar-brand" href="pagina_principal.php">
-            <img src="img/home.png" alt="">
-        </a>
+        <div class="dropdown d-flex align-items-center pr-4">
+            <div class="px-2">
+                <img src="img/login_profile_user.png" alt="">
+            </div>
+            <p class="mb-0 px-1">
+                <span class="text-white"><?php echo $_SESSION['usuario'];?></span>
+            </p>
+            <button class="btn btn-dark" type="button" data-toggle="dropdown" aria-expanded="false">
+                <i class="fa-solid fa-ellipsis-vertical"></i>
+            </button>
+            <div class="dropdown-menu dropdown-menu-right">
+                <a class="dropdown-item" href="pagina_principal.php"><i class="fa-solid fa-house"></i> Inicio</a>
+                <a class="dropdown-item" href="add_user.php"><i class="fa-solid fa-user-plus"></i> Agregar usuario</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="php/cerrar_sesion.php"><i class="fa-solid fa-right-from-bracket"></i> Cerrar sesion</a>
+            </div>
+        </div>
     </nav>
     <center>
         <div>
@@ -89,23 +96,21 @@ ob_start();
                                     <label for="herra_b">Herramienta:</label>
                                     <select class="custom-select" id="herra_b" name="herramienta">
                                         <option selected>Choose...</option>
-                                        <option value="Cortador">Cortador</option>
-                                        <option value="Broca">Broca</option>
-                                        <option value="Broca">Machuelo</option>
+                                        <?php
+                                        include("php/abrir_conexion.php"); 
+                                        $queryH = mysqli_query($conexion,"SELECT nombre FROM $tbherr_db7 GROUP BY nombre");
+                                            while($res = mysqli_fetch_array($queryH)){
+                                                echo '<option value="'.$res['nombre'].'">'.$res['nombre'].'</option>';   
+                                            }
+                                        include("php/cerrar_conexion.php");
+                                        ?>
                                     </select>
                                 </div>
                                 <div class="col-md-5 my-1">
                                     <label for="medida_b">Medida:</label>
                                     <select class="custom-select" id="medida_b" name="medida">
                                         <option selected>Choose...</option>
-                                        <?php
-                                        include("php/abrir_conexion.php");
-                                        $consulta = mysqli_query($conexion,"SELECT m.ancho FROM $tbherr_db7 h INNER JOIN $tbmed_db9 m WHERE h.id_Medidas = m.id_Medidas ORDER BY h.id_herramienta");
-                                            while($res = mysqli_fetch_array($consulta)){
-                                                echo '<option value="'.$res['ancho'].'">'.$res['ancho'].'</option>';   
-                                            }
-                                        include("php/cerrar_conexion.php");
-                                        ?>
+                                        
                                     </select>
                                 </div>
                             </div>
@@ -161,7 +166,7 @@ ob_start();
                             $resultados = mysqli_query($conexion,"SELECT h.id_herramienta,h.Nombre,c.material,c.descripcion,g.Num_gavilanes,m.Ancho,m.Largo,h.cantidad_minima,h.cantidad,h.fecha_hora FROM $tbherr_db7 h inner join $tbcat_db3 c on h.id_categoria = c.id_categoria inner join $tbgav_db6 g on h.id_gavilanes = g.id_gav inner join $tbmed_db9 m on h.id_medidas = m.id_medidas ORDER BY h.id_herramienta");
                             //Unimos tabla Herramientas con categorias y medidas
                             echo "
-                            <table class=\"table\" id=\"herramientas\">
+                            <table class=\"table table-striped\" id=\"herramientas\">
                                         <thead class=\"thead-dark\">
                                             <tr>
                                                 <th><center>#</center></th>
@@ -180,7 +185,7 @@ ob_start();
                                             </tr>
                                         </thead>
                                 ";
-                                while($consulta = mysqli_fetch_array($resultados)){
+                                while($consulta = mysqli_fetch_array($resultados)) {
                                 echo 
                                 "<tbody class=\"body-tb\">
                                     <tr>
@@ -227,8 +232,9 @@ ob_start();
             </div>
         </div>
     </center>
-    <div class="contador-h">
-        <div style="background: #2E4053; border-radius: 5px; "><center><h1 style="color: white;">Resultados</h1></center></div>
+    <div class="contador-h" id="resultados_search">
+        <div class="container_resultados_busqueda">
+            <div style="background: #2E4053; border-radius: 5px; "><center><h1 style="color: white;">Resultados</h1></center></div>
             <?php
             include("php/abrir_conexion.php");
             if (isset($_POST['buscar'])) {
@@ -237,7 +243,7 @@ ob_start();
                 if ($her != 'Choose...' && $med != 'Choose...') {
                     $consult = mysqli_query($conexion, "SELECT h.id_herramienta,h.Nombre,c.Descripcion,c.Material,g.Num_gavilanes,m.Ancho,m.Largo,h.Cantidad,h.rutaimg FROM $tbherr_db7 h inner join $tbcat_db3 c on h.id_categoria = c.id_categoria inner join $tbgav_db6 g on h.id_gavilanes = g.id_gav inner join $tbmed_db9 m on h.id_medidas = m.id_medidas WHERE Nombre LIKE '%$her%' AND Ancho LIKE '%$med%' ORDER BY h.id_herramienta");  
                     while($consulta = mysqli_fetch_array($consult)) {
-                    ?>
+            ?>
                     <div class="conten">
                     <img src="<?php echo $consulta['rutaimg'];?>" id="imgs" alt="imagen no encontrada">
                         <div class = "infor">
@@ -247,7 +253,7 @@ ob_start();
                             <p><?php echo"gavilanes: ".$consulta['Num_gavilanes']." Cantidad: ".$consulta['Cantidad'];?></p>
                         </div>
                     </div>
-                    <?php
+            <?php
                         echo '
                         <script>
                         swal({
@@ -272,8 +278,16 @@ ob_start();
                 echo '<div class="d-flex justify-content-center"><div class="alert alert-secondary " role="alert">Aquí se muestran los resultados de tu busqueda!!</div></div>';
             }
             ?>
+        </div>
     </div>
-    
+
+    <script src="https://kit.fontawesome.com/282ec8cabc.js" crossorigin="anonymous"></script>
+    <!-----------CDN JQuery----------------------->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+    <script type="module" src="js/app.js"></script>
+    <script type="module" src="js/buscar_app.js"></script>
+    <script type="module" src="js/funcion.js"></script>
 </body>
-<script src="js/app.js"></script>
 </html>

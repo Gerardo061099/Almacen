@@ -1,3 +1,21 @@
+<?php
+//importante
+    session_start();
+    include("php/abrir_conexion.php");
+    if (isset($_SESSION['id'])) {
+        $id = $_SESSION['id'];
+        $queryUser = mysqli_query($conexion,"SELECT user FROM $tbu_db1 WHERE id_us = $id");
+        $result = mysqli_fetch_assoc($queryUser);
+
+        $user = null;
+        if (mysqli_num_rows($queryUser) > 0) {
+            $user = $result;
+            $_SESSION['usuario'] = $user['user'];
+        }
+    } else {
+        header('Location: login.php');
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,36 +30,28 @@
     <link href="https://cdn.datatables.net/v/bs4/dt-1.13.6/datatables.min.css" rel="stylesheet">
 </head>
 <body style="background: #17202A;">
-    <?php
-        session_start();
-        ob_start();
-            if (isset($_POST['btn1'])) {
-                $_SESSION['sesion']=0;//No a inisiado sesion
-                $mail = $_POST['user'];
-                $pwd = $_POST['pass'];
-                if ($mail == "" || $pwd == "") {//Revisamos si algun campo está vacio
-                    $_SESSION['sesion']=2;
-                }
-                else{
-                    include("php/abrir_conexion.php");
-                    $_SESSION['sesion']=3;
-                    $resultado = mysqli_query($conexion,"SELECT * FROM $tbu_db1 WHERE user = '$mail' AND pass = PASSWORD('$pwd')");
-                    while($consulta = mysqli_fetch_array($resultado)){
-                        //echo "Bienvenido ".$consulta['user']." has iniciado sesion";
-                        $_SESSION['sesion']=1;
-                    }
-                    include("php/cerrar_conexion.php");
-                }
-            }
-            if ($_SESSION['sesion']<>1) {
-                header("Location:index.php");
-            }
-    ?>
     <header>
         <nav class="navbar navbar-dark bg-dark ">
             <a class="navbar-brand" href="pagina_principal.php">
                 ALUXSA S.A de C.V
             </a>
+            <div class="dropdown d-flex align-items-center pr-4">
+                <div class="px-2"> 
+                    <img src="img/login_profile_user.png" alt="">
+                </div>
+                <p class="mb-0 px-1">
+                    <span class="text-white"><?php echo $_SESSION['usuario'];?></span>
+                </p>
+                <button class="btn btn-dark" type="button" data-toggle="dropdown" aria-expanded="false">
+                    <i class="fa-solid fa-ellipsis-vertical"></i>
+                </button>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <a class="dropdown-item" href="pagina_principal.php"><i class="fa-solid fa-house"></i> Inicio</a>
+                    <a class="dropdown-item" href="#"><i class="fa-solid fa-user-plus"></i> Agregar usuario</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="php/cerrar_sesion.php"><i class="fa-solid fa-right-from-bracket"></i> Cerrar sesion</a>
+                </div>
+            </div>
         </nav>
     </header>
     <main class="px-3 py-1">
@@ -49,6 +59,7 @@
             <div class="encabesado">
                 <h1 class="titulo">Agregar Usuario</h1>
             </div>
+            
         </header>
         <article class=" pb-2">
             <div class="">

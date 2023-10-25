@@ -1,9 +1,30 @@
+<?php
+    session_start();
+    include("php/abrir_conexion.php");
+    if (isset($_SESSION['id'])) {
+        header('Location: pagina_principal.php');
+    }
+    $message = '';
+    if (!empty($_POST['user']) && !empty($_POST['pass'])) {
+        $user = $_POST['user'];
+        $loginUser = mysqli_query($conexion,"SELECT id_us,user,pass FROM $tbu_db1 WHERE user = '$user'");
+        $result = mysqli_fetch_assoc($loginUser);
+
+        if (mysqli_num_rows($loginUser) > 0 && password_verify($_POST['pass'],$result['pass'])) {
+            $_SESSION ['id'] = $result['id_us'];
+            header('Location: pagina_principal.php');
+        } else {
+            $message = 'Lo siento, las credenciales no coinciden';
+        }
+    }
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="img/pie-chart.png">
     <title>Inicio de Sesion</title>
     <link rel="stylesheet" href="css/styles.css">
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script><!--CDN swal(sweatalert)-->
@@ -14,11 +35,14 @@
         <div class="col-md-4" style="padding: 0px; width: 30%;"></div>
             <div class="col-md-4 " id="login">
                 <center><h1 style="margin-top: 5px;" class="titulo1">Inicio de Sesion</h1>
-                    <div class="contenedoru">
-                        <img class="usuario" src="img/user.png" alt="imagen no disponible">
+                    <div class="">
+                        <img class="" src="img/login_profile.png" alt="imagen no disponible">
                     </div>
                 </center>
-                <form method="POST" action="pagina_principal.php" style="margin: 8px 8px">
+                <?php if (!empty($message)):?>
+                    <p class="d-flex justify-content-center"><span class="badge badge-danger"><?= $message ?></span></p>
+                <?php endif;?>
+                <form method="POST" action="login.php" style="margin: 8px 8px">
                     <div class="formulario" style="text-align: center; ">
                         <div class="form-group">
                             <label for="user" class="usuariola">Nombre de usuario:</label>
@@ -38,48 +62,5 @@
         <div class="col-md-4" style="padding: 0px; width: 30%;"></div>
     </div>
     <center><p class="ley">Aluminios Xalatlaco S.A de C.V. Software v0.1</p></center>
-            <?php
-            //utilizando variables globales
-            //control de usuarios
-            session_start();
-            ob_start();
-                if(isset($_SESSION['sesion'])){ 
-                    if($_SESSION['sesion']==2){//Error de campos vacios
-                        echo "<script>
-                            swal({
-                                title: \"Campos Vacios:\",
-                                text:\"Debes llenar todos los campos.\",
-                                icon:\"warning\",
-                                dangerMode: true,
-                            });
-                        </script>";
-                    }
-                    if($_SESSION['sesion']==3){//Error de datos incorrectos 
-                        echo "<script>
-                            swal({
-                                title: \"DATOS INCORRECTOS:\",
-                                text: \"Verifica el usuario o la Contraseña.\",
-                                icon: \"warning\",
-                                dangerMode: \"true\",
-                            });
-                        </script>";
-                    }
-                }
-                else{
-                    $_SESSION['sesion']=0;//No se ha iniciado sesion
-                }
-            ?>
-            <?php
-                if($_SESSION['sesion']==4){
-                    echo "<script>
-                        swal({
-                            title: \"Sesion Cerrada\",
-                            text: \"GRACIAS POR USAR NUESTROS SERVICIOS\",
-                            icon: \"success\",
-                        });
-                    </script>";
-                }
-                $_SESSION['sesion']=0; //Despues de confirmar el error, igualo lo variable a 0
-            ?>
 </body>
 </html>

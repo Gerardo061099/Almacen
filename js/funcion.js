@@ -27,7 +27,7 @@ function medidas(e) {
                         title: "Insercion exitosa",
                         text: "Los datos se agregaron correctamente",
                         icon: "success"
-                    });
+                    })
                 } else {
                     swal({
                         title: "Error",
@@ -36,6 +36,35 @@ function medidas(e) {
                     });
                 }
             }
-        });
+        })
     }
 }
+$(document).ready(function () {
+    function searchOptions() {
+        var select_herramienta = document.getElementById('herra_b').value
+        var medida_select = document.getElementById('medida_b')
+        var data 
+        data = JSON.stringify({'herramienta':select_herramienta})
+        $.ajax({
+            async: false,
+            type: "POST",
+            url: "php/getOptions.php",
+            data: data,
+            dataType: "json",
+            success: function (data) {
+                for (let i = 0; i < data.length; i++) {
+                    const element = data[i];
+                    console.log(element)
+                    
+                }
+            }
+        })
+    }
+    $(document).on('change','#herra_b',function (e) {
+        e.preventDefault()
+        searchOptions()
+    })
+})
+
+
+

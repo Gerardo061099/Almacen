@@ -58,18 +58,12 @@
         flex: 1 1 auto;
     }
 
-    .box-1 {
+    .encabesado {
         border-bottom: #2ECC71 5px solid;
         background-color: #fdfefec7;
         border-radius: 5px;
-        padding: 20px;
-        margin: 15px;
     }
 
-    .encabesado {
-        height: 55%;
-        display: block;
-    }
 
     #titulos-form {
         font-size: 15px;
@@ -118,12 +112,17 @@
     }
 
     .contador-h {
-        margin: 10px 10px;
-        background: #FDFEFE;
-        padding: 5px;
+        padding: 10px 15px;
         border-radius: 5px;
         height: max-content;
-        width: 95%;
+        width: 100%;
+    }
+
+    .container_resultados_busqueda {
+        background-color: #F2F3F4;
+        border-radius: 5px;
+        height: max-content;
+        width: 100%;
     }
 
     .conten {
@@ -432,7 +431,6 @@
     .contenedor {
         background: #ECF0F1;
         padding: 18px 13px;
-        margin: 12px;
         border-radius: 5px;
     }
 

@@ -1,3 +1,21 @@
+<?php
+//importante
+    session_start();
+    include("php/abrir_conexion.php");
+    if (isset($_SESSION['id'])) {
+        $id = $_SESSION['id'];
+        $queryUser = mysqli_query($conexion,"SELECT user FROM $tbu_db1 WHERE id_us = $id");
+        $result = mysqli_fetch_assoc($queryUser);
+
+        $user = null;
+        if (mysqli_num_rows($queryUser) > 0) {
+            $user = $result;
+            $_SESSION['usuario'] = $user['user'];
+        }
+    } else {
+        header('Location: login.php');
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,31 +33,6 @@
     
 </head>
 <body style="background: #17202A;">
-<?php
-session_start();
-ob_start();
-    if (isset($_POST['btn1'])) {
-        $_SESSION['sesion']=0;//No a iniciado sesion
-        $mail = $_POST['user'];
-        $pwd = $_POST['pass'];
-        if ($mail == "" || $pwd == "") {//Revisamos si algun campo está vacio
-            $_SESSION['sesion']=2;
-        }
-        else{
-            include("php/abrir_conexion.php");
-            $_SESSION['sesion']=3;
-            $resultado = mysqli_query($conexion,"SELECT * FROM $tbu_db1 WHERE user = '$mail' AND pass = PASSWORD('$pwd')");
-            while($consulta = mysqli_fetch_array($resultado)){
-                //echo "Bienvenido ".$consulta['user']." has iniciado sesion";
-                $_SESSION['sesion']=1;
-            }
-            include("php/cerrar_conexion.php");
-        }
-    }
-    if ($_SESSION['sesion']<>1) {
-        header("Location:index.php");
-    }
-?>
     <nav class="navbar navbar-dark bg-dark">
         <a class="navbar-brand" href="registro_h.php">
             <img src="img/back.png" alt="sin respuesta">
