@@ -110,12 +110,11 @@
                                     <label for="medida_b">Medida:</label>
                                     <select class="custom-select" id="medida_b" name="medida">
                                         <option selected>Choose...</option>
-                                        
                                     </select>
                                 </div>
                             </div>
                             <div class="col-auto my-1">
-                                <button class="btn btn-info" type="submit" name="buscar"><img src="img/search.png" alt="sin resultados"> Buscar</button>
+                                <button class="btn btn-info" type="submit" name="btn_buscar"><img src="img/search.png" alt="sin resultados"> Buscar</button>
                             <div id="cargando"></div>
                         </div>
                     </form>
@@ -184,20 +183,21 @@
                                                 <th><center>Editar</center></th>
                                             </tr>
                                         </thead>
+                                    <tbody class=\"body-tb\">
                                 ";
                                 while($consulta = mysqli_fetch_array($resultados)) {
-                                    $datos = $consulta['id_herramienta'] ||
-                                            $consulta['Nombre'] ||
-                                            $consulta['material'] ||
-                                            $consulta['descripcion'] ||
-                                            $consulta['Num_gavilanes'] ||
-                                            $consulta['Ancho'] ||
-                                            $consulta['Largo'] ||
-                                            $consulta['cantidad_minima'] ||
-                                            $consulta['cantidad'] ||
-                                            $consulta['fecha_hora'];
+                                    $datos =$consulta[0] ."||".
+                                    $consulta[1]."||".
+                                    $consulta[2]."||".
+                                    $consulta[3]."||".
+                                    $consulta[4]."||".
+                                    $consulta[5]."||".
+                                    $consulta[6]."||".
+                                    $consulta[7]."||".
+                                    $consulta[8]."||".
+                                    $consulta[9];
                                 echo 
-                                "<tbody class=\"body-tb\">
+                                "
                                     <tr>
                                         <td><center>".$consulta['id_herramienta']."</center></td>
                                         <td><center>".$consulta['Nombre']."</center></td>
@@ -230,7 +230,7 @@
                                         ?>
                                         </center></th>
                                         <th><center><a class="btn btn-danger btn-sm" href="eliminar.php?id=<?php echo $consulta['id_herramienta']?>" role="button">Eliminar</a></center></th>
-                                        <th><center><a class="btn btn-warning btn-sm" role="button" onclick="Update_infousers(<?php echo $datos?>)">Editar</a></center></th>
+                                        <th><center><a class="btn btn-warning btn-sm" role="button" onclick="editarHerramienta('<?php echo $datos?>')">Editar</a></center></th>
                                     </tr>
                                 </tbody>
                             <?php
@@ -243,66 +243,112 @@
         </div>
         <div class="modal fade" id="ModalEditar" tabindex="-1">
             <div class="modal-dialog">
-                <div class="modal-content">
+                <div class="modal-content bg-dark text-white">
                     <div class="modal-header">
-                        <h5 class="modal-title">Modal title</h5>
+                        <h5 class="modal-title">Editando...</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
                         <form action="">
-                            <div class="form-row">
-                                <div class="col">
-                                    <input type="text" id="nombremodal" class="form-control" placeholder="First name">
+                            <div class="form-row mb-3">
+                                <div class="col-md-2">
+                                    <label for="idmodal">id</label>
+                                    <input type="text" id="idmodal" class="form-control form-control-sm" disabled>
                                 </div>
-                                <div class="col">
-                                    <input type="text" id="apellidosmodal" class="form-control" placeholder="Last name">
+                                <div class="col-md-4">
+                                    <label for="nombremodal">Nombre</label>
+                                    <input type="text" id="nombremodal" class="form-control form-control-sm">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="materialmodal">Material</label>
+                                    <input type="text" id="materialmodal" class="form-control form-control-sm">
                                 </div>
                             </div>
-
+                            <div class="form-row">
+                                <div class="col-md-6">
+                                    <label for="descripcionmodal">Descripcion</label>
+                                    <input type="text" id="descripcionmodal" class="form-control form-control-sm">
+                                </div>
+                                <div class="col-md-2">
+                                    <label for="gavilanesmodal">Gavilanes</label>
+                                    <input type="text" id="gavilanesmodal" class="form-control form-control-sm">
+                                </div>
+                                <div class="col-md-2">
+                                    <label for="anchomodal">Ancho</label>
+                                    <input type="text" id="anchomodal" class="form-control form-control-sm">
+                                </div>
+                                <div class="col-md-2">
+                                    <label for="largomodal">Largo</label>
+                                    <input type="text" id="largomodal" class="form-control form-control-sm">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-3">
+                                    <label for="stock">Stock</label>
+                                    <input type="text" id="stock" class="form-control form-control-sm">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="stockminimo">Stock minimo</label>
+                                    <input type="text" id="stockminimo" class="form-control form-control-sm">
+                                </div>
+                            </div>
                         </form>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
+                        <button type="button" class="btn btn-primary">Actualizar</button>
                     </div>
                 </div>
             </div>
         </div>
     </center>
-    <div class="contador-h" id="resultados_search">
-        <div class="container_resultados_busqueda">
-            <div style="background: #2E4053; border-radius: 5px; "><center><h1 style="color: white;">Resultados</h1></center></div>
+    <div class="contador-h">
+                <div style="background: #2E4053; border-radius: 5px; "><center><h1 style="color: white;">Resultados</h1></center></div>
             <?php
-            include("php/abrir_conexion.php");
-            if (isset($_POST['buscar'])) {
-                $her = $_POST['herramienta'];
-                $med = $_POST['medida'];
-                if ($her != 'Choose...' && $med != 'Choose...') {
-                    $consult = mysqli_query($conexion, "SELECT h.id_herramienta,h.Nombre,c.Descripcion,c.Material,g.Num_gavilanes,m.Ancho,m.Largo,h.Cantidad,h.rutaimg FROM $tbherr_db7 h inner join $tbcat_db3 c on h.id_categoria = c.id_categoria inner join $tbgav_db6 g on h.id_gavilanes = g.id_gav inner join $tbmed_db9 m on h.id_medidas = m.id_medidas WHERE Nombre LIKE '%$her%' AND Ancho LIKE '%$med%' ORDER BY h.id_herramienta");  
-                    while($consulta = mysqli_fetch_array($consult)) {
+                include("php/abrir_conexion.php");
+                if (isset($_POST['btn_buscar'])) {
+                    $her = $_POST['herramienta'];
+                    $med = $_POST['medida'];
+                    if ($her != 'Choose...' && $med != 'Choose...') {
+                        $consultah = mysqli_query($conexion, "SELECT h.id_herramienta AS id,h.Nombre AS Nombre,c.Descripcion AS Descripcion,c.Material AS Material,g.Num_gavilanes AS Num_gavilanes,m.Ancho AS Ancho,m.Largo AS Largo,h.Cantidad AS Cantidad,h.rutaimg AS rutaimg FROM $tbherr_db7 h inner join $tbcat_db3 c on h.id_categoria = c.id_categoria inner join $tbgav_db6 g on h.id_gavilanes = g.id_gav inner join $tbmed_db9 m on h.id_medidas = m.id_medidas WHERE h.Nombre LIKE '%$her%' AND m.Ancho LIKE '%$med%'");                    
             ?>
-                    <div class="conten">
-                    <img src="<?php echo $consulta['rutaimg'];?>" id="imgs" alt="imagen no encontrada">
-                        <div class = "infor">
-                            <h1 class="subt">Caracteristicas</h1>
-                            <p><?php echo "# ".$consulta['id_herramienta']." Nombre: ".$consulta['Nombre']." de ".$consulta['Material']." ".$consulta['Descripcion'];?></p>
-                            <p><?php echo "Medidas: ".$consulta['Ancho']." Ancho x ".$consulta['Largo']." Largo";?></p>
-                            <p><?php echo"gavilanes: ".$consulta['Num_gavilanes']." Cantidad: ".$consulta['Cantidad'];?></p>
-                        </div>
-                    </div>
-            <?php
-                        echo '
-                        <script>
-                        swal({
-                            title: "Busqueda exitosa!!",
-                            text: "Para ver los resultados deslice hacia arriba",
-                            icon: "success"
-                        });
-                        </script>';
-                    }
-                }else {
+                        <center><div id="mensaje"></div></center>
+                            <?php
+                            if(mysqli_num_rows($consultah) > 0){
+                                while($responsData = mysqli_fetch_assoc($consultah)) {
+                            ?>
+                                <div class="conten">
+                                <img src="<?php echo $responsData['rutaimg'];?>" id="imgs" alt="imagen no encontrada">
+                                    <div class = "infor">
+                                        <h1 class="subt">Caracteristicas</h1>
+                                        <p><?php echo "#: ".$responsData['id']." Nombre: ".$responsData['Nombre']." de ".$responsData['Material']." ".$responsData['Descripcion'];?></p>
+                                        <p><?php echo "Medidas: ".$responsData['Ancho']." Ancho x ".$responsData['Largo']." Largo";?></p>
+                                        <p><?php echo "Gavilanes: ".$responsData['Num_gavilanes']." Cantidad: ".$responsData['Cantidad'];?></p>
+                                    </div>
+                                </div>
+                            <?php
+                                }
+                                echo '
+                                <script>
+                                swal({
+                                    title: "Busqueda exitosa!!",
+                                    text: "Para ver los resultados deslice hacia arriba",
+                                    icon: "success"
+                                });
+                                </script>';
+                        }else{
+                            echo '
+                            <script>
+                                swal({
+                                    title: "Opciones no validas",
+                                    text: "Las medidas no coinciden con el tipo de herramienta en la base de datos",
+                                    icon: "error"
+                                });
+                            </script>';
+                        }
+                    }else {
                     echo '
                     <script>
                         swal({
@@ -312,13 +358,12 @@
                         });
                     </script>';
                     }
-                include("php/cerrar_conexion.php");
-            } else {
-                echo '<div class="d-flex justify-content-center"><div class="alert alert-secondary " role="alert">Aquí se muestran los resultados de tu busqueda!!</div></div>';
-            }
-            ?>
+                    include("php/cerrar_conexion.php");
+                } else{
+                    echo '<center><div class="alert alert-warning" role="alert"><strong>Sin resultados</strong></div></center>';
+                }
+                            ?>
         </div>
-    </div>
 
     <script src="https://kit.fontawesome.com/282ec8cabc.js" crossorigin="anonymous"></script>
     <!-----------CDN JQuery----------------------->

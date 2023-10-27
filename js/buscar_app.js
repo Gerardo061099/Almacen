@@ -20,7 +20,7 @@ $(document).ready(function () {
             success: function (data) {
                 for (let i = 0; i < data.length; i++) {
                     var option = document.createElement('option')
-                    option.value = data[i].id
+                    option.value = data[i].ancho
                     option.text = data[i].ancho
                     medida_select.add(option)
                 }
@@ -29,7 +29,8 @@ $(document).ready(function () {
     }
     $(document).on('change','#herra_b',function (e) {
         e.preventDefault()
-        $('#medida_b').empty();
+        $('#medida_b').empty()
+        $("#medida_b").prepend("<option selected>Choose...</option>");
         searchOptions()
     })
 })
