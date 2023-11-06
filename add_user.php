@@ -32,9 +32,9 @@
 <body style="background: #17202A;">
     <header>
         <nav class="navbar navbar-dark bg-dark ">
-            <a class="navbar-brand" href="pagina_principal.php">
+            <div class="navbar-brand" >
                 ALUXSA S.A de C.V
-            </a>
+            </div>
             <div class="dropdown d-flex align-items-center pr-4">
                 <div class="px-2"> 
                     <img src="img/login_profile_user.png" alt="">
@@ -94,7 +94,7 @@
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="pass_u">Password</label>
-                                        <input type="password" class="form-control form-control-sm" id="pass_u">
+                                        <input type="password" class="form-control form-control-sm" id="pass_u" placeholder="**********" >
                                     </div>
                                 </div>
                                 <div class="form-row">

@@ -2,21 +2,18 @@
  * 
  */
 
-
 /** 
- * 
+ *  Code by: Gerardo Jiménez Castillo
  */
-function editarHerramienta(data) {
-    var d = data.split('||');
-    $('#idmodal').val(d[0]);//id
-    $('#nombremodal').val(d[1]);//nombre
-    $('#materialmodal').val(d[2]);//material
-    $('#descripcionmodal').val(d[3]);//descripcion
-    $('#gavilanesmodal').val(d[4]);//gavilanes
-    $('#anchomodal').val(d[5]);//ancho
-    $('#largomodal').val(d[6]);//largo
-    $('#stock').val(d[7]);//stock
-    $('#stockminimo').val(d[8]);//stock minimo
+async function editarHerramienta(data) {
+    var d = data.split('||')
+    $('#idmodal').val(d[0])//id
+    $('#nombremodal').val(d[1])//nombre
+    await getCategoria(d[2],d[3])
+    $('#stockminimo').val(d[7])//stock
+    await getGavilanes(d[4])
+    $('#stock').val(d[8])//stock minimo
+    await getMedidas(d[5],d[6])
     $('#ModalEditar').modal('show')
 }
 

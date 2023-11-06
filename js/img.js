@@ -19,10 +19,17 @@ $(document).ready(function () {
             let name = file.name
             let sizekb = (file.size / 1024).toFixed(2)
             let sizemb = (file.size / (1024*1024)).toFixed(2)
+            let intsize = parseFloat(sizemb)
             let srcURL = URL.createObjectURL(file)
             etiquetaIMG.src = srcURL
             nombre_img.textContent = `Nombre: ${name}`
-            tamaño_img.textContent = `Tamaño: ${sizekb} Kb o ${sizemb} Mb` 
+            tamaño_img.textContent = `Tamaño: ${sizekb} Kb / ${sizemb} Mb`
+            if (intsize > 3.00) {
+                $('#link_diss_img').attr('hidden', false)
+            }
+            if (intsize < 3.00) {
+                $('#link_diss_img').attr('hidden', true)
+            }
         } else{ 
             etiquetaIMG.src = ''
             nombre_img.textContent = ''

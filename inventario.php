@@ -32,7 +32,7 @@
 </head>
 <body class="pag">
     <!-- Image and text -->
-    <nav class="navbar navbar-dark bg-dark">
+    <nav class="navbar sticky-top navbar-dark bg-dark">
         <a class="navbar-brand" href="pagina_principal.php">
             ALUXSA S.A de C.V
         </a>
@@ -55,20 +55,18 @@
         </div>
     </nav>
     <center>
-        <div>
-            <div class="info">
-                <p class="info-p">
-                    <h1>Herramientas</h1>
-                </p>
-            </div>
+        <header class="info p-3">
+            <h1 class="info-p text-center text-white">Herramientas</h1>
+        </header>
+        <main>
             <div class="forms">
-                <div class="form-update">
+                <div class="form-update bg-dark text-white p-3">
                     <form>
                         <h1 id="titulos-form">Actualizar</h1>
                         <div class="form-row" id="items">
                             <div class="col-md-6 mb-3">
                                 <label for="id_h"># registro</label>
-                                <select class="custom-select" id="id_h">
+                                <select class="form-control form-control-sm" id="id_h">
                                 <option selected>Choose...</option>
                                     <?php
                                     include("php/abrir_conexion.php");
@@ -80,21 +78,21 @@
                                     ?>
                                 </select>
                             </div>
-                            <div class="col-md-4 mb-3">
+                            <div class="col-md-6 mb-3">
                                 <label for="cantidadnew">Cantidad</label>
-                                <input type="text" class="form-control" id="cantidadnew">
+                                <input type="text" class="form-control form-control-sm" id="cantidadnew">
                             </div>
                         </div>
-                        <button class="btn btn-primary" type="submit" onclick="update(event);"><img src="img/update.png" alt=""> Actualizar</button>
+                        <button class="btn btn-primary btn-sm" type="submit" onclick="update(event);"> Actualizar</button>
                     </form>
                 </div>
-                <div class="botones">
+                <div class="botones bg-dark text-white p-3">
                     <form method="POST" action="inventario.php">
                         <h1 id="titulos-form">Buscar</h1>
                             <div class="form-row align-items-center">
-                                <div class="col-md-5 my-1">
+                                <div class="col-md-6 my-1">
                                     <label for="herra_b">Herramienta:</label>
-                                    <select class="custom-select" id="herra_b" name="herramienta">
+                                    <select class="form-control form-control-sm" id="herra_b" name="herramienta">
                                         <option selected>Choose...</option>
                                         <?php
                                         include("php/abrir_conexion.php"); 
@@ -106,15 +104,15 @@
                                         ?>
                                     </select>
                                 </div>
-                                <div class="col-md-5 my-1">
+                                <div class="col-md-6 my-1">
                                     <label for="medida_b">Medida:</label>
-                                    <select class="custom-select" id="medida_b" name="medida">
+                                    <select class="form-control form-control-sm" id="medida_b" name="medida">
                                         <option selected>Choose...</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-auto my-1">
-                                <button class="btn btn-info" type="submit" name="btn_buscar"><img src="img/search.png" alt="sin resultados"> Buscar</button>
+                                <button class="btn btn-info btn-sm" type="submit" name="btn_buscar"><i class="fa-solid fa-magnifying-glass"></i> Buscar</button>
                             <div id="cargando"></div>
                         </div>
                     </form>
@@ -154,33 +152,32 @@
                 </div>
             </div>
             <div class="tb-herramientas">
-                    <div class="opciones">
-                    </div>
-                    <div style="margin: 0px 10px; background: #FDFEFE;">
+                <div class="container_herramientas">
+                    <div style="margin: 0px 10px; ">
                         <h1 class="titulos" style="text-align:left;"><strong>Listado de herramientas</strong></h1>
                     </div>
-                    <div class="tabla-herramientas">
+                    <div class="tabla-herramientas px-2">
                         <?php
                             include("php/abrir_conexion.php");// conexion con la BD
                             $resultados = mysqli_query($conexion,"SELECT h.id_herramienta,h.Nombre,c.material,c.descripcion,g.Num_gavilanes,m.Ancho,m.Largo,h.cantidad_minima,h.cantidad,h.fecha_hora FROM $tbherr_db7 h inner join $tbcat_db3 c on h.id_categoria = c.id_categoria inner join $tbgav_db6 g on h.id_gavilanes = g.id_gav inner join $tbmed_db9 m on h.id_medidas = m.id_medidas ORDER BY h.id_herramienta");
                             //Unimos tabla Herramientas con categorias y medidas
                             echo "
-                            <table class=\"table table-striped\" id=\"herramientas\">
-                                        <thead class=\"thead-dark\">
+                            <table class=\"table table-striped table-bordered table-hover table-sm table-dark\" id=\"herramientas\">
+                                        <thead class=\"sticky-top thead-dark\">
                                             <tr>
-                                                <th><center>#</center></th>
-                                                <th><center>Nombre</center></th>
-                                                <th><center>Material</center></th>
-                                                <th><center>Descripcion</center></th>
-                                                <th><center>Gavilanes</center></th>
-                                                <th><center>Ancho</center></th>
-                                                <th><center>Largo</center></th>
-                                                <th><center>C_Minima</center></th>
-                                                <th><center>Cantidad</center></th>
-                                                <th><center>Fecha</center></th>
-                                                <th><center>Estado</center></th>
-                                                <th><center>Borrar</center></th>
-                                                <th><center>Editar</center></th>
+                                                <th scope=\"col\">#</th>
+                                                <th scope=\"col\">Nombre</th>
+                                                <th scope=\"col\">Material</th>
+                                                <th scope=\"col\">Descripcion</th>
+                                                <th scope=\"col\">Gavilanes</th>
+                                                <th scope=\"col\">Ancho</th>
+                                                <th scope=\"col\">Largo</th>
+                                                <th scope=\"col\">Stock min</th>
+                                                <th scope=\"col\">Stock</th>
+                                                <th scope=\"col\">Fecha</th>
+                                                <th scope=\"col\">Estado</th>
+                                                <th scope=\"col\">Borrar</th>
+                                                <th scope=\"col\">Editar</th>
                                             </tr>
                                         </thead>
                                     <tbody class=\"body-tb\">
@@ -211,26 +208,26 @@
                                         <td><center>".$consulta['fecha_hora']."</center></td>
                                         <th><center>";?>
                                         <?php
-                                        //mostramos un aviso segun la cantidad de piezas 
-                                        if($consulta['cantidad']<$consulta['cantidad_minima']){//condicionamos var cantidad a 2 o menor para mostrar un mesaje 
-                                            if ($consulta['cantidad']!=0 && $consulta['cantidad']<$consulta['cantidad_minima']) {
-                                                echo "<img src=\"img/warning.png\" alt=\"sin resultados\">";
-                                            }
+                                            //mostramos un aviso segun la cantidad de piezas 
+                                            if($consulta['cantidad'] < $consulta['cantidad_minima']) {//condicionamos var cantidad a 2 o menor para mostrar un mesaje 
+                                                if ($consulta['cantidad'] != 0 && $consulta['cantidad'] < $consulta['cantidad_minima']) {
+                                                    echo "<img src=\"img/warning.png\" alt=\"sin resultados\">";
+                                                }
+                                                else{
+                                                    if ($consulta['cantidad'] == 0) {
+                                                        echo "<img src=\"img/cancel.png\" alt=\"sin resultados\">";
+                                                    }
+                                                }
+                                            }//si la cantidad es mayor a 2 no se requiere comprar más
                                             else{
-                                                if ($consulta['cantidad']==0) {
-                                                    echo "<img src=\"img/cancel.png\" alt=\"sin resultados\">";
+                                                if ($consulta['cantidad'] >= $consulta['cantidad_minima']) {
+                                                    echo "<img src=\"img/check.png\" alt=\"sin resultados\">";
                                                 }
                                             }
-                                        }//si la cantidad es mayor a 2 no se requiere comprar más
-                                        else{
-                                            if ($consulta['cantidad']>=$consulta['cantidad_minima']) {
-                                                echo "<img src=\"img/check.png\" alt=\"sin resultados\">";
-                                            }
-                                        }
                                         ?>
                                         </center></th>
-                                        <th><center><a class="btn btn-danger btn-sm" href="eliminar.php?id=<?php echo $consulta['id_herramienta']?>" role="button">Eliminar</a></center></th>
-                                        <th><center><a class="btn btn-warning btn-sm" role="button" onclick="editarHerramienta('<?php echo $datos?>')">Editar</a></center></th>
+                                        <th><center><a class="btn btn-danger btn-sm" href="eliminar.php?id=<?php echo $consulta['id_herramienta']?>" role="button"><i class="fa-solid fa-trash"></i></a></center></th>
+                                        <th><center><a class="btn btn-light btn-sm" role="button" onclick="editarHerramienta('<?php echo $datos?>')"><i class="fa-solid fa-square-pen"></i></a></center></th>
                                     </tr>
                                 </tbody>
                             <?php
@@ -239,93 +236,94 @@
                             ?>
                                 </table><br>
                     </div>
+                </div>
             </div>
-        </div>
+        </main>
         <div class="modal fade" id="ModalEditar" tabindex="-1">
             <div class="modal-dialog">
                 <div class="modal-content bg-dark text-white">
                     <div class="modal-header">
                         <h5 class="modal-title">Editando...</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
+                            <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body">
-                        <form action="">
+                    <form id="frm_update_h">
+                        <div class="modal-body">
                             <div class="form-row mb-3">
                                 <div class="col-md-2">
                                     <label for="idmodal">id</label>
                                     <input type="text" id="idmodal" class="form-control form-control-sm" disabled>
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="nombremodal">Nombre</label>
+                                    <label for="nombremodal">Nombre:</label>
                                     <input type="text" id="nombremodal" class="form-control form-control-sm">
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="materialmodal">Material</label>
-                                    <input type="text" id="materialmodal" class="form-control form-control-sm">
+                                    <label for="medidasmodal">Medidas:</label>
+                                    <select class="form-control form-control-sm" id="medidasmodal">
+                                        <option selected >Choose...</option>
+                                    </select>
                                 </div>
                             </div>
-                            <div class="form-row">
-                                <div class="col-md-6">
-                                    <label for="descripcionmodal">Descripcion</label>
-                                    <input type="text" id="descripcionmodal" class="form-control form-control-sm">
+                            <div class="form-row mb-3">
+                                <div class="col-md-9">
+                                    <label for="descripcionmodal">Categoria:</label>
+                                    <select class="form-control form-control-sm" id="descripcionmodal">
+                                        <option selected >Choose...</option>
+                                    </select>
                                 </div>
-                                <div class="col-md-2">
-                                    <label for="gavilanesmodal">Gavilanes</label>
-                                    <input type="text" id="gavilanesmodal" class="form-control form-control-sm">
-                                </div>
-                                <div class="col-md-2">
-                                    <label for="anchomodal">Ancho</label>
-                                    <input type="text" id="anchomodal" class="form-control form-control-sm">
-                                </div>
-                                <div class="col-md-2">
-                                    <label for="largomodal">Largo</label>
-                                    <input type="text" id="largomodal" class="form-control form-control-sm">
+                                <div class="col-md-3">
+                                    <label for="gavilanesmodal">Gavilanes:</label>
+                                    <select class="form-control form-control-sm" id="gavilanesmodal">
+                                        <option selected >Choose...</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="col-md-3">
-                                    <label for="stock">Stock</label>
+                                    <label for="stock">Stock:</label>
                                     <input type="text" id="stock" class="form-control form-control-sm">
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="stockminimo">Stock minimo</label>
+                                    <label for="stockminimo">Stock minimo:</label>
                                     <input type="text" id="stockminimo" class="form-control form-control-sm">
                                 </div>
                             </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Actualizar</button>
-                    </div>
+                        
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-success">Actualizar</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </center>
     <div class="contador-h">
-                <div style="background: #2E4053; border-radius: 5px; "><center><h1 style="color: white;">Resultados</h1></center></div>
+            <div style="background: #2E4053; border-radius: 5px; "><center><h3 style="color: white;">Resultados</h3></center></div>
             <?php
                 include("php/abrir_conexion.php");
                 if (isset($_POST['btn_buscar'])) {
                     $her = $_POST['herramienta'];
                     $med = $_POST['medida'];
                     if ($her != 'Choose...' && $med != 'Choose...') {
-                        $consultah = mysqli_query($conexion, "SELECT h.id_herramienta AS id,h.Nombre AS Nombre,c.Descripcion AS Descripcion,c.Material AS Material,g.Num_gavilanes AS Num_gavilanes,m.Ancho AS Ancho,m.Largo AS Largo,h.Cantidad AS Cantidad,h.rutaimg AS rutaimg FROM $tbherr_db7 h inner join $tbcat_db3 c on h.id_categoria = c.id_categoria inner join $tbgav_db6 g on h.id_gavilanes = g.id_gav inner join $tbmed_db9 m on h.id_medidas = m.id_medidas WHERE h.Nombre LIKE '%$her%' AND m.Ancho LIKE '%$med%'");                    
+                        $consultah = mysqli_query($conexion, "SELECT h.id_herramienta AS id,h.Nombre AS Nombre,c.Descripcion AS Descripcion,c.Material AS Material,g.Num_gavilanes AS Num_gavilanes,m.Ancho AS Ancho,m.Largo AS Largo,h.Cantidad AS Stock,h.Cantidad_Minima AS Stock_minimo,h.rutaimg AS rutaimg FROM $tbherr_db7 h inner join $tbcat_db3 c on h.id_categoria = c.id_categoria inner join $tbgav_db6 g on h.id_gavilanes = g.id_gav inner join $tbmed_db9 m on h.id_medidas = m.id_medidas WHERE h.Nombre LIKE '%$her%' AND m.Ancho LIKE '%$med%'");                    
             ?>
-                        <center><div id="mensaje"></div></center>
+                        <div class="d-flex" id="mensaje">
                             <?php
                             if(mysqli_num_rows($consultah) > 0){
                                 while($responsData = mysqli_fetch_assoc($consultah)) {
                             ?>
-                                <div class="conten">
-                                <img src="<?php echo $responsData['rutaimg'];?>" id="imgs" alt="imagen no encontrada">
+                                <div class="conten ">
+                                    <img src="<?php echo $responsData['rutaimg'];?>" id="imgs" alt="imagen no encontrada">
                                     <div class = "infor">
-                                        <h1 class="subt">Caracteristicas</h1>
-                                        <p><?php echo "#: ".$responsData['id']." Nombre: ".$responsData['Nombre']." de ".$responsData['Material']." ".$responsData['Descripcion'];?></p>
+                                        <h1 class="subt">Características</h1>
+                                        <p><?php echo "# ".$responsData['id'];?></p>
+                                        <p><?php echo "Nombre: ".$responsData['Nombre']." de ".$responsData['Material']." ".$responsData['Descripcion'];?></p></p>
                                         <p><?php echo "Medidas: ".$responsData['Ancho']." Ancho x ".$responsData['Largo']." Largo";?></p>
-                                        <p><?php echo "Gavilanes: ".$responsData['Num_gavilanes']." Cantidad: ".$responsData['Cantidad'];?></p>
+                                        <p><?php echo "Gavilanes: ".$responsData['Num_gavilanes']." Stock: ".$responsData['Stock']." Stock minimo: ".$responsData['Stock_minimo'];?></p>
                                     </div>
                                 </div>
                             <?php
@@ -340,6 +338,7 @@
                                 </script>';
                         }else{
                             echo '
+                            <center><div class="alert alert-warning" role="alert"><strong>Sin resultados</strong></div></center>
                             <script>
                                 swal({
                                     title: "Opciones no validas",
@@ -350,6 +349,7 @@
                         }
                     }else {
                     echo '
+                    <center><div class="alert alert-warning" role="alert"><strong>Sin resultados</strong></div></center>
                     <script>
                         swal({
                             title: "Opciones no validas",
@@ -360,18 +360,22 @@
                     }
                     include("php/cerrar_conexion.php");
                 } else{
-                    echo '<center><div class="alert alert-warning" role="alert"><strong>Sin resultados</strong></div></center>';
+                    echo '<center><div class="alert alert-warning" role="alert"><strong>Busquedas de herramientas</strong></div></center>';
                 }
                             ?>
+                </div>
         </div>
 
     <script src="https://kit.fontawesome.com/282ec8cabc.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-----------CDN JQuery----------------------->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
     <script type="module" src="js/app.js"></script>
+    <script src="js/getCategoria.js"></script>
     <script src="js/funciones_herramientas.js"></script>
     <script type="module" src="js/buscar_app.js"></script>
+    <script type="module" src="js/funciones_Modal_H.js"></script>
 </body>
 </html>

@@ -59,7 +59,7 @@
     <main class="d-flex justify-content-around px-3 py-3">
         <article class="contenedor w-auto h-25" style="border-top: #5DADE2 7px solid;">
             <div class="">
-                <form enctype="multipart/form-data">
+            <form enctype="multipart/form-data">
                 <h1 class="text-center">Registrar:</h1>
                     <div class="form-row">
                         <div class="form-group col-md-6">
@@ -78,41 +78,20 @@
                     <div class="form-row">
                         <div class="form-group col-md-2">
                             <label for="gavilanes">Gavilanes:</label>
-                                <select id="gavilanes" id="gavilanes" class="form-control">
+                                <select id="gavilanes" class="form-control">
                                     <option selected>Choose...</option>
-                                    <?php
-                                        include("php/abrir_conexion.php");
-                                        //realizamos una consulta a la DB
-                                        $query = $conexion -> query ("SELECT * FROM $tbgav_db6 ORDER BY Num_gavilanes");
-                                        //mostramos los datos obtenidos mediante etiquetas de HTML
-                                            while ($valores = mysqli_fetch_array($query)) {
-                                                echo ('<option value="'.$valores['id_Gav'].'">'.$valores['Num_gavilanes'].'</option>');
-                                            }
-                                        include("php/cerrar_conexion.php");
-                                    ?>
                                 </select>
                         </div>
                         <div class="form-group col-md-3">
                             <label for="medidas">Medidas:</label>
                                 <select id="medidas" class="form-control">
                                     <option selected>Choose...</option>
-                                    <?php
-                                        include("php/abrir_conexion.php");
-                                        $query = $conexion -> query ("SELECT * FROM $tbmed_db9");
-                                            while ($valores = mysqli_fetch_array($query)) {
-                                                echo ('<option value="'.$valores['id_Medidas'].'">'.$valores['Ancho'].' x '.$valores['Largo'].'</option>');
-                                            }
-                                        include("php/cerrar_conexion.php");
-                                    ?>
                                 </select>
                         </div>
                         <div class="form-group col-md-7">
                             <label for="categoria">Categoria:</label>
                             <select id="categoria" class="form-control">
                                 <option selected>Choose...</option>
-                                <?php
-                                    include("php/print_list_categorias.php");
-                                ?>
                             </select>
                         </div>
                     </div>
@@ -143,20 +122,27 @@
             <div class="d-flex justify-content-center p-2" id="contenedor_img">
                 <img class="rounded w-100" id="etiquetaIMG" src="" alt="">
             </div>
-            <div class="p-2" id="datos_img">
-                <p class="text-white" id="nombre_img"></p>
-                <p class="text-white" id="tamaño_img"></p>
+            <div class="p-2 h-auto text-justify" id="datos_img">
+                <p class="text-white h-auto w-100" id="nombre_img"></p>
+                <p class="text-white w-100 text-justify" id="tamaño_img"></p>
+                <a id="link_diss_img" href="https://www.iloveimg.com/es/comprimir-imagen/comprimir-jpg" hidden> Baja la calidad de la imagen aquí</a>
             </div>
         </article>
     </main>
+    <!--  -->
     <script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.min.js"></script>
+    <!--  -->
     <script src="https://kit.fontawesome.com/282ec8cabc.js" crossorigin="anonymous"></script>
+    <!--  -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!---->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+    <!---->
     <script src="js/customFile.js"></script>
     <script src="js/eliminar.js"></script>
     <script src="js/img.js"></script>
     <script src="js/app.js"></script>
+    <script src="js/funciones_registro_h.js" type="module" ></script>
 </body>
 </html>

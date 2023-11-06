@@ -15,7 +15,6 @@
     }
 
     .pag {
-        background: #CACFD2;
     }
 
     .pag::-webkit-scrollbar {
@@ -64,7 +63,6 @@
         border-radius: 5px;
     }
 
-
     #titulos-form {
         font-size: 15px;
     }
@@ -98,17 +96,10 @@
         border-bottom: #5DADE2 5px solid;
     }
 
-    .body-tb:hover {
-        background: #abc8dfb0;
-        border-bottom: #F4D03F 2px solid;
-    }
-
     .tb-herramientas {
         width: 100%;
-        height: 450px;
+        height: max-content;
         padding: 5px 5px;
-        border-radius: 2px;
-        background: #FDFEFE;
     }
 
     .contador-h {
@@ -156,15 +147,15 @@
     .forms {
         margin: 5px 5px;
         display: flex;
+        justify-content: space-between;
     }
 
     .form-update {
         align-content: center;
         width: max-content;
-        height: 170px;
+        height: max-content;
         margin: 10px 10px;
         padding: 5px;
-        background: #FDFEFE;
         border-radius: 5px;
         border-left: #F4D03F 5px solid;
     }
@@ -173,8 +164,7 @@
         margin: 10px 10px;
         padding: 8px 8px;
         width: max-content;
-        height: 170px;
-        background: #FDFEFE;
+        height: max-content;
         border-left: #DC7633 5px solid;
         border-radius: 5px;
         display: block;
@@ -186,7 +176,7 @@
     }
 
     .tabla-herramientas {
-        width: 1050px;
+        width: 100%;
         height: 300px;
         display: block;
         overflow-y: auto;
@@ -200,10 +190,6 @@
     }
 
     #herramientas {
-        margin: 0px;
-        width: 1050px;
-        height: 25px;
-        font-size: 13px;
     }
 
     #h {
@@ -240,11 +226,6 @@
         width: 1050px;
         height: 25px;
         font-size: 13px;
-    }
-
-    .tb-body:hover {
-        background: #abc8dfb0;
-        border-bottom: #F4D03F 3px solid;
     }
 
     .contenido {
@@ -353,15 +334,17 @@
     }
 
     .info {
-        margin: 10px 10px;
-        padding: 8px 8px;
-        background: #FDFEFE;
-        border-radius: 5px;
-        border-bottom: #2ECC71 7px solid;
+        width: 100%;
+        height: max-content;
     }
 
     .info-p {
         text-align: justify;
+        border-radius: 5px;
+        padding: 10px 10px;
+        height: max-content;
+        background-color: #606c88;
+        border-bottom: #2ECC71 7px solid;
     }
 
     .parrafo2 {

@@ -1,23 +1,24 @@
 function obtener(e) {
-    e.preventDefault();
+    e.preventDefault()
     //obtenemos los valores ingresados por el usuario del documento registro_h.php
     //por su id incluyendo la imagen
-    var nom = document.getElementById('nombre').value;
-    var can = document.getElementById('cantidad').value;
-    var canm = document.getElementById('cantidadm').value;
-    var img = document.getElementById('subir_imagen').files[0]; //obtenemos un objeto
-    var select = document.getElementById('medidas').value;
-    var cate = document.getElementById('categoria').value;
-    var gav = document.getElementById('gavilanes').value;
-        var datos = new FormData();
-        datos.append("nombre", nom);
-        datos.append("cantidad", can);
-        datos.append("cantidadm", canm);
-        datos.append("img", img);
-        datos.append("medidas", select);
-        datos.append("categoria", cate);
-        datos.append("gavilanes", gav);
-        console.log("Subiendo datos");
+    var nom = document.getElementById('nombre').value
+    var can = document.getElementById('cantidad').value
+    var canm = document.getElementById('cantidadm').value
+    var img = document.getElementById('subir_imagen').files[0] //obtenemos un objeto
+    var select = document.getElementById('medidas').value
+    var cate = document.getElementById('categoria').value
+    var gav = document.getElementById('gavilanes').value
+        var datos = new FormData()
+        datos.append('nombre', nom)
+        datos.append('cantidad', can)
+        datos.append('cantidadm', canm)
+        datos.append('img', img)
+        datos.append('medidas', select)
+        datos.append('categoria', cate)
+        datos.append('gavilanes', gav)
+        console.log('Subiendo datos')
+        console.log(datos)
         $.ajax({
             url: "add_h.php",
             type: "POST",
@@ -25,27 +26,55 @@ function obtener(e) {
             processData: false,
             Cache: false,
             contentType: false,
-            beforeSend: function() {
-                $('#load1').html('Cargando...');
-            },
             success: function(mensaje) {
-                if (mensaje == "campos vacios") {
-                    swal({
-                        title: "Campos Vacios",
-                        text: "Debes llenar todos los campos",
-                        icon: "warning",
-                    });
-                    $('#load1').html('Oh Oh.. ocurrio un error!!');
-                } else {
-                    swal({
-                        title: "Insercion exitosa",
-                        text: "Puedes consultar la informacion en la lista de herramientas",
-                        icon: "success"
-                    });
-                    $('#load1').html('Registro terminado!!');
+                switch (mensaje) {
+                    case "campos vacios":
+                        swal({
+                            title: "Campos Vacios",
+                            text: "Debes llenar todos los campos",
+                            icon: "warning",
+                        })
+                        $('#load1').html('Oh Oh.. ocurrio un error!!')
+                        break
+                    case "Insercion exitosa":
+                        swal({
+                            title: "Insercion exitosa",
+                            text: "Puedes consultar la informacion en la lista de herramientas",
+                            icon: "success"
+                        })
+                        $('#load1').html('Registro terminado!!')
+                        break
+                    case "Error al insertar la informacion":
+                        swal({
+                            title: "Error de insercion",
+                            text: "Lo sentimos, ocurrio un problema al insertar la información",
+                            icon: "error"
+                        })
+                        break
+                    case "Error al subir la imagen al servidor":
+                        swal({
+                            title: "Error con la imagen",
+                            text: "La imagen capturada no se pudo subir al servidor",
+                            icon: "error"
+                        })
+                        break
+                    case "La extencion del archivo no es permitida":
+                        swal({
+                            title: "Error con la imagen",
+                            text: "La extencion del archivo no es permitida",
+                            icon: "error"
+                        })
+                        break
+                    default:
+                        swal({
+                            title: "Error de insercion",
+                            text: "Lo sentimos, ocurrio un problema al insertar la información",
+                            icon: "error"
+                        })
+                        break
                 }
             }
-        });
+        })
     
 } //fin function obtener();
 
