@@ -226,16 +226,13 @@ function subirsolicitud(e) {
         processData: false,
         Cache: false,
         contentType: false,
-        beforeSend: function() {
-            $('#cargar').html('<div><img src="img/cargando.gif"></img><br><br>Cargando...</div>');
-        },
         success: function(mensaje) {
             if (mensaje == "Insercion exitosa!!") {
                 swal({
                     title: "Insercion exitosa",
                     text: "Los datos han sido insertados",
                     icon: "success"
-                });
+                })
                 window.location.href = "add_solicitud.php";
             } else if (mensaje == "La insercion no se pudo ejecutar") {
                 swal({

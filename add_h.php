@@ -35,8 +35,7 @@ if ($nombre == '' || $cantidad == '' || $medidas == 'Choose...' || $categoria ==
                                 if ($insertaH == false) {
                                         echo 'Error al insertar la informacion';
                                 }
-                        }
-                        if (move_uploaded_file($temporal, $ruta) == false) {
+                        }else {
                                 echo 'Error al subir la imagen al servidor';
                         }
                 }

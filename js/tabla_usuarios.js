@@ -1,7 +1,7 @@
 /**
  * 
  */
- import { messageSWA } from './messages.js'
+    import { messageSWA } from './messages.js'
 /**
  * 
  */
@@ -105,6 +105,7 @@ $(document).ready(function () {
         } else {
             messageSWA('Datos incompletos','info')
         }
+        $('#modalUsuarios').modal('hide')
     })
 
     $(document).on('click','.btnEditar', function () {

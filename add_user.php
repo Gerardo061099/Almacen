@@ -54,15 +54,12 @@
             </div>
         </nav>
     </header>
-    <main class="px-3 py-1">
-        <header class="box-1">
-            <div class="encabesado">
-                <h1 class="titulo">Agregar Usuario</h1>
-            </div>
-            
+    <main class="px-3 py-3">
+        <header class="encabesado text-white p-2">
+            <h1 class="titulo">Agregar Usuario</h1>
         </header>
-        <article class=" pb-2">
-            <div class="">
+        <article class="p-2">
+            <div class="d-flex justify-content-end">
                 <button type="button" class="btn btn-dark" id="btn_open_modal"><i class="fa-regular fa-square-plus"></i></button>
             </div>
             <!-- Modal -->

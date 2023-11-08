@@ -14,9 +14,6 @@
         /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     }
 
-    .pag {
-    }
-
     .pag::-webkit-scrollbar {
         width: 8px;
         /* Tamaño del scroll en vertical */
@@ -59,7 +56,7 @@
 
     .encabesado {
         border-bottom: #2ECC71 5px solid;
-        background-color: #fdfefec7;
+        background-color: #34495E;
         border-radius: 5px;
     }
 
@@ -144,11 +141,6 @@
         border-left: #85C1E9 5px solid;
     }
 
-    .forms {
-        margin: 5px 5px;
-        display: flex;
-        justify-content: space-between;
-    }
 
     .form-update {
         align-content: center;
@@ -189,8 +181,7 @@
         overflow-y: auto;
     }
 
-    #herramientas {
-    }
+    #herramientas {}
 
     #h {
         margin: 0px;
@@ -297,6 +288,7 @@
     }
 
     .subtitulo2 {
+        background-color: #34495E;
         color: black;
         margin: 5px;
         border-bottom: #EC7063 5px solid;
@@ -310,7 +302,6 @@
     }
 
     .tb {
-        background: #ECF0F1;
         margin: 0px;
         width: max-content;
         height: max-content;
@@ -333,10 +324,6 @@
         display: inline-block;
     }
 
-    .info {
-        width: 100%;
-        height: max-content;
-    }
 
     .info-p {
         text-align: justify;

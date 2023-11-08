@@ -23,14 +23,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Herramientas</title>
-    <link rel="shortcut icon" href="img/bits.png">
+    <link rel="shortcut icon" href="img/pie-chart.png">
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/styles.css">    
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
     <!-----------CDN swal(sweatalert)------------->
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
-<body class="pag">
+<body style="background: #17202A;">
     <!-- Image and text -->
     <nav class="navbar sticky-top navbar-dark bg-dark">
         <a class="navbar-brand" href="pagina_principal.php">
@@ -55,11 +55,11 @@
         </div>
     </nav>
     <center>
-        <header class="info p-3">
-            <h1 class="info-p text-center text-white">Herramientas</h1>
-        </header>
-        <main>
-            <div class="forms">
+        <main class="px-3 py-3">
+            <header class="encabesado p-2 text-white">
+                <h1 class=" text-center">Herramientas</h1>
+            </header>
+            <div class="d-flex flex-wrap justify-content-around">
                 <div class="form-update bg-dark text-white p-3">
                     <form>
                         <h1 id="titulos-form">Actualizar</h1>
@@ -119,8 +119,8 @@
                 </div>
                 <div class="card" style="width: 18rem;">
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item"><a href="registro_h.php" class="badge badge-success"><img src="img/playlist.png" alt=""> Nuevo registro</a></li>
-                        <li class="list-group-item"><a class="navbar-brand" href="#">
+                        <li class="list-group-item list-group-item-action list-group-item-dark"><a href="registro_h.php" class="badge badge-success"><img src="img/playlist.png" alt=""> Nuevo registro</a></li>
+                        <li class="list-group-item list-group-item-action list-group-item-dark"><a class="navbar-brand" href="#">
                             <?php
                                 //Contamos la cantidad que hay en el almacen
                                 include("php/abrir_conexion.php");
@@ -134,7 +134,7 @@
                                 include("php/cerrar_conexion.php");
                             ?>
                         </a></li>
-                        <li class="list-group-item"><a class="navbar-brand" href="herramienta_agotada.php">
+                        <li class="list-group-item list-group-item-action list-group-item-dark"><a class="navbar-brand" href="herramienta_agotada.php">
                             <?php
                                 //Contamos la cantidad que hay en el almacen
                                 include("php/abrir_conexion.php");
@@ -153,37 +153,38 @@
             </div>
             <div class="tb-herramientas">
                 <div class="container_herramientas">
-                    <div style="margin: 0px 10px; ">
-                        <h1 class="titulos" style="text-align:left;"><strong>Listado de herramientas</strong></h1>
+                    <div class="d-flex justify-content-between p-2 ">
+                        <h3 class="titulos text-white"><strong>Listado de herramientas</strong></h3>
+                        <div><a class="btn btn-danger btn-sm" href="php/reporte_Herramientas.php" target="_blank"><i class="fa-solid fa-file-pdf"></i></a></div>
                     </div>
-                    <div class="tabla-herramientas px-2">
+                    <div class="tabla-herramientas table-responsive px-2">
                         <?php
                             include("php/abrir_conexion.php");// conexion con la BD
                             $resultados = mysqli_query($conexion,"SELECT h.id_herramienta,h.Nombre,c.material,c.descripcion,g.Num_gavilanes,m.Ancho,m.Largo,h.cantidad_minima,h.cantidad,h.fecha_hora FROM $tbherr_db7 h inner join $tbcat_db3 c on h.id_categoria = c.id_categoria inner join $tbgav_db6 g on h.id_gavilanes = g.id_gav inner join $tbmed_db9 m on h.id_medidas = m.id_medidas ORDER BY h.id_herramienta");
                             //Unimos tabla Herramientas con categorias y medidas
                             echo "
-                            <table class=\"table table-striped table-bordered table-hover table-sm table-dark\" id=\"herramientas\">
-                                        <thead class=\"sticky-top thead-dark\">
-                                            <tr>
-                                                <th scope=\"col\">#</th>
-                                                <th scope=\"col\">Nombre</th>
-                                                <th scope=\"col\">Material</th>
-                                                <th scope=\"col\">Descripcion</th>
-                                                <th scope=\"col\">Gavilanes</th>
-                                                <th scope=\"col\">Ancho</th>
-                                                <th scope=\"col\">Largo</th>
-                                                <th scope=\"col\">Stock min</th>
-                                                <th scope=\"col\">Stock</th>
-                                                <th scope=\"col\">Fecha</th>
-                                                <th scope=\"col\">Estado</th>
-                                                <th scope=\"col\">Borrar</th>
-                                                <th scope=\"col\">Editar</th>
-                                            </tr>
-                                        </thead>
+                                <table class=\"table table-striped table-bordered table-hover table-sm table-dark\" id=\"herramientas\">
+                                    <thead class=\"sticky-top thead-dark\">
+                                        <tr>
+                                            <th scope=\"col\">#</th>
+                                            <th scope=\"col\">Nombre</th>
+                                            <th scope=\"col\">Material</th>
+                                            <th scope=\"col\">Descripcion</th>
+                                            <th scope=\"col\">Gavilanes</th>
+                                            <th scope=\"col\">Ancho</th>
+                                            <th scope=\"col\">Largo</th>
+                                            <th scope=\"col\">Stock</th>
+                                            <th scope=\"col\">Stock min</th>
+                                            <th scope=\"col\">Fecha</th>
+                                            <th scope=\"col\">Estado</th>
+                                            <th scope=\"col\">Borrar</th>
+                                            <th scope=\"col\">Editar</th>
+                                        </tr>
+                                    </thead>
                                     <tbody class=\"body-tb\">
                                 ";
                                 while($consulta = mysqli_fetch_array($resultados)) {
-                                    $datos =$consulta[0] ."||".
+                                    $datos = $consulta[0] ."||".
                                     $consulta[1]."||".
                                     $consulta[2]."||".
                                     $consulta[3]."||".
@@ -203,8 +204,8 @@
                                         <td><center>".$consulta['Num_gavilanes']."</center></td>
                                         <td><center>".$consulta['Ancho']."</center></td>
                                         <td><center>".$consulta['Largo']."</center></td>
-                                        <td><center>".$consulta['cantidad_minima']."</center></td>
                                         <td><center>".$consulta['cantidad']."</center></td>
+                                        <td><center>".$consulta['cantidad_minima']."</center></td>
                                         <td><center>".$consulta['fecha_hora']."</center></td>
                                         <th><center>";?>
                                         <?php
@@ -238,133 +239,135 @@
                     </div>
                 </div>
             </div>
-        </main>
-        <div class="modal fade" id="ModalEditar" tabindex="-1">
-            <div class="modal-dialog">
-                <div class="modal-content bg-dark text-white">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Editando...</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+            <div class="modal fade" id="ModalEditar" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content bg-dark text-white">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Editando...</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form id="frm_update_h">
+                            <div class="modal-body">
+                                <div class="form-row mb-3">
+                                    <div class="col-md-2">
+                                        <label for="idmodal">id</label>
+                                        <input type="text" id="idmodal" class="form-control form-control-sm" disabled>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="nombremodal">Nombre:</label>
+                                        <input type="text" id="nombremodal" class="form-control form-control-sm">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="medidasmodal">Medidas:</label>
+                                        <select class="form-control form-control-sm" id="medidasmodal">
+                                            <option selected >Choose...</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-row mb-3">
+                                    <div class="col-md-9">
+                                        <label for="descripcionmodal">Categoria:</label>
+                                        <select class="form-control form-control-sm" id="descripcionmodal">
+                                            <option selected >Choose...</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="gavilanesmodal">Gavilanes:</label>
+                                        <select class="form-control form-control-sm" id="gavilanesmodal">
+                                            <option selected >Choose...</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-3">
+                                        <label for="stock">Stock:</label>
+                                        <input type="text" id="stock" class="form-control form-control-sm">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="stockminimo">Stock minimo:</label>
+                                        <input type="text" id="stockminimo" class="form-control form-control-sm">
+                                    </div>
+                                </div>
+                            
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-success">Actualizar</button>
+                            </div>
+                        </form>
                     </div>
-                    <form id="frm_update_h">
-                        <div class="modal-body">
-                            <div class="form-row mb-3">
-                                <div class="col-md-2">
-                                    <label for="idmodal">id</label>
-                                    <input type="text" id="idmodal" class="form-control form-control-sm" disabled>
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="nombremodal">Nombre:</label>
-                                    <input type="text" id="nombremodal" class="form-control form-control-sm">
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="medidasmodal">Medidas:</label>
-                                    <select class="form-control form-control-sm" id="medidasmodal">
-                                        <option selected >Choose...</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-row mb-3">
-                                <div class="col-md-9">
-                                    <label for="descripcionmodal">Categoria:</label>
-                                    <select class="form-control form-control-sm" id="descripcionmodal">
-                                        <option selected >Choose...</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-3">
-                                    <label for="gavilanesmodal">Gavilanes:</label>
-                                    <select class="form-control form-control-sm" id="gavilanesmodal">
-                                        <option selected >Choose...</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="col-md-3">
-                                    <label for="stock">Stock:</label>
-                                    <input type="text" id="stock" class="form-control form-control-sm">
-                                </div>
-                                <div class="col-md-3">
-                                    <label for="stockminimo">Stock minimo:</label>
-                                    <input type="text" id="stockminimo" class="form-control form-control-sm">
-                                </div>
-                            </div>
-                        
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-success">Actualizar</button>
-                        </div>
-                    </form>
                 </div>
+            </div>
+        </main>
+        <div class="contador-h bg-dark">
+        <div style="background: #2E4053; border-radius: 5px; "><center><h3 style="color: white;">Resultados</h3></center></div>
+            <div class="w-100 ">
+            <?php
+                    include("php/abrir_conexion.php");
+                    if (isset($_POST['btn_buscar'])) {
+                        $her = $_POST['herramienta'];
+                        $med = $_POST['medida'];
+                        if ($her != 'Choose...' && $med != 'Choose...') {
+                            $consultah = mysqli_query($conexion, "SELECT h.id_herramienta AS id,h.Nombre AS Nombre,c.Descripcion AS Descripcion,c.Material AS Material,g.Num_gavilanes AS Num_gavilanes,m.Ancho AS Ancho,m.Largo AS Largo,h.Cantidad AS Stock,h.Cantidad_Minima AS Stock_minimo,h.rutaimg AS rutaimg FROM $tbherr_db7 h inner join $tbcat_db3 c on h.id_categoria = c.id_categoria inner join $tbgav_db6 g on h.id_gavilanes = g.id_gav inner join $tbmed_db9 m on h.id_medidas = m.id_medidas WHERE h.Nombre LIKE '%$her%' AND m.Ancho LIKE '%$med%'");                    
+                ?>
+                            <div class="d-flex flex-wrap justify-content-around" id="mensaje">
+                                <?php
+                                if(mysqli_num_rows($consultah) > 0){
+                                    while($responsData = mysqli_fetch_assoc($consultah)) {
+                                ?>
+                                    <div class="conten ">
+                                        <img class="text-white" src="<?php echo $responsData['rutaimg'];?>" id="imgs" alt="imagen no encontrada">
+                                        <div class = "infor">
+                                            <h1 class="subt">Características</h1>
+                                            <p><?php echo "# ".$responsData['id'];?></p>
+                                            <p><?php echo "Nombre: ".$responsData['Nombre']." de ".$responsData['Material']." ".$responsData['Descripcion'];?></p></p>
+                                            <p><?php echo "Medidas: ".$responsData['Ancho']." Ancho x ".$responsData['Largo']." Largo";?></p>
+                                            <p><?php echo "Gavilanes: ".$responsData['Num_gavilanes']." Stock: ".$responsData['Stock']." Stock minimo: ".$responsData['Stock_minimo'];?></p>
+                                        </div>
+                                    </div>
+                                <?php
+                                    }
+                                    echo '
+                                    <script>
+                                    swal({
+                                        title: "Busqueda exitosa!!",
+                                        text: "Para ver los resultados deslice hacia arriba",
+                                        icon: "success"
+                                    });
+                                    </script>';
+                            }else{
+                                echo '
+                                <center><div class="alert alert-warning" role="alert"><strong>Sin resultados</strong></div></center>
+                                <script>
+                                    swal({
+                                        title: "Opciones no validas",
+                                        text: "Las medidas no coinciden con el tipo de herramienta en la base de datos",
+                                        icon: "error"
+                                    });
+                                </script>';
+                            }
+                        }else {
+                        echo '
+                        <center><div class="alert alert-warning" role="alert"><strong>Sin resultados</strong></div></center>
+                        <script>
+                            swal({
+                                title: "Opciones no validas",
+                                text: "Selecciona los valores para realizar la busqueda",
+                                icon: "warning"
+                            });
+                        </script>';
+                        }
+                        include("php/cerrar_conexion.php");
+                    } else{
+                        echo '<center><div class="alert alert-warning d-inline-flex p-2" role="alert"><strong>Busqueda de herramientas</strong></div></center>';
+                    }
+                                ?>
             </div>
         </div>
     </center>
-    <div class="contador-h">
-            <div style="background: #2E4053; border-radius: 5px; "><center><h3 style="color: white;">Resultados</h3></center></div>
-            <?php
-                include("php/abrir_conexion.php");
-                if (isset($_POST['btn_buscar'])) {
-                    $her = $_POST['herramienta'];
-                    $med = $_POST['medida'];
-                    if ($her != 'Choose...' && $med != 'Choose...') {
-                        $consultah = mysqli_query($conexion, "SELECT h.id_herramienta AS id,h.Nombre AS Nombre,c.Descripcion AS Descripcion,c.Material AS Material,g.Num_gavilanes AS Num_gavilanes,m.Ancho AS Ancho,m.Largo AS Largo,h.Cantidad AS Stock,h.Cantidad_Minima AS Stock_minimo,h.rutaimg AS rutaimg FROM $tbherr_db7 h inner join $tbcat_db3 c on h.id_categoria = c.id_categoria inner join $tbgav_db6 g on h.id_gavilanes = g.id_gav inner join $tbmed_db9 m on h.id_medidas = m.id_medidas WHERE h.Nombre LIKE '%$her%' AND m.Ancho LIKE '%$med%'");                    
-            ?>
-                        <div class="d-flex" id="mensaje">
-                            <?php
-                            if(mysqli_num_rows($consultah) > 0){
-                                while($responsData = mysqli_fetch_assoc($consultah)) {
-                            ?>
-                                <div class="conten ">
-                                    <img src="<?php echo $responsData['rutaimg'];?>" id="imgs" alt="imagen no encontrada">
-                                    <div class = "infor">
-                                        <h1 class="subt">Características</h1>
-                                        <p><?php echo "# ".$responsData['id'];?></p>
-                                        <p><?php echo "Nombre: ".$responsData['Nombre']." de ".$responsData['Material']." ".$responsData['Descripcion'];?></p></p>
-                                        <p><?php echo "Medidas: ".$responsData['Ancho']." Ancho x ".$responsData['Largo']." Largo";?></p>
-                                        <p><?php echo "Gavilanes: ".$responsData['Num_gavilanes']." Stock: ".$responsData['Stock']." Stock minimo: ".$responsData['Stock_minimo'];?></p>
-                                    </div>
-                                </div>
-                            <?php
-                                }
-                                echo '
-                                <script>
-                                swal({
-                                    title: "Busqueda exitosa!!",
-                                    text: "Para ver los resultados deslice hacia arriba",
-                                    icon: "success"
-                                });
-                                </script>';
-                        }else{
-                            echo '
-                            <center><div class="alert alert-warning" role="alert"><strong>Sin resultados</strong></div></center>
-                            <script>
-                                swal({
-                                    title: "Opciones no validas",
-                                    text: "Las medidas no coinciden con el tipo de herramienta en la base de datos",
-                                    icon: "error"
-                                });
-                            </script>';
-                        }
-                    }else {
-                    echo '
-                    <center><div class="alert alert-warning" role="alert"><strong>Sin resultados</strong></div></center>
-                    <script>
-                        swal({
-                            title: "Opciones no validas",
-                            text: "Selecciona los valores para realizar la busqueda",
-                            icon: "warning"
-                        });
-                    </script>';
-                    }
-                    include("php/cerrar_conexion.php");
-                } else{
-                    echo '<center><div class="alert alert-warning" role="alert"><strong>Busquedas de herramientas</strong></div></center>';
-                }
-                            ?>
-                </div>
-        </div>
+    
 
     <script src="https://kit.fontawesome.com/282ec8cabc.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

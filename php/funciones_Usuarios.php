@@ -59,3 +59,5 @@
         }
         include("cerrar_conexion.php");
     }
+
+    //print encryptingPass('paz');

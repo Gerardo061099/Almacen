@@ -23,16 +23,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro de nuevas herramientas</title>
-    <link rel="shortcut icon" href="img/copy.png">
+    <link rel="shortcut icon" href="img/pie-chart.png">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script><!--CDN swal(sweatalert)-->
 </head>
 <body style="background: #17202A;">
-    <nav class="navbar navbar-dark bg-dark">
-        <div class="navbar-brand">
+    <!-- Image and text -->
+    <nav class="navbar sticky-top navbar-dark bg-dark">
+        <a class="navbar-brand" href="pagina_principal.php">
             ALUXSA S.A de C.V
-        </div>
+        </a>
         <div class="dropdown d-flex align-items-center pr-4">
             <div class="px-2">
                 <img src="img/login_profile_user.png" alt="">
@@ -51,15 +52,15 @@
             </div>
         </div>
     </nav>
-    <div class="box-1 px-3 py-3">
-        <div class="encabesado" style="border-top: #DC7633 7px solid;">
+    <header class="px-3 py-3">
+        <div class="encabesado text-white p-2">
             <h1 class="titulo">Registro de Herramientas</h1>
         </div>
-    </div>
+    </header>
     <main class="d-flex justify-content-around px-3 py-3">
-        <article class="contenedor w-auto h-25" style="border-top: #5DADE2 7px solid;">
+        <article class="contenedor w-auto h-25 bg-dark text-white" style="border-left: #5DADE2 7px solid;">
             <div class="">
-            <form enctype="multipart/form-data">
+                <form enctype="multipart/form-data">
                 <h1 class="text-center">Registrar:</h1>
                     <div class="form-row">
                         <div class="form-group col-md-6">

@@ -28,7 +28,7 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script><!--CDN swal(sweatalert)-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 </head>
-<body class="pag" onload="mueveReloj()">
+<body class="pag" onload="mueveReloj()" style="background: #17202A;">
     <!-- Image and text -->
     <nav class="navbar navbar-dark bg-dark">
         <div class="navbar-brand">
@@ -57,7 +57,7 @@
     </nav>
     <center>
         <div class="box-1 p-3">
-            <div class="encabesado ">
+            <div class="encabesado text-white p-2">
                 <h1 class="titulo">¡Bienvenido  al sistema de inventario de ALUXSA!</h1>
             </div>
         </div>
