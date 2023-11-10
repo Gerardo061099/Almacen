@@ -44,7 +44,7 @@
             <p class="mb-0 px-1">
                 <span class="text-white"><?php echo $_SESSION['usuario'];?></span>
             </p>
-            <button class="btn btn-dark" type="button" data-toggle="dropdown" aria-expanded="false">
+            <button class="btn btn-dark btn-sm" type="button" data-toggle="dropdown" aria-expanded="false">
                 <i class="fa-solid fa-ellipsis-vertical"></i>
             </button>
             <div class="dropdown-menu dropdown-menu-right">

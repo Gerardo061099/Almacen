@@ -195,23 +195,17 @@
     }
 
     .cortadores {
-        width: 1050px;
-        height: 300px;
-        margin: 0px 0px;
+        background: #FDFEFE;
         display: block;
-        overflow-y: auto;
     }
 
     .separador {
-        margin: 2px;
-        border-bottom: #2ECC71 5px solid;
+        width: 100%;
+        height: 300px;
+        display: block;
     }
 
     #tb-cortadores {
-        margin: 0px 20px;
-        width: 1050px;
-        height: 25px;
-        font-size: 13px;
     }
 
     .contenido {
@@ -219,12 +213,8 @@
     }
 
     .con-cortadores {
-        margin: 10px 20px;
-        width: 1100px;
-        height: 350px;
-        padding: 5px 5px;
         border-radius: 5px;
-        background: #FDFEFE;
+        height: max-content;
     }
 
     .cortadores::-webkit-scrollbar {

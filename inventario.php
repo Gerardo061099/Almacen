@@ -6,7 +6,6 @@
         $id = $_SESSION['id'];
         $queryUser = mysqli_query($conexion,"SELECT user FROM $tbu_db1 WHERE id_us = $id");
         $result = mysqli_fetch_assoc($queryUser);
-
         $user = null;
         if (mysqli_num_rows($queryUser) > 0) {
             $user = $result;
@@ -27,15 +26,13 @@
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/styles.css">    
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
-    <!-----------CDN swal(sweatalert)------------->
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body style="background: #17202A;">
     <!-- Image and text -->
     <nav class="navbar sticky-top navbar-dark bg-dark">
-        <a class="navbar-brand" href="pagina_principal.php">
+        <div class="navbar-brand">
             ALUXSA S.A de C.V
-        </a>
+        </div>
         <div class="dropdown d-flex align-items-center pr-4">
             <div class="px-2">
                 <img src="img/login_profile_user.png" alt="">
@@ -43,7 +40,7 @@
             <p class="mb-0 px-1">
                 <span class="text-white"><?php echo $_SESSION['usuario'];?></span>
             </p>
-            <button class="btn btn-dark" type="button" data-toggle="dropdown" aria-expanded="false">
+            <button class="btn btn-dark btn-sm" type="button" data-toggle="dropdown" aria-expanded="false">
                 <i class="fa-solid fa-ellipsis-vertical"></i>
             </button>
             <div class="dropdown-menu dropdown-menu-right">

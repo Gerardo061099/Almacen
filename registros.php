@@ -22,14 +22,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inventario de Bodega</title>
+    <link rel="shortcut icon" href="img/pie-chart.png">
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/styles.css">
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script><!--CDN swal(sweatalert)-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 </head>
 <body style="background: #17202A;">
     <!-- Image and text -->
     <nav class="navbar sticky-top navbar-dark bg-dark">
-        <div class="navbar-brand" href="pagina_principal.php">
+        <div class="navbar-brand">
             ALUXSA S.A de C.V
         </div>
         <div class="dropdown d-flex align-items-center pr-4">
@@ -39,7 +40,7 @@
             <p class="mb-0 px-1">
                 <span class="text-white"><?php echo $_SESSION['usuario'];?></span>
             </p>
-            <button class="btn btn-dark" type="button" data-toggle="dropdown" aria-expanded="false">
+            <button class="btn btn-dark btn-sm" type="button" data-toggle="dropdown" aria-expanded="false">
                 <i class="fa-solid fa-ellipsis-vertical"></i>
             </button>
             <div class="dropdown-menu dropdown-menu-right">
@@ -50,7 +51,7 @@
             </div>
         </div>
     </nav>
-    <div class="p-3">
+    <main class="p-3">
         <div class="encabesado text-white text-center p-2">
             <h1 class="">Categorias</h1>
         </div>
@@ -60,12 +61,12 @@
                 <li class="breadcrumb-item active" aria-current="page">Categorias</li>
             </ol>
         </nav>
-        <div class="contenido con-cortadores">
-            <div class="cortadores">
-                <div>
-                    <h1 style="text-align: left; margin: 5px 15px;">Cortadores</h1>
+        <div class="con-cortadores w-100 p-2">
+            <div class="cortadores rounded">
+                <div class="p-2">
+                    <h3>Cortadores</h3>
                 </div>
-                <div class="separador"></div>
+                <div class="separador table-responsive px-2">
             <?php
                 include("php/abrir_conexion.php");// conexion con la BD
                 $resultados = mysqli_query($conexion,"SELECT h.id_herramienta,h.Nombre,c.material,c.descripcion,g.Num_gavilanes,m.Ancho,m.Largo,h.cantidad,h.fecha_hora FROM $tbherr_db7 h inner join $tbcat_db3 c on h.id_categoria = c.id_categoria inner join $tbgav_db6 g on h.id_gavilanes = g.id_gav inner join $tbmed_db9 m on h.id_medidas = m.id_medidas WHERE NOMBRE = 'CORTADOR' ORDER BY h.id_herramienta");
@@ -74,104 +75,81 @@
                     <table class=\"table\" id=\"tb-cortadores\">
                         <thead class=\"thead-dark\">
                             <tr>
-                                <th><center>#</center></th>
-                                <th><center>Nombre</center></th>
-                                <th><center>Material</center></th>
-                                <th><center>Descripcion</center></th>
-                                <th><center>Gavilanes</center></th>
-                                <th><center>Ancho</center></th>
-                                <th><center>Largo</center></th>
-                                <th><center>Cantidad</center></th>
-                                <th><center>Fecha</center></th>
+                                <th>Id</th>
+                                <th>Nombre</th>
+                                <th>Material</th>
+                                <th>Descripcion</th>
+                                <th>Gavilanes</th>
+                                <th>Ancho</th>
+                                <th>Largo</th>
+                                <th>Stock</th>
+                                <th>Fecha</th>
                             </tr>
-                        </thead>";
+                        </thead>
+                        <tbody class=\"tb-body\">
+                        ";
                 while($consulta = mysqli_fetch_array($resultados)){
                 echo "
-                        <tbody class=\"tb-body\">
-                            <tr>
-                                <td><center>".$consulta['id_herramienta']."</center></td>
-                                <td><center>".$consulta['Nombre']."</center></td>
-                                <td><center>".$consulta['material']."</center></td>
-                                <td><center>".$consulta['descripcion']."</center></td>
-                                <td><center>".$consulta['Num_gavilanes']."</center></td>
-                                <td><center>".$consulta['Ancho']."</center></td>
-                                <td><center>".$consulta['Largo']."</center></td>
-                                <td><center>".$consulta['cantidad']."</center></td>
-                                <td><center>".$consulta['fecha_hora']."</center></td>
-                            </tr>
-                        </tbody>";
+                        <tr>
+                            <td>".$consulta['id_herramienta']."</td>
+                            <td>".$consulta['Nombre']."</td>
+                            <td>".$consulta['material']."</td>
+                            <td>".$consulta['descripcion']."</td>
+                            <td>".$consulta['Num_gavilanes']."</td>
+                            <td>".$consulta['Ancho']."</td>
+                            <td>".$consulta['Largo']."</td>
+                            <td>".$consulta['cantidad']."</td>
+                            <td>".$consulta['fecha_hora']."</td>
+                        </tr>
+                        ";
                 }
                 include("php/cerrar_conexion.php");
                 echo "
+                        </tbody>
                     </table>
                 ";
             ?>
-            </div>
-        </div>
-        <?php
-        include("php/abrir_conexion.php");
-        $consulta = mysqli_query($conexion,"SELECT COUNT(*) as cortadores FROM $tbherr_db7 WHERE Nombre = 'Cortador'");
-        while ($resultado = mysqli_fetch_array($consulta)){
-            $n_cortadores = $resultado['cortadores'];
-        }
-        include("php/cerrar_conexion.php");
-        ?>
-        <div class="informacion_piezas">
-            <div class="informacion_p">
-            <h1>Numero de Registros por pieza</h1>
-                <p>
-                    <?php echo '<button type="button" class="btn btn-primary">Cortadores <span class="badge badge-light">'.$n_cortadores.'</span>
-                    <span class="sr-only">unread messages</span>
-                    </button>'; ?> 
-                </p>
-                <?php
-                include("php/abrir_conexion.php");
-                $query = mysqli_query($conexion,"SELECT COUNT(*) as brocas FROM $tbherr_db7 WHERE Nombre = 'Broca'");
-                while ($row = mysqli_fetch_array($query)){
-                    $n_broca = $row['brocas'];
-                }
-                ?>
-                <p><?php echo '<button type="button" class="btn btn-info">Brocas <span class="badge badge-light">'.$n_broca.'</span><span class="sr-only">unread messages</span></button>'; ?></p>
-            </div>
-        </div>
-    </div>
-        <div class="con-cortadores">
-            <div class="cortadores">
-                <div>
-                    <h1 style="text-align: left; margin: 5px 15px;">Brocas</h1>
                 </div>
-            <div class="separador"></div>
+            </div>
+        </div>
+        <div class="con-cortadores w-100 p-2">
+            <div class="cortadores rounded">
+                <div class="p-2">
+                    <h3>Brocas</h3>
+                </div>
+                <div class="separador table-responsive px-2">
             <?php
+            include('php/abrir_conexion.php');
                 $resultados = mysqli_query($conexion,"SELECT h.id_herramienta,h.Nombre,c.material,c.descripcion,g.Num_gavilanes,m.Ancho,m.Largo,h.cantidad,h.fecha_hora FROM $tbherr_db7 h inner join $tbcat_db3 c on h.id_categoria = c.id_categoria inner join $tbgav_db6 g on h.id_gavilanes = g.id_gav inner join $tbmed_db9 m on h.id_medidas = m.id_medidas WHERE NOMBRE = 'Broca' ORDER BY h.id_herramienta");
                 //Unimos tabla Herramientas con categorias y medidas
                 echo "
                     <table class=\"table\" id=\"tb-cortadores\">
                         <thead class=\"thead-dark\">
                             <tr>
-                                <th><center>#</center></th>
-                                <th><center>Nombre</center></th>
-                                <th><center>Material</center></th>
-                                <th><center>Descripcion</center></th>
-                                <th><center>Gavilanes</center></th>
-                                <th><center>Ancho</center></th>
-                                <th><center>Largo</center></th>
-                                <th><center>Cantidad</center></th>
-                                <th><center>Fecha</center></th>
+                                <th>Id</th>
+                                <th>Nombre</th>
+                                <th>Material</th>
+                                <th>Descripcion</th>
+                                <th>Gavilanes</th>
+                                <th>Ancho</th>
+                                <th>Largo</th>
+                                <th>Stock</th>
+                                <th>Fecha</th>
                             </tr>
                         </thead>";
                 while($consulta = mysqli_fetch_array($resultados)){
                 echo "
                         <tbody class=\"tb-body\">
                             <tr>
-                                <td><center>".$consulta['id_herramienta']."</center></td>
-                                <td><center>".$consulta['Nombre']."</center></td>
-                                <td><center>".$consulta['material']."</center></td>
-                                <td><center>".$consulta['descripcion']."</center></td>
-                                <td><center>".$consulta['Num_gavilanes']."</center></td>
-                                <td><center>".$consulta['Ancho']."</center></td>
-                                <td><center>".$consulta['Largo']."</center></td>
-                                <td><center>".$consulta['cantidad']."</center></td>
-                                <td><center>".$consulta['fecha_hora']."</center></td>
+                                <td>".$consulta['id_herramienta']."</td>
+                                <td>".$consulta['Nombre']."</td>
+                                <td>".$consulta['material']."</td>
+                                <td>".$consulta['descripcion']."</td>
+                                <td>".$consulta['Num_gavilanes']."</td>
+                                <td>".$consulta['Ancho']."</td>
+                                <td>".$consulta['Largo']."</td>
+                                <td>".$consulta['cantidad']."</td>
+                                <td>".$consulta['fecha_hora']."</td>
                             </tr>
                         </tbody>";
                 }
@@ -180,22 +158,10 @@
                     </table>
                 ";
             ?>
+                </div>
             </div>
-        </div>  
-    <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-center">
-            <li class="page-item">
-                <a class="page-link" href="inventario.php">Previous</a>
-            </li>
-            <li class="page-item"><a class="page-link" href="inventario.php">1</a></li>
-            <li class="page-item disabled"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="herramienta_agotada.php">3</a></li>
-            <li class="page-item">
-                <a class="page-link" href="herramienta_agotada.php">Next</a>
-            </li>
-        </ul>
-    </nav>
-
+        </div>
+    </main>
     <script src="https://kit.fontawesome.com/282ec8cabc.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-----------CDN JQuery----------------------->
