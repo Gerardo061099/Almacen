@@ -163,7 +163,6 @@
     }
 
     .card {
-        margin: 10px 10px;
         border-radius: 5px;
     }
 
@@ -171,14 +170,10 @@
         width: 100%;
         height: 300px;
         display: block;
-        overflow-y: auto;
     }
 
     .tb_h {
-        width: 1050px;
         height: 300px;
-        display: block;
-        overflow-y: auto;
     }
 
     #herramientas {}
@@ -365,7 +360,6 @@
     }
 
     .contenedor_registros {
-        margin: 15px 20px;
     }
 
     .Nuevos_registros {
@@ -380,8 +374,6 @@
     }
 
     .salidas {
-        margin: 15px 15px;
-        width: 975px;
         background: #FDFEFE;
     }
 

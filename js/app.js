@@ -292,7 +292,7 @@ function RegistrarSoli(e) {
     } else {
         swal({
             title: "Datos no ingresados",
-            text: "Debes Selection los datos",
+            text: "La información recibida está incompleta",
             icon: "warning"
         });
     }
