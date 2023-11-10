@@ -117,7 +117,7 @@
                         </div>
                     </form>
                 </div>
-                <div class="card" style="width: 18rem;">
+                <div class="card p-2" style="width: 18rem;">
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item list-group-item-action list-group-item-dark"><a href="registro_h.php" class="badge badge-success"><img src="img/playlist.png" alt=""> Nuevo registro</a></li>
                         <li class="list-group-item list-group-item-action list-group-item-dark"><a class="navbar-brand" href="#">
