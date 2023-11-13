@@ -25,6 +25,7 @@
     <link rel="shortcut icon" href="img/pie-chart.png">
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/styles.css">    
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 </head>
 <body style="background: #17202A;">
@@ -63,7 +64,7 @@
                         <div class="form-row" id="items">
                             <div class="col-md-6 mb-3">
                                 <label for="id_h"># registro</label>
-                                <select class="form-control form-control-sm" id="id_h">
+                                <select class="form-control form-control-sm" id="id_h" disabled>
                                 <option selected>Choose...</option>
                                     <?php
                                     include("php/abrir_conexion.php");
@@ -77,10 +78,10 @@
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="cantidadnew">Cantidad</label>
-                                <input type="text" class="form-control form-control-sm" id="cantidadnew">
+                                <input type="text" class="form-control form-control-sm" id="cantidadnew" disabled>
                             </div>
                         </div>
-                        <button class="btn btn-primary btn-sm" type="submit" onclick="update(event);"> Actualizar</button>
+                        <button class="btn btn-primary btn-sm" type="submit" onclick="update(event);" disabled> Actualizar</button>
                     </form>
                 </div>
                 <div class="botones bg-dark text-white p-3">
@@ -299,8 +300,8 @@
             </div>
         </main>
         <div class="contador-h bg-dark">
-        <div style="background: #2E4053; border-radius: 5px; "><center><h3 style="color: white;">Resultados</h3></center></div>
-            <div class="w-100 ">
+            <div style="background: #2E4053; border-radius: 5px; "><center><h3 style="color: white;">Resultados</h3></center></div>
+            <div class="w-100">
             <?php
                     include("php/abrir_conexion.php");
                     if (isset($_POST['btn_buscar'])) {
@@ -314,7 +315,7 @@
                                 if(mysqli_num_rows($consultah) > 0){
                                     while($responsData = mysqli_fetch_assoc($consultah)) {
                                 ?>
-                                    <div class="conten ">
+                                    <div class="conten">
                                         <img class="text-white" src="<?php echo $responsData['rutaimg'];?>" id="imgs" alt="imagen no encontrada">
                                         <div class = "infor">
                                             <h1 class="subt">Características</h1>
