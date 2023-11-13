@@ -31,6 +31,7 @@ $(document).ready(function () {
                 $('#link_diss_img').attr('hidden', true)
             }
         } else{ 
+            $('#link_diss_img').attr('hidden', true)
             etiquetaIMG.src = ''
             nombre_img.textContent = ''
             tamaño_img.textContent = ''

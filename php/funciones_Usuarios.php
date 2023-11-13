@@ -60,4 +60,4 @@
         include("cerrar_conexion.php");
     }
 
-    //print encryptingPass('paz');
+    //print encryptingPass('octubre061099');

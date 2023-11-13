@@ -62,9 +62,9 @@
         $resultado = mysqli_fetch_array($consulta);
         include("php/cerrar_conexion.php");
     ?>
-    <div class="box-registros w-100 p-2 d-flex flex-wrap">
-        <div class="p-2">
-            <div class="salidas rounded p-2">
+    <main class="box-registros w-100 p-2 d-flex flex-wrap">
+        <section class="p-2 w-75">
+            <div class="salidas w-100 rounded p-2">
                 <div style="background: #FDFEFE;">
                     <h1 class="titulos" style="text-align:left;"><strong>Salidas del almacen</strong></h1>
                 </div>
@@ -74,7 +74,7 @@
                         $resultados = mysqli_query($conexion,"SELECT s.id_solicitud,e.nombre as solicitante,e.apellidos,h.Nombre as herramienta,c.Descripcion,c.Material,g.Num_gavilanes AS Gav,m.Largo,m.Ancho,d.cantidad,s.Fecha from $tbsoli_db10 s inner join $tbdet_db4 d on s.id_solicitud = d.id_solicitud inner join $tbherr_db7 h on d.id_herramientas = h.id_herramienta inner join $tbcat_db3 c on h.id_categoria = c.id_categoria inner join $tbgav_db6 g on h.id_gavilanes = g.id_gav inner join $tbmed_db9 m on h.id_medidas = m.id_medidas inner join $tbem_db5 e on s.id_empleado = e.id_empleado ORDER BY s.id_solicitud DESC");
                         //Unimos tabla Herramientas con categorias y medidas
                         echo "
-                    <table class=\"table table-dark table-striped table-hover\" id=\"h\">
+                    <table class=\"table table-dark table-striped table-hover table-sm\" id=\"h\">
                         <thead class=\"\">
                             <tr>
                                 <th>Id</th>
@@ -119,9 +119,9 @@
                     </table>
                 </div>
             </div>
-        </div>
-        <div class="contenedor_registros p-2">
-            <div class="card text-white bg-primary" style="width: 13rem;">
+        </section>
+        <aside class="contenedor_registros w-auto p-2">
+            <div class="card text-white bg-primary w-100">
             <div class="card-header">Datos registrados:</div>
                 <ul class="list-group list-group-flush">
                 <?php
@@ -143,8 +143,8 @@
                     ?>
                 </div>
             </div>
-        </div>
-    </div>
+        </aside>
+    </main>
     <script src="https://kit.fontawesome.com/282ec8cabc.js" crossorigin="anonymous"></script>
     <!-----------CDN JQuery----------------------->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>

@@ -329,9 +329,6 @@
 
     .aside1 {
         /*border: #000 5px solid;*/
-        padding: 25px 20px;
-        margin: 12px;
-        border-radius: 5px;
         display: inline-block;
     }
 
@@ -425,13 +422,6 @@
             width: 1000px;
             display: block;
             overflow-x: auto;
-        }
-
-        .salidas {
-            margin: 15px 15px;
-            padding: 5PX 5PX;
-            width: 625x;
-            background: #FDFEFE;
         }
 
         .form-update {
@@ -574,13 +564,6 @@
         .contenedor_registros {
             margin: 15px 15px;
         }
-
-        .salidas {
-            margin: 15px 15px;
-            padding: 5PX 5PX;
-            width: 380px;
-            background: #FDFEFE;
-        }
     }
 
     @media all and (max-width: 430px) {
@@ -713,13 +696,6 @@
             display: block;
             overflow-x: auto;
         }
-
-        .salidas {
-            margin: 15px 15px;
-            padding: 5PX 5PX;
-            width: 340px;
-            background: #FDFEFE;
-        }
     }
 
     @media all and (max-width:330px) {
@@ -755,12 +731,6 @@
             overflow-x: auto;
         }
 
-        .salidas {
-            margin: 15px 15px;
-            padding: 5PX 5PX;
-            width: 290px;
-            background: #FDFEFE;
-        }
 
         .contenedor_registros {
             margin: 10px 10px;

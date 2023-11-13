@@ -58,7 +58,7 @@
     <center>
         <div class="box-1 p-3">
             <div class="encabesado text-white p-2">
-                <h1 class="titulo">¡Bienvenido  al sistema de inventario de ALUXSA!</h1>
+                <h1 class="">¡Bienvenido  al sistema de inventario de ALUXSA!</h1>
             </div>
         </div>
     </center>

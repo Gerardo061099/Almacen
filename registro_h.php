@@ -31,9 +31,9 @@
 <body style="background: #17202A;">
     <!-- Image and text -->
     <nav class="navbar sticky-top navbar-dark bg-dark">
-        <a class="navbar-brand" href="pagina_principal.php">
+        <div class="navbar-brand">
             ALUXSA S.A de C.V
-        </a>
+        </div>
         <div class="dropdown d-flex align-items-center pr-4">
             <div class="px-2">
                 <img src="img/login_profile_user.png" alt="">
@@ -110,10 +110,10 @@
                             </div>
                         </div>
                     </div>
-                    <a href="add_categorias.php" type="submit" class="btn btn-dark"><img src="img/plus-withe.png" alt="sin resultados"> Categoria</a>
-                    <a href="add_medidas.php" type="submit" class="btn btn-primary"><img src="img/plus-withe.png" alt="sin resultados"> Medidas</a>
-                    <input type="submit" value="Hecho" class="btn btn-success" onclick=obtener(event)>
-                    <button type="button" class="btn btn-danger"><img src="img/trash-can.png" alt="sin resultados" onclick="borrar(event)"></button>
+                    <a href="add_categorias.php" type="submit" class="btn btn-dark btn-sm"><i class="fa-solid fa-circle-plus"></i> Categoria</a>
+                    <a href="add_medidas.php" type="submit" class="btn btn-primary btn-sm"><i class="fa-solid fa-circle-plus"></i> Medidas</a>
+                    <input type="submit" value="Hecho" class="btn btn-success btn-sm" onclick=obtener(event)>
+                    <button type="button" class="btn btn-danger btn-sm" onclick="borrar(event)"><i class="fa-solid fa-trash"></i></button>
                     <div id="load1" style="color: black; font-size: 20px;"></div>
                 </form>
             </div>

@@ -34,7 +34,6 @@ function obtener(e) {
                             text: "Debes llenar todos los campos",
                             icon: "warning",
                         })
-                        $('#load1').html('Oh Oh.. ocurrio un error!!')
                         break
                     case "Insercion exitosa":
                         swal({
@@ -42,7 +41,6 @@ function obtener(e) {
                             text: "Puedes consultar la informacion en la lista de herramientas",
                             icon: "success"
                         })
-                        $('#load1').html('Registro terminado!!')
                         break
                     case "Error al insertar la informacion":
                         swal({
