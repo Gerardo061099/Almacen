@@ -60,22 +60,22 @@
         <header class="encabesado text-white p-2">
             <h1 class="titulo">Registro de Categorías</h1>
         </header>
-        <section class="aside1 py-2">
+        <section class="aside1 py-2 w-100 d-flex justify-content-center ">
             <div class="contenedor" style="border-top: #5DADE2 7px solid;">
                 <div class="aside">
                     <form enctype="multipart/form-data">
-                    <h1>Agrega una categoria</h1>
+                    <h3 class="text-center " >Agrega una categoria</h3>
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="desc">Descripcion:</label>
-                                <input type="text" class="form-control" id="desc">
+                                <input type="text" class="form-control form-control-sm" id="desc">
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="material">Material:</label>
-                                <input type="text" class="form-control" id="material">
+                                <input type="text" class="form-control form-control-sm" id="material">
                             </div>
                         </div>
-                        <input type="submit" value="Agregar" class="btn btn-outline-primary" onclick="addcategorias(event)">
+                        <input type="submit" value="Agregar" class="btn btn-outline-primary btn-sm" onclick="addcategorias(event)">
                         <div id="cargando"></div>
                     </form>
                 </div>

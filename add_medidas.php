@@ -26,56 +26,64 @@
     <link rel="shortcut icon" href="img/pie-chart.png">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script><!--CDN swal(sweatalert)-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    
     
 </head>
 <body style="background: #17202A;">
-    <nav class="navbar navbar-dark bg-dark">
-        <a class="navbar-brand" href="registro_h.php">
-            <img src="img/back.png" alt="sin respuesta">
-        </a>
-        <a class="navbar-brand" href="#">
-        ALUXSA S.A de C.V
-        </a>
-    </nav>
-    <center>
-        <div class="box-1" style="border-top: #DC7633 7px solid;">
-            <div class="encabesado">
-                <h1 class="titulo">Registro de medidas</h1>
+    <!-- Image and text -->
+    <nav class="navbar sticky-top navbar-dark bg-dark">
+        <div class="navbar-brand">
+            ALUXSA S.A de C.V
+        </div>
+        <div class="dropdown d-flex align-items-center pr-4">
+            <div class="px-2">
+                <img src="img/login_profile_user.png" alt="">
+            </div>
+            <p class="mb-0 px-1">
+                <span class="text-white"><?php echo $_SESSION['usuario'];?></span>
+            </p>
+            <button class="btn btn-dark btn-sm" type="button" data-toggle="dropdown" aria-expanded="false">
+                <i class="fa-solid fa-ellipsis-vertical"></i>
+            </button>
+            <div class="dropdown-menu dropdown-menu-right">
+                <a class="dropdown-item" href="pagina_principal.php"><i class="fa-solid fa-house"></i> Inicio</a>
+                <a class="dropdown-item" href="add_user.php"><i class="fa-solid fa-user-plus"></i> Agregar usuario</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="php/cerrar_sesion.php"><i class="fa-solid fa-right-from-bracket"></i> Cerrar sesion</a>
             </div>
         </div>
-        <div class="aside1">
-                <div class="contenedor" style="border-top: #5DADE2 7px solid;">
-                    <div class="aside">
-                        <form enctype="multipart/form-data">
-                        <h1>Medidas:</h1>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="ancho">Ancho:</label>
-                                    <input type="text" class="form-control" id="ancho">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="largo">Largo:</label>
-                                    <input type="text" class="form-control" id="largo">
-                                </div>
-                            </div>
-                            <input type="submit" value="Agregar" class="btn btn-outline-success" onclick="medidas(event)">
-                            <div id="cargando"></div>
-                        </form>
-                    </div>
-                </div>
+    </nav>
+    <main class="p-3">
+        <div class="box-1 p-2">
+            <div class="encabesado text-white p-2">
+                <h1 class="text-center">Registro de medidas</h1>
+            </div>
         </div>
-        <nav aria-label="Page navigation example" style="margin: 10px 10px;">
-            <ul class="pagination justify-content-center">
-                <li class="page-item">
-                    <a class="page-link" href="registro_h.php">Volver</a>
-                </li>
-            </ul>
-        </nav>
-    </center>
+        <div class="aside1 d-flex justify-content-center p-2">
+            <div class="contenedor" style="border-top: #5DADE2 7px solid;">
+                <div class="aside">
+                    <form enctype="multipart/form-data">
+                    <h3 class="text-center">Medidas:</h3>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="ancho">Ancho:</label>
+                                <input type="text" class="form-control form-control-sm" id="ancho">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="largo">Largo:</label>
+                                <input type="text" class="form-control form-control-sm" id="largo">
+                            </div>
+                        </div>
+                        <input type="submit" value="Agregar" class="btn btn-outline-success btn-sm" onclick="medidas(event)">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="https://kit.fontawesome.com/282ec8cabc.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script><!--CDN swal(sweatalert)-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
     <script src="js/funcion.js"></script>
 </body>
 </html>

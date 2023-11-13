@@ -53,45 +53,45 @@
         </div>
     </nav>
     <header class="px-3 py-3">
-        <div class="encabesado text-white p-2">
-            <h1 class="titulo">Registro de Herramientas</h1>
+        <div class="encabesado text-white p-2 text-center">
+            <h3 class="">Registro de Herramientas</h3>
         </div>
     </header>
-    <main class="d-flex justify-content-around px-3 py-3">
-        <article class="contenedor w-auto h-25 bg-dark text-white" style="border-left: #5DADE2 7px solid;">
+    <main class="d-flex justify-content-around flex-wrap px-3 py-3">
+        <article class="contenedor w-auto h-25 bg-dark text-white p-2 mb-2" style="border-left: #5DADE2 7px solid;">
             <div class="">
                 <form enctype="multipart/form-data">
-                <h1 class="text-center">Registrar:</h1>
+                <h2 class="text-center">Registrar:</h2>
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="nombre">Nombre:</label>
-                            <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Cortador, Broca, Machuelo, Avellanador...">
+                            <input type="text" class="form-control form-control-sm" id="nombre" name="nombre" placeholder="Cortador, Broca, Machuelo, Avellanador...">
                         </div>
                         <div class="form-group col-md-2">
                             <label for="cantidad">Stock:</label>
-                            <input type="number" class="form-control" id="cantidad" name="cantidad1" placeholder="Stock...">
+                            <input type="number" class="form-control form-control-sm" id="cantidad" name="cantidad1" placeholder="Stock...">
                         </div>
                         <div class="form-group col-md-4">
                             <label for="cantidadm">Stock (minimo):</label>
-                            <input type="number" class="form-control" id="cantidadm" name="cantidad2" placeholder="Stock minimo">
+                            <input type="number" class="form-control form-control-sm" id="cantidadm" name="cantidad2" placeholder="Stock minimo">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-2">
                             <label for="gavilanes">Gavilanes:</label>
-                                <select id="gavilanes" class="form-control">
+                                <select id="gavilanes" class="form-control form-control-sm">
                                     <option selected>Choose...</option>
                                 </select>
                         </div>
                         <div class="form-group col-md-3">
                             <label for="medidas">Medidas:</label>
-                                <select id="medidas" class="form-control">
+                                <select id="medidas" class="form-control form-control-sm">
                                     <option selected>Choose...</option>
                                 </select>
                         </div>
                         <div class="form-group col-md-7">
                             <label for="categoria">Categoria:</label>
-                            <select id="categoria" class="form-control">
+                            <select id="categoria" class="form-control form-control-sm">
                                 <option selected>Choose...</option>
                             </select>
                         </div>
@@ -118,15 +118,22 @@
                 </form>
             </div>
         </article>
-        <article class="bg-dark w-25 h-25 p-2 rounded">
-            <header class="text-white text-center p-3"><h4>Preview de la imagen</h4></header>
-            <div class="d-flex justify-content-center p-2" id="contenedor_img">
-                <img class="rounded w-100" id="etiquetaIMG" src="" alt="">
-            </div>
-            <div class="p-2 h-auto text-justify" id="datos_img">
-                <p class="text-white h-auto w-100" id="nombre_img"></p>
-                <p class="text-white w-100 text-justify" id="tamaño_img"></p>
-                <a id="link_diss_img" href="https://www.iloveimg.com/es/comprimir-imagen/comprimir-jpg" hidden> Baja la calidad de la imagen aquí</a>
+        <article class="bg-dark w-50 h-25 p-2 rounded">
+            <div class="w-100">
+                <header class="text-white text-center">
+                    <h4>Preview de la imagen</h4>
+                </header>
+                <div  class="d-flex justify-content-center" id="contenedor_img">
+                    <div class=" w-50 h-50 p-2">
+                        <img class="rounded img-fluid img-thumbnail" id="etiquetaIMG" src="" alt="">
+                    </div>
+                    
+                </div>
+                <div class="p-2 h-auto w-100 text-justify" id="datos_img">
+                    <p class="text-white h-auto w-100 text-wrap " id="nombre_img"></p>
+                    <p class="text-white w-100 text-justify" id="tamaño_img"></p>
+                    <a id="link_diss_img" href="https://www.iloveimg.com/es/comprimir-imagen/comprimir-jpg" target="_blank" hidden> Baja la calidad de la imagen aquí</a>
+                </div>
             </div>
         </article>
     </main>
