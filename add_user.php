@@ -13,7 +13,7 @@
             $_SESSION['usuario'] = $user['user'];
         }
     } else {
-        header('Location: login.php');
+        header('Location: index.php');
     }
 ?>
 <!DOCTYPE html>
@@ -56,7 +56,7 @@
     </header>
     <main class="px-3 py-3">
         <header class="encabesado text-white p-2">
-            <h1 class="titulo">Agregar Usuario</h1>
+            <h3 class="text-center">Agregar Usuario</h3>
         </header>
         <article class="p-2">
             <div class="d-flex justify-content-end">
@@ -69,7 +69,7 @@
                         <div class="modal-header">
                             <h5 class="modal-title" id="modal_title"></h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
+                                <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
@@ -122,7 +122,7 @@
                 </div>
             </div>
         </article>
-        <section class="rounded py-3 px-2 bg-light">
+        <section class="rounded py-3 px-2 bg-warning table-responsive">
             <table class="table table-striped table-dark table-hover px-1" id="tabla_usuarios">
                 <thead>
                     <tr>

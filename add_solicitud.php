@@ -13,7 +13,7 @@
             $_SESSION['usuario'] = $user['user'];
         }
     } else {
-        header('Location: login.php');
+        header('Location: index.php');
     }
 ?>
 <!DOCTYPE html>

@@ -13,7 +13,7 @@
             $_SESSION['usuario'] = $user['user'];
         }
     } else {
-        header('Location: login.php');
+        header('Location: index.php');
     }
 ?>
 <!DOCTYPE html>
@@ -30,9 +30,9 @@
 <body style="background: #17202A;">
     <!-- Image and text -->
     <nav class="navbar sticky-top navbar-dark bg-dark">
-        <a class="navbar-brand" href="pagina_principal.php">
+        <div class="navbar-brand">
             ALUXSA S.A de C.V
-        </a>
+        </div>
         <div class="dropdown d-flex align-items-center pr-4">
             <div class="px-2">
                 <img src="img/login_profile_user.png" alt="">
@@ -59,7 +59,7 @@
             <a class="btn btn-danger btn-sm" type="button" href="php/reporte_herramientas_agotadas.php" target="_blank"><i class="fa-solid fa-file-pdf"></i></a>
         </div>
         <section class="py-2 d-flex justify-content-center">
-            <div class="tb">
+            <div class="tb table-responsive">
             <?php
                 include("php/abrir_conexion.php");// conexion con la BD
                 $resultados = mysqli_query($conexion,"SELECT h.id_herramienta,h.Nombre,c.material,c.descripcion,g.Num_gavilanes,m.Ancho,m.Largo,h.cantidad_minima,h.cantidad,h.fecha_hora FROM $tbherr_db7 h inner join categorias c on h.id_categoria = c.id_categoria inner join gavilanes g on h.id_gavilanes = g.id_gav inner join medidas m on h.id_medidas = m.id_medidas  WHERE cantidad < Cantidad_Minima ORDER BY id_herramienta");

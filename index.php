@@ -25,7 +25,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="img/pie-chart.png">
-    <title>Inicio de Sesion</title>
+    <title>Log In</title>
     <link rel="stylesheet" href="css/styles.css">
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script><!--CDN swal(sweatalert)-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
@@ -42,7 +42,7 @@
                 <?php if (!empty($message)):?>
                     <p class="d-flex justify-content-center"><span class="badge badge-danger"><?= $message ?></span></p>
                 <?php endif;?>
-                <form method="POST" action="login.php" style="margin: 8px 8px">
+                <form method="POST" action="index.php" style="margin: 8px 8px">
                     <div class="formulario" style="text-align: center; ">
                         <div class="form-group">
                             <label for="user" class="usuariola">Nombre de usuario:</label>
