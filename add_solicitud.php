@@ -47,17 +47,17 @@
                 <i class="fa-solid fa-ellipsis-vertical"></i>
             </button>
             <div class="dropdown-menu dropdown-menu-right">
-                <a class="dropdown-item" href="pagina_principal.php"><i class="fa-solid fa-house"></i> Inicio</a>
-                <a class="dropdown-item" href="add_user.php"><i class="fa-solid fa-user-plus"></i> Agregar usuario</a>
+                <a class="dropdown-item disabled" href="pagina_principal.php"><i class="fa-solid fa-house"></i> Inicio</a>
+                <a class="dropdown-item disabled" href="add_user.php"><i class="fa-solid fa-user-plus"></i> Agregar usuario</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="php/cerrar_sesion.php"><i class="fa-solid fa-right-from-bracket"></i> Cerrar sesion</a>
+                <a class="dropdown-item disabled" href="php/cerrar_sesion.php"><i class="fa-solid fa-right-from-bracket"></i> Cerrar sesion</a>
             </div>
         </div>
     </nav>
     <center>
         <div class="p-3">
             <div class="encabesado p-2 text-white">
-                <h1 class="titulo">Solicitud de herramientas</h1>
+                <h3 class="text-center">Solicitud de herramientas</h3>
             </div>
         </div>
         <div class="aside1">
@@ -96,11 +96,11 @@
                             </div>
                             <div class="form-group col-md-2">
                                 <label for="cantidad">Cantidad:</label>
-                                <input type="number" class="form-control form-control-sm" id="cantidad">
+                                <input type="number" class="form-control form-control-sm" id="cantidad" min="1" >
                             </div>
                         </div>
-                        <input type="submit" value="Registrar" class="btn btn-outline-success" onclick="RegistrarSoli(event)">
-                        <a class="btn btn-primary" href="salidas_almacen.php" role="button">Finalizar</a>
+                        <input type="submit" value="Registrar" class="btn btn-outline-success btn-sm" onclick="RegistrarSoli(event)">
+                        <a class="btn btn-primary btn-sm" href="salidas_almacen.php" role="button" id="btn-finalizar" hidden>Finalizar</a>
                         <div id="load"></div>
                     </form>
                 </div>

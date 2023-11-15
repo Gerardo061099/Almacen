@@ -102,25 +102,83 @@ function update() {
                         title: "Actualizacion exitosa!!",
                         text: "Se realizo un actualizacion de manera exitosa!!",
                         icon: "success"
-                    });
+                    })
                 } else {
                     swal({
                         title: "Oh oh ",
                         text: "Ocurrio un error",
                         icon: "Debes ingresar los valores necesarios para realizar la actualizacion"
-                    });
+                    })
                 }
             }
-        });
+        })
     } else {
         swal({
             title: "Datos Vacios",
             text: "Debes ingresar los valores necesarios para realizar la actualizacion",
             icon: "error"
-        });
+        })
     }
 
 } //fin function update();
+
+async function getDataDeleteH(data) {
+    var d = data.split('||')
+    console.log(d[0],d[1],d[2],d[3],d[4],d[5],d[6],d[7],d[8])
+    $('#idmodal_d').val(d[0])//id
+    $('#nombremodal_d').val(d[1])//nombre
+    await getCategoria_d(d[2],d[3])
+    $('#stockminimo_d').val(d[7])//stock
+    await getGavilanes_d(d[4])
+    $('#stock_d').val(d[8])//stock minimo
+    await getMedidas_d(d[5],d[6])
+    $('#ModalEliminar').modal('show')
+}
+
+function deleteHerramienta(e) {
+    var id_delete = $('#idmodal_d').val()
+    var data
+    var x = confirm(`¿La siguiente herramientas se va a eliminar?`)
+    data = JSON.stringify({'id_delete':id_delete})
+    if (x) {
+        alert('Eliminando...')
+        $.ajax({
+            type: "POST",
+            url: "php/eliminar.php",
+            data: data,
+            dataType: "json",
+            success: function (response) {
+                switch (response) {
+                    case '1':
+                        swal({
+                            title: "Herramienta eliminada",
+                            text: "La herramienta se borro de manera exitosa",
+                            icon: "success"
+                        })
+                        break
+                    case '0':
+                        swal({
+                            title: "Error",
+                            text: "La herramienta no se pudo borrar",
+                            icon: "success"
+                        })
+                        break
+                    default:
+                        swal({
+                            title: "Error",
+                            text: "La herramienta no se pudo borrar",
+                            icon: "success"
+                        })
+                        break
+                }
+            }
+        })
+    }
+    if (!x) {
+        alert('Accion cancelada')
+    }
+}
+
 function consultar(e) {
     var nombre_h = document.getElementById('herra_b').value;
     var medida_h = document.getElementById('medida_b').value;
@@ -144,13 +202,13 @@ function consultar(e) {
                         title: "Oh oh ",
                         text: "Ocurrio un error",
                         icon: "error"
-                    });
+                    })
                 } else {
                     swal({
                         title: "Consulta exitosa!!",
                         text: "Deslice para abajo para ver los resultados de la busqueda!!",
                         icon: "success"
-                    });
+                    })
                 }
             },
             error: function() {
@@ -158,16 +216,16 @@ function consultar(e) {
                     title: "Oh oh ",
                     text: "Algo salio mal",
                     icon: "error"
-                });
+                })
             }
-        });
+        })
     } else {
         swal({
             title: "Campos vacios",
             text: "Debes seleccionar una opcion para realizar la busqueda!!",
             icon: "warning"
-        });
-        e.preventDefault();
+        })
+        e.preventDefault()
     }
 } //fin function consultar();
 
@@ -202,8 +260,8 @@ function convertir() {
                 title: "Conversion exitosa!!",
                 text: "Se a generado el PDF",
                 icon: "success"
-            });
-        });
+            })
+        })
 }
 
 function subirsolicitud(e) {
@@ -237,10 +295,10 @@ function subirsolicitud(e) {
                     title: "Oh oh",
                     text: "Ocurrio un problema",
                     icon: "warning"
-                });
+                })
             }
         }
-    });
+    })
 }
 function RegistrarSoli(e) {
     e.preventDefault();
@@ -269,6 +327,7 @@ function RegistrarSoli(e) {
                         text: "Se a registrado la solicitud de forma exitosa!!",
                         icon: "success"
                     });
+                    $('#btn-finalizar').attr('hidden', true);
                     window.location.href = " ";
                 } else if (message == "La cantidad solicitada es mayor a la cantidad en existencia") {
                     swal({
@@ -286,12 +345,12 @@ function RegistrarSoli(e) {
                     window.location.href = " ";
                 }
             }
-        });
+        })
     } else {
         swal({
             title: "Datos no ingresados",
             text: "La información recibida está incompleta",
             icon: "warning"
-        });
+        })
     }
 }

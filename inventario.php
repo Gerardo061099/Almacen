@@ -225,7 +225,7 @@
                                             }
                                         ?>
                                         </center></th>
-                                        <th><center><a class="btn btn-danger btn-sm" href="eliminar.php?id=<?php echo $consulta['id_herramienta']?>" role="button"><i class="fa-solid fa-trash"></i></a></center></th>
+                                        <th><center><a class="btn btn-danger btn-sm" role="button" onclick="getDataDeleteH('<?php echo $datos?>')" ><i class="fa-solid fa-trash"></i></a></center></th>
                                         <th><center><a class="btn btn-light btn-sm" role="button" onclick="editarHerramienta('<?php echo $datos?>')"><i class="fa-solid fa-square-pen"></i></a></center></th>
                                     </tr>
                                 </tbody>
@@ -292,6 +292,66 @@
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                 <button type="submit" class="btn btn-success">Actualizar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="ModalEliminar" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content bg-danger text-white">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Borrar...</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form id="frm_update_h">
+                            <div class="modal-body">
+                                <div class="form-row mb-3">
+                                    <div class="col-md-2">
+                                        <label for="idmodal_d">id</label>
+                                        <input type="text" id="idmodal_d" class="form-control form-control-sm" disabled>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="nombremodal_d">Nombre:</label>
+                                        <input type="text" id="nombremodal_d" class="form-control form-control-sm" disabled>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="medidasmodal_d">Medidas:</label>
+                                        <select class="form-control form-control-sm" id="medidasmodal_d" disabled >
+                                            <option selected >Choose...</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-row mb-3">
+                                    <div class="col-md-9">
+                                        <label for="descripcionmodal_d">Categoria:</label>
+                                        <select class="form-control form-control-sm" id="descripcionmodal_d" disabled>
+                                            <option selected >Choose...</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="gavilanesmodal_d">Gavilanes:</label>
+                                        <select class="form-control form-control-sm" id="gavilanesmodal_d" disabled>
+                                            <option selected >Choose...</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-3">
+                                        <label for="stock_d">Stock:</label>
+                                        <input type="text" id="stock_d" class="form-control form-control-sm" disabled>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="stockminimo_d">Stock minimo:</label>
+                                        <input type="text" id="stockminimo_d" class="form-control form-control-sm" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-danger btn-sm" onclick="deleteHerramienta(event)">Borrar</button>
                             </div>
                         </form>
                     </div>
@@ -372,8 +432,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
-    <script type="module" src="js/app.js"></script>
     <script src="js/getCategoria.js"></script>
+    <script src="js/app.js"></script>
     <script src="js/funciones_herramientas.js"></script>
     <script type="module" src="js/buscar_app.js"></script>
     <script type="module" src="js/funciones_Modal_H.js"></script>

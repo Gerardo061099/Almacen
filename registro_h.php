@@ -118,19 +118,18 @@
                 </form>
             </div>
         </article>
-        <article class="bg-dark w-50 h-25 p-2 rounded">
+        <article class="bg-dark w-50 h-auto p-2 rounded">
             <div class="w-100">
-                <header class="text-white text-center">
+                <header class="text-white text-center w-100 p-2">
                     <h4>Preview de la imagen</h4>
                 </header>
-                <div  class="d-flex justify-content-center" id="contenedor_img">
-                    <div class=" w-50 h-50 p-2">
+                <div class="d-flex justify-content-center w-100 p-2" id="contenedor_img">
+                    <div class="w-50 h-50 p-2">
                         <img class="rounded img-fluid img-thumbnail" id="etiquetaIMG" src="" alt="">
                     </div>
-                    
                 </div>
                 <div class="p-2 h-auto w-100 text-justify" id="datos_img">
-                    <p class="text-white h-auto w-100 text-wrap " id="nombre_img"></p>
+                    <p class="text-white w-100 text-justify" id="nombre_img"></p>
                     <p class="text-white w-100 text-justify" id="tamaño_img"></p>
                     <a id="link_diss_img" href="https://www.iloveimg.com/es/comprimir-imagen/comprimir-jpg" target="_blank" hidden> Baja la calidad de la imagen aquí</a>
                 </div>

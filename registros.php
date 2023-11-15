@@ -55,13 +55,160 @@
         <div class="encabesado text-white text-center p-2">
             <h1 class="">Categorias</h1>
         </div>
-        <nav aria-label="breadcrumb" style="margin: 5px 5px; width: 96%;">
+        <nav class="py-2" aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="pagina_principal.php">Pagina de inicio</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Categorias</li>
             </ol>
         </nav>
-        <div class="con-cortadores w-100 p-2">
+        <div class="w-100 p-2">
+            <div class="cortadores rounded">
+                <div class="p-2">
+                    <h3>Avellanadores</h3>
+                </div>
+                <div class="separador table-responsive px-2">
+            <?php
+            include('php/abrir_conexion.php');
+                $resultados = mysqli_query($conexion,"SELECT h.id_herramienta,h.Nombre,c.material,c.descripcion,g.Num_gavilanes,m.Ancho,m.Largo,h.cantidad,h.fecha_hora FROM $tbherr_db7 h inner join $tbcat_db3 c on h.id_categoria = c.id_categoria inner join $tbgav_db6 g on h.id_gavilanes = g.id_gav inner join $tbmed_db9 m on h.id_medidas = m.id_medidas WHERE NOMBRE = 'Avellanador' ORDER BY h.id_herramienta");
+                //Unimos tabla Herramientas con categorias y medidas
+                echo "
+                    <table class=\"table table-stripted\" id=\"tb-cortadores\">
+                        <thead class=\"thead-dark\">
+                            <tr>
+                                <th>Id</th>
+                                <th>Nombre</th>
+                                <th>Material</th>
+                                <th>Descripcion</th>
+                                <th>Gavilanes</th>
+                                <th>Ancho</th>
+                                <th>Largo</th>
+                                <th>Stock</th>
+                                <th>Fecha</th>
+                            </tr>
+                        </thead>";
+                while($consulta = mysqli_fetch_array($resultados)){
+                echo "
+                        <tbody class=\"tb-body\">
+                            <tr>
+                                <td>".$consulta['id_herramienta']."</td>
+                                <td>".$consulta['Nombre']."</td>
+                                <td>".$consulta['material']."</td>
+                                <td>".$consulta['descripcion']."</td>
+                                <td>".$consulta['Num_gavilanes']."</td>
+                                <td>".$consulta['Ancho']."</td>
+                                <td>".$consulta['Largo']."</td>
+                                <td>".$consulta['cantidad']."</td>
+                                <td>".$consulta['fecha_hora']."</td>
+                            </tr>
+                        </tbody>";
+                }
+                include("php/cerrar_conexion.php");
+                echo "
+                    </table>
+                ";
+            ?>
+                </div>
+            </div>
+        </div>
+        <div class="w-100 p-2">
+            <div class="cortadores rounded">
+                <div class="p-2">
+                    <h3>Brocas</h3>
+                </div>
+                <div class="separador table-responsive px-2">
+            <?php
+            include('php/abrir_conexion.php');
+                $resultados = mysqli_query($conexion,"SELECT h.id_herramienta,h.Nombre,c.material,c.descripcion,g.Num_gavilanes,m.Ancho,m.Largo,h.cantidad,h.fecha_hora FROM $tbherr_db7 h inner join $tbcat_db3 c on h.id_categoria = c.id_categoria inner join $tbgav_db6 g on h.id_gavilanes = g.id_gav inner join $tbmed_db9 m on h.id_medidas = m.id_medidas WHERE NOMBRE = 'Broca' ORDER BY h.id_herramienta");
+                //Unimos tabla Herramientas con categorias y medidas
+                echo "
+                    <table class=\"table\" id=\"tb-cortadores\">
+                        <thead class=\"thead-dark\">
+                            <tr>
+                                <th>Id</th>
+                                <th>Nombre</th>
+                                <th>Material</th>
+                                <th>Descripcion</th>
+                                <th>Gavilanes</th>
+                                <th>Ancho</th>
+                                <th>Largo</th>
+                                <th>Stock</th>
+                                <th>Fecha</th>
+                            </tr>
+                        </thead>";
+                while($consulta = mysqli_fetch_array($resultados)){
+                echo "
+                        <tbody class=\"tb-body\">
+                            <tr>
+                                <td>".$consulta['id_herramienta']."</td>
+                                <td>".$consulta['Nombre']."</td>
+                                <td>".$consulta['material']."</td>
+                                <td>".$consulta['descripcion']."</td>
+                                <td>".$consulta['Num_gavilanes']."</td>
+                                <td>".$consulta['Ancho']."</td>
+                                <td>".$consulta['Largo']."</td>
+                                <td>".$consulta['cantidad']."</td>
+                                <td>".$consulta['fecha_hora']."</td>
+                            </tr>
+                        </tbody>";
+                }
+                include("php/cerrar_conexion.php");
+                echo "
+                    </table>
+                ";
+            ?>
+                </div>
+            </div>
+        </div>
+        <div class="w-100 p-2">
+            <div class="cortadores rounded">
+                <div class="p-2">
+                    <h3>Buriles</h3>
+                </div>
+                <div class="separador table-responsive px-2">
+            <?php
+            include('php/abrir_conexion.php');
+                $resultados = mysqli_query($conexion,"SELECT h.id_herramienta,h.Nombre,c.material,c.descripcion,g.Num_gavilanes,m.Ancho,m.Largo,h.cantidad,h.fecha_hora FROM $tbherr_db7 h inner join $tbcat_db3 c on h.id_categoria = c.id_categoria inner join $tbgav_db6 g on h.id_gavilanes = g.id_gav inner join $tbmed_db9 m on h.id_medidas = m.id_medidas WHERE NOMBRE = 'Buril' ORDER BY h.id_herramienta");
+                //Unimos tabla Herramientas con categorias y medidas
+                echo "
+                    <table class=\"table\" id=\"tb-cortadores\">
+                        <thead class=\"thead-dark\">
+                            <tr>
+                                <th>Id</th>
+                                <th>Nombre</th>
+                                <th>Material</th>
+                                <th>Descripcion</th>
+                                <th>Gavilanes</th>
+                                <th>Ancho</th>
+                                <th>Largo</th>
+                                <th>Stock</th>
+                                <th>Fecha</th>
+                            </tr>
+                        </thead>";
+                while($consulta = mysqli_fetch_array($resultados)){
+                echo "
+                        <tbody class=\"tb-body\">
+                            <tr>
+                                <td>".$consulta['id_herramienta']."</td>
+                                <td>".$consulta['Nombre']."</td>
+                                <td>".$consulta['material']."</td>
+                                <td>".$consulta['descripcion']."</td>
+                                <td>".$consulta['Num_gavilanes']."</td>
+                                <td>".$consulta['Ancho']."</td>
+                                <td>".$consulta['Largo']."</td>
+                                <td>".$consulta['cantidad']."</td>
+                                <td>".$consulta['fecha_hora']."</td>
+                            </tr>
+                        </tbody>";
+                }
+                include("php/cerrar_conexion.php");
+                echo "
+                    </table>
+                ";
+            ?>
+                </div>
+            </div>
+        </div>
+        <div class="w-100 p-2">
             <div class="cortadores rounded">
                 <div class="p-2">
                     <h3>Cortadores</h3>
@@ -112,15 +259,15 @@
                 </div>
             </div>
         </div>
-        <div class="con-cortadores w-100 p-2">
+        <div class="w-100 p-2">
             <div class="cortadores rounded">
                 <div class="p-2">
-                    <h3>Brocas</h3>
+                    <h3>Machuelos</h3>
                 </div>
                 <div class="separador table-responsive px-2">
             <?php
             include('php/abrir_conexion.php');
-                $resultados = mysqli_query($conexion,"SELECT h.id_herramienta,h.Nombre,c.material,c.descripcion,g.Num_gavilanes,m.Ancho,m.Largo,h.cantidad,h.fecha_hora FROM $tbherr_db7 h inner join $tbcat_db3 c on h.id_categoria = c.id_categoria inner join $tbgav_db6 g on h.id_gavilanes = g.id_gav inner join $tbmed_db9 m on h.id_medidas = m.id_medidas WHERE NOMBRE = 'Broca' ORDER BY h.id_herramienta");
+                $resultados = mysqli_query($conexion,"SELECT h.id_herramienta,h.Nombre,c.material,c.descripcion,g.Num_gavilanes,m.Ancho,m.Largo,h.cantidad,h.fecha_hora FROM $tbherr_db7 h inner join $tbcat_db3 c on h.id_categoria = c.id_categoria inner join $tbgav_db6 g on h.id_gavilanes = g.id_gav inner join $tbmed_db9 m on h.id_medidas = m.id_medidas WHERE NOMBRE = 'Machuelo' ORDER BY h.id_herramienta");
                 //Unimos tabla Herramientas con categorias y medidas
                 echo "
                     <table class=\"table\" id=\"tb-cortadores\">
