@@ -7,12 +7,12 @@
 
     body.cuerpo {
         font-family: sans-serif;
-    background: #000000;
-    /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #434343, #000000);
-    /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #434343, #000000);
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        background: #000000;
+        /* fallback for old browsers */
+        background: -webkit-linear-gradient(to right, #434343, #000000);
+        /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to right, #434343, #000000);
+        /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     }
 
     .pag::-webkit-scrollbar {
@@ -177,6 +177,15 @@
         height: 300px;
     }
 
+    .tb_h::-webkit-scrollbar {
+        width: 8px;
+        /* Tamaño del scroll en vertical */
+        height: 8px;
+        /* Tamaño del scroll en horizontal */
+        display: none;
+        /* Ocultar scroll */
+    }
+
     #herramientas {}
 
     #h {
@@ -206,8 +215,7 @@
         display: block;
     }
 
-    #tb-cortadores {
-    }
+    #tb-cortadores {}
 
     .contenido {
         display: flex;
@@ -347,8 +355,7 @@
         display: flex;
     }
 
-    .contenedor_registros {
-    }
+    .contenedor_registros {}
 
     .Nuevos_registros {
         width: 250px;
@@ -391,6 +398,18 @@
     .acciones {
         margin: 5px;
         padding: 5px;
+    }
+
+    .dataTables_filter label {
+        color: white;
+    }
+
+    .dataTables_wrapper label {
+        color: white;
+    }
+
+    .dataTables_info {
+        color: white;
     }
 
     @media screen and (max-width: 1030px) {

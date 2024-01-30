@@ -55,53 +55,55 @@
         <header class="encabesado  text-white p-2">
             <h1 class="text-center">Herramientas Agotadas</h1>
         </header>
-        <div class="d-flex justify-content-end p-2"> 
-            <a class="btn btn-danger btn-sm" type="button" href="php/reporte_herramientas_agotadas.php" target="_blank"><i class="fa-solid fa-file-pdf"></i></a>
-        </div>
-        <section class="py-2 d-flex justify-content-center">
-            <div class="tb table-responsive">
-            <?php
-                include("php/abrir_conexion.php");// conexion con la BD
-                $resultados = mysqli_query($conexion,"SELECT h.id_herramienta,h.Nombre,c.material,c.descripcion,g.Num_gavilanes,m.Ancho,m.Largo,h.cantidad_minima,h.cantidad,h.fecha_hora FROM $tbherr_db7 h inner join categorias c on h.id_categoria = c.id_categoria inner join gavilanes g on h.id_gavilanes = g.id_gav inner join medidas m on h.id_medidas = m.id_medidas  WHERE cantidad < Cantidad_Minima ORDER BY id_herramienta");
-                //Unimos tabla Herramientas con categorias y medidas
-            ?>
-                        <table class="table table-striped table-dark">
-                            <thead class="" id="thead">
-                                <tr>
-                                    <th><center>id</center></th>
-                                    <th><center>Nombre</center></th>
-                                    <th>Material</th>
-                                    <th>Descripcion</th>
-                                    <th><center>Gavilanes</center></th>
-                                    <th><center>Ancho</center></th>
-                                    <th><center>Largo</center></th>
-                                    <th><center>Cantidad</center></th>
-                                    <th><center>A Comprar</center></th>
-                                </tr>
-                            </thead>
-                            <?php
-                            while($consulta = mysqli_fetch_array($resultados)){
-                            ?>
-                            <tbody class="body-tb">
-                                <tr>
-                                    <td><center><?php echo $consulta['id_herramienta']?></center></td>
-                                    <td><center><?php echo $consulta['Nombre']?></center></td>
-                                    <td><?php echo $consulta['material']?></td>
-                                    <td><?php echo $consulta['descripcion']?></td>
-                                    <td><center><?php echo $consulta['Num_gavilanes']?></center></td>
-                                    <td><center><?php echo $consulta['Ancho']?></center></td>
-                                    <td><center><?php echo $consulta['Largo']?></center></td>
-                                    <td><center><?php echo $consulta['cantidad']?></center></td>
-                                    <td><center><?php echo $consulta['cantidad_minima']-$consulta['cantidad']?></center></td>
-                                </tr>
-                            </tbody>
-                            <?php
-                        }?>
-                    </table><br>
-                    <?php
-                    include("php/cerrar_conexion.php");
-                    ?>
+        <section class="container">
+            <div class="d-flex justify-content-end p-2"> 
+                <a class="btn btn-danger btn-sm" type="button" href="php/reporte_herramientas_agotadas.php" target="_blank"><i class="fa-solid fa-file-pdf"></i></a>
             </div>
+            <section class="py-2 d-flex justify-content-center">
+                <div class="tb table-responsive">
+                <?php
+                    include("php/abrir_conexion.php");// conexion con la BD
+                    $resultados = mysqli_query($conexion,"SELECT h.id_herramienta,h.Nombre,c.material,c.descripcion,g.Num_gavilanes,m.Ancho,m.Largo,h.cantidad_minima,h.cantidad,h.fecha_hora FROM $tbherr_db7 h inner join categorias c on h.id_categoria = c.id_categoria inner join gavilanes g on h.id_gavilanes = g.id_gav inner join medidas m on h.id_medidas = m.id_medidas  WHERE cantidad < Cantidad_Minima ORDER BY id_herramienta");
+                    //Unimos tabla Herramientas con categorias y medidas
+                ?>
+                            <table class="table table-striped table-dark">
+                                <thead class="" id="thead">
+                                    <tr>
+                                        <th><center>id</center></th>
+                                        <th><center>Nombre</center></th>
+                                        <th>Material</th>
+                                        <th>Descripcion</th>
+                                        <th><center>Gavilanes</center></th>
+                                        <th><center>Ancho</center></th>
+                                        <th><center>Largo</center></th>
+                                        <th><center>Cantidad</center></th>
+                                        <th><center>A Comprar</center></th>
+                                    </tr>
+                                </thead>
+                                <?php
+                                while($consulta = mysqli_fetch_array($resultados)){
+                                ?>
+                                <tbody class="body-tb">
+                                    <tr>
+                                        <td><center><?php echo $consulta['id_herramienta']?></center></td>
+                                        <td><center><?php echo $consulta['Nombre']?></center></td>
+                                        <td><?php echo $consulta['material']?></td>
+                                        <td><?php echo $consulta['descripcion']?></td>
+                                        <td><center><?php echo $consulta['Num_gavilanes']?></center></td>
+                                        <td><center><?php echo $consulta['Ancho']?></center></td>
+                                        <td><center><?php echo $consulta['Largo']?></center></td>
+                                        <td><center><?php echo $consulta['cantidad']?></center></td>
+                                        <td><center><?php echo $consulta['cantidad_minima']-$consulta['cantidad']?></center></td>
+                                    </tr>
+                                </tbody>
+                                <?php
+                            }?>
+                        </table><br>
+                        <?php
+                        include("php/cerrar_conexion.php");
+                        ?>
+                </div>
+            </section>
         </section>
     </main>
     <script src="https://kit.fontawesome.com/282ec8cabc.js" crossorigin="anonymous"></script>

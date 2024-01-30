@@ -62,85 +62,87 @@
         $resultado = mysqli_fetch_array($consulta);
         include("php/cerrar_conexion.php");
     ?>
-    <main class="box-registros w-100 p-2 d-flex flex-wrap">
-        <section class="p-2 w-75">
-            <div class="salidas w-100 rounded p-2">
-                <div style="background: #FDFEFE;">
-                    <h1 class="titulos" style="text-align:left;"><strong>Salidas del almacen</strong></h1>
-                </div>
-                <div class="tb_h table-responsive">
-                    <?php
-                        include("php/abrir_conexion.php");// conexion con la BD
-                        $resultados = mysqli_query($conexion,"SELECT s.id_solicitud,e.nombre as solicitante,e.apellidos,h.Nombre as herramienta,c.Descripcion,c.Material,g.Num_gavilanes AS Gav,m.Largo,m.Ancho,d.cantidad,s.Fecha from $tbsoli_db10 s inner join $tbdet_db4 d on s.id_solicitud = d.id_solicitud inner join $tbherr_db7 h on d.id_herramientas = h.id_herramienta inner join $tbcat_db3 c on h.id_categoria = c.id_categoria inner join $tbgav_db6 g on h.id_gavilanes = g.id_gav inner join $tbmed_db9 m on h.id_medidas = m.id_medidas inner join $tbem_db5 e on s.id_empleado = e.id_empleado ORDER BY s.id_solicitud DESC");
-                        //Unimos tabla Herramientas con categorias y medidas
+    <main class="container pt-4">
+        <section class="row">
+            <div class="col-lg-12 col-xl-12">
+                <div class="card text-white bg-dark mb-3">
+                    <header class="card-header">Salidas del almacen</header>
+                    <section class="card-body tb_h table-responsive">
+                        <?php
+                            include("php/abrir_conexion.php");// conexion con la BD
+                            $resultados = mysqli_query($conexion,"SELECT s.id_solicitud,e.nombre as solicitante,e.apellidos,h.Nombre as herramienta,c.Descripcion,c.Material,g.Num_gavilanes AS Gav,m.Largo,m.Ancho,d.cantidad,s.Fecha from $tbsoli_db10 s inner join $tbdet_db4 d on s.id_solicitud = d.id_solicitud inner join $tbherr_db7 h on d.id_herramientas = h.id_herramienta inner join $tbcat_db3 c on h.id_categoria = c.id_categoria inner join $tbgav_db6 g on h.id_gavilanes = g.id_gav inner join $tbmed_db9 m on h.id_medidas = m.id_medidas inner join $tbem_db5 e on s.id_empleado = e.id_empleado ORDER BY s.id_solicitud DESC");
+                            //Unimos tabla Herramientas con categorias y medidas
+                            echo "
+                        <table class=\"table table-dark table-striped table-hover\" id=\"h\">
+                            <thead class=\"\">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Solicitante</th>
+                                    <th>Apellidos</th>
+                                    <th>Herramienta</th>
+                                    <th>Descripcion</th>
+                                    <th>Material</th>
+                                    <th>Gav</th>
+                                    <th>Ancho</th>
+                                    <th>Largo</th>
+                                    <th>Cantidad</th>
+                                    <th>Fecha</th>
+                                </tr>
+                            </thead>
+                            <tbody class=\"body-tb\">
+                                ";
+                                while($consulta = mysqli_fetch_array($resultados)){
+                                echo 
+                                "
+                                <tr>
+                                    <td>".$consulta['id_solicitud']."</td>
+                                    <td>".$consulta['solicitante']."</td>
+                                    <td>".$consulta['apellidos']."</td>
+                                    <td>".$consulta['herramienta']."</td>
+                                    <td>".$consulta['Descripcion']."</td>
+                                    <td>".$consulta['Material']."</td>
+                                    <td>".$consulta['Gav']."</td>
+                                    <td>".$consulta['Ancho']."</td>
+                                    <td>".$consulta['Largo']."</td>
+                                    <td>".$consulta['cantidad']."</td>
+                                    <td>".$consulta['Fecha']."</td>
+                                </tr>
+                                ";
+                        ?>
+                        <?php
+                        }
                         echo "
-                    <table class=\"table table-dark table-striped table-hover table-sm\" id=\"h\">
-                        <thead class=\"\">
-                            <tr>
-                                <th>Id</th>
-                                <th>Solicitante</th>
-                                <th>Apellidos</th>
-                                <th>Herramienta</th>
-                                <th>Descripcion</th>
-                                <th>Material</th>
-                                <th>Gav</th>
-                                <th>Ancho</th>
-                                <th>Largo</th>
-                                <th>Cantidad</th>
-                                <th>Fecha</th>
-                            </tr>
-                        </thead>
-                        <tbody class=\"body-tb\">
-                            ";
-                            while($consulta = mysqli_fetch_array($resultados)){
-                            echo 
-                            "
-                            <tr>
-                                <td>".$consulta['id_solicitud']."</td>
-                                <td>".$consulta['solicitante']."</td>
-                                <td>".$consulta['apellidos']."</td>
-                                <td>".$consulta['herramienta']."</td>
-                                <td>".$consulta['Descripcion']."</td>
-                                <td>".$consulta['Material']."</td>
-                                <td>".$consulta['Gav']."</td>
-                                <td>".$consulta['Ancho']."</td>
-                                <td>".$consulta['Largo']."</td>
-                                <td>".$consulta['cantidad']."</td>
-                                <td>".$consulta['Fecha']."</td>
-                            </tr>
-                            ";
-                    ?>
-                    <?php
-                    }
-                    echo "
-                        </tbody>";
-                    include("php/cerrar_conexion.php");
-                    ?>
-                    </table>
+                            </tbody>";
+                        include("php/cerrar_conexion.php");
+                        ?>
+                        </table>
+                    </section>
                 </div>
             </div>
         </section>
-        <aside class="contenedor_registros w-auto p-2">
-            <div class="card text-white bg-primary w-100">
-            <div class="card-header">Datos registrados:</div>
-                <ul class="list-group list-group-flush">
-                <?php
-                include ("php/abrir_conexion.php");
-                    $query = mysqli_query($conexion, "SELECT Nombre,Apellidos,N_Empleado FROM $tbem_db5 WHERE id_empleado = (SELECT MAX(id_empleado) FROM $tbem_db5)");
-                    $resul = mysqli_fetch_array($query);
-                ?>
-                    <li class="list-group-item active"><img src="img/profile.png" alt="Sin respuesta del servidor"> <?php echo $resul['Nombre']." ".$resul['Apellidos'];?></li>
-                    <li class="list-group-item active">N° empleado: <?php echo $resul['N_Empleado'];?></li>
-                    <li class="list-group-item active">Stock solicitado: <?php echo $resultado['solicitud'];?> </li>
-                </ul>
-                <div class="card-footer">
+        <aside class="row">
+            <div class="col-8 col-sm-6 col-md-5 col-lg-4 col-xl-3">
+                <div class="card text-white bg-primary w-100">
+                <header class="card-header">Datos registrados:</header>
+                    <ul class="list-group list-group-flush">
                     <?php
-                        $consulta = mysqli_query($conexion, "SELECT MAX(id_solicitud) AS solicitud FROM $tbsoli_db10");
-                        $res = mysqli_fetch_array($consulta);
+                    include ("php/abrir_conexion.php");
+                        $query = mysqli_query($conexion, "SELECT Nombre,Apellidos,N_Empleado FROM $tbem_db5 WHERE id_empleado = (SELECT MAX(id_empleado) FROM $tbem_db5)");
+                        $resul = mysqli_fetch_array($query);
                     ?>
-                    N° solicitud: <?php  echo $res['solicitud']; 
-                    include('php/cerrar_conexion.php')
-                    ?>
+                        <li class="list-group-item active"><img src="img/profile.png" alt="Sin respuesta del servidor"> <?php echo $resul['Nombre']." ".$resul['Apellidos'];?></li>
+                        <li class="list-group-item active">N° empleado: <?php echo $resul['N_Empleado'];?></li>
+                        <li class="list-group-item active">Stock solicitado: <?php echo $resultado['solicitud'];?> </li>
+                    </ul>
+                    <div class="card-footer">
+                        <?php
+                            $consulta = mysqli_query($conexion, "SELECT MAX(id_solicitud) AS solicitud FROM $tbsoli_db10");
+                            $res = mysqli_fetch_array($consulta);
+                        ?>
+                        N° solicitud: <?php  echo $res['solicitud']; 
+                        include('php/cerrar_conexion.php')
+                        ?>
+                    </div>
                 </div>
             </div>
         </aside>

@@ -25,9 +25,9 @@
     <title>Agregar Usuarios</title>
     <link rel="shortcut icon" href="img/add_user.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
     <link href="https://cdn.datatables.net/v/bs4/dt-1.13.6/datatables.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body style="background: #17202A;">
     <header>
@@ -122,7 +122,7 @@
                 </div>
             </div>
         </article>
-        <section class="rounded py-3 px-2 bg-warning table-responsive">
+        <section class="rounded py-3 px-2 bg-dark table-responsive">
             <table class="table table-striped table-dark table-hover px-1" id="tabla_usuarios">
                 <thead>
                     <tr>

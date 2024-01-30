@@ -265,16 +265,16 @@ function convertir() {
 }
 
 function subirsolicitud(e) {
-    e.preventDefault();
-    var nombre = document.getElementById("nombre").value;
-    var apellidos = document.getElementById("ap").value;
-    var n_empleado = document.getElementById("n_empleado").value;
-    var genero = document.getElementById("genero").value;
-    var datos = new FormData();
-    datos.append("Nombre", nombre);
-    datos.append("Apellidos", apellidos);
-    datos.append("N_empleado", n_empleado);
-    datos.append("Genero", genero);
+    e.preventDefault()
+    var nombre = document.getElementById("nombre").value
+    var apellidos = document.getElementById("ap").value
+    var n_empleado = document.getElementById("n_empleado").value
+    var genero = document.getElementById("genero").value
+    var datos = new FormData()
+    datos.append("Nombre", nombre)
+    datos.append("Apellidos", apellidos)
+    datos.append("N_empleado", n_empleado)
+    datos.append("Genero", genero)
     $.ajax({
         url: "add_solicitante.php",
         type: "POST",
@@ -301,15 +301,15 @@ function subirsolicitud(e) {
     })
 }
 function RegistrarSoli(e) {
-    e.preventDefault();
-    var herramienta = document.getElementById("herramienta").value;
-    var maquina = document.getElementById("maquina").value;
-    var cantidad = document.getElementById("cantidad").value;
-    if (herramienta != "Choose..." && maquina != "Choose..." && cantidad != "") {
-        var data = new FormData();
-        data.append("N_herramienta", herramienta);
-        data.append("N_maquina", maquina);
-        data.append("cantidad", cantidad);
+    e.preventDefault()
+    var herramienta = document.getElementById("id-herramienta").value
+    var maquina = document.getElementById("maquina").value
+    var cantidad = document.getElementById("cantidad").value
+    if (herramienta != "" && maquina != "Choose..." && cantidad != "") {
+        var data = new FormData()
+        data.append("N_herramienta", herramienta)
+        data.append("N_maquina", maquina)
+        data.append("cantidad", cantidad)
         $.ajax({
             url: "fin_solicitud.php",
             type: "POST",
@@ -317,32 +317,26 @@ function RegistrarSoli(e) {
             processData: false,
             Cache: false,
             contentType: false,
-            beforeSend: function() {
-                $('#load').html('<br><br><div><img src="img/cargando.gif"></img>Cargando...</div>');
-            },
             success: function(message) {
                 if (message == "Registro realizado") {
                     swal({
                         title: "Registro Exitoso",
                         text: "Se a registrado la solicitud de forma exitosa!!",
                         icon: "success"
-                    });
-                    $('#btn-finalizar').attr('hidden', true);
-                    window.location.href = " ";
+                    })
+                    $('#btn-finalizar').attr('hidden', false)
                 } else if (message == "La cantidad solicitada es mayor a la cantidad en existencia") {
                     swal({
                         title: "Error",
                         text: "La cantidad que solicitas es mayor al número de piezas almacenadas",
                         icon: "warning"
-                    });
-                    window.location.href = " ";
+                    })
                 } else {
                     swal({
                         title: "Error",
                         text: "Ocurrio un error inesperado",
                         icon: "warning"
-                    });
-                    window.location.href = " ";
+                    })
                 }
             }
         })
