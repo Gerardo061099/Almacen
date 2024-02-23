@@ -139,6 +139,7 @@ $(document).ready(function () {
             password1.type = 'password'
         }
     })
+    
     $(document).on('click','.btnBorrar', function () {
         option = 4
         fila = $(this)

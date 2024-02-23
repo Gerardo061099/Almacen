@@ -24,13 +24,14 @@
     <title>Herramientas</title>
     <link rel="shortcut icon" href="img/pie-chart.png">
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="css/styles.css">    
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/styles.css">    
+    <link rel="stylesheet" href="css/stylesBootstrap.css">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body style="background: #17202A;">
     <!-- Image and text -->
-    <nav class="navbar sticky-top navbar-dark bg-dark">
+    <nav class="navbar sticky-top headline navbar-dark bg-dark ">
         <div class="navbar-brand">
             ALUXSA S.A de C.V
         </div>
@@ -115,39 +116,41 @@
                         </div>
                     </form>
                 </div>
-                <div class="card p-2" style="width: 18rem;">
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item list-group-item-action list-group-item-dark"><a href="registro_h.php" class="badge badge-success"><img src="img/playlist.png" alt=""> Nuevo registro</a></li>
-                        <li class="list-group-item list-group-item-action list-group-item-dark"><a class="navbar-brand" href="#">
-                            <?php
-                                //Contamos la cantidad que hay en el almacen
-                                include("php/abrir_conexion.php");
-                                $resul = mysqli_query($conexion,"SELECT Count(id_herramienta) as herramientas FROM $tbherr_db7");
-                                while($consulta = mysqli_fetch_array($resul)){
-                                    echo "  <button type=\"button\" class=\"btn btn-primary btn-sm\">
-                                                <strong>N° Piesas:</strong> <span class=\"badge badge-light\">".$consulta['herramientas']."</span>
-                                            </button>
-                                        ";
-                                }
-                                include("php/cerrar_conexion.php");
-                            ?>
-                        </a></li>
-                        <li class="list-group-item list-group-item-action list-group-item-dark"><a class="navbar-brand" href="herramienta_agotada.php">
-                            <?php
-                                //Contamos la cantidad que hay en el almacen
-                                include("php/abrir_conexion.php");
-                                $resul = mysqli_query($conexion,"SELECT Count(id_herramienta) as faltantes FROM $tbherr_db7 WHERE cantidad < Cantidad_Minima");
-                                while($consulta = mysqli_fetch_array($resul)){
-                                    echo "  <button type=\"button\" class=\"btn btn-danger btn-sm\">
-                                                <strong>Agotadas:</strong> <span class=\"badge badge-light\">".$consulta['faltantes']."</span>
-                                            </button>
-                                        ";
-                                }
-                                include("php/cerrar_conexion.php");
-                            ?></a>
-                        </li>
-                    </ul>
-                </div>
+                <article class="p-2">
+                    <div class="card p-2" style="width: 15rem;">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item list-group-item-action list-group-item-dark"><a href="registro_h.php" class="badge badge-success"><img src="img/playlist.png" alt=""> Nuevo registro</a></li>
+                            <li class="list-group-item list-group-item-action list-group-item-dark"><a class="navbar-brand" href="#">
+                                <?php
+                                    //Contamos la cantidad que hay en el almacen
+                                    include("php/abrir_conexion.php");
+                                    $resul = mysqli_query($conexion,"SELECT Count(id_herramienta) as herramientas FROM $tbherr_db7");
+                                    while($consulta = mysqli_fetch_array($resul)){
+                                        echo "  <button type=\"button\" class=\"btn btn-primary btn-sm\">
+                                                    <strong>N° Piesas:</strong> <span class=\"badge badge-light\">".$consulta['herramientas']."</span>
+                                                </button>
+                                            ";
+                                    }
+                                    include("php/cerrar_conexion.php");
+                                ?>
+                            </a></li>
+                            <li class="list-group-item list-group-item-action list-group-item-dark"><a class="navbar-brand" href="herramienta_agotada.php">
+                                <?php
+                                    //Contamos la cantidad que hay en el almacen
+                                    include("php/abrir_conexion.php");
+                                    $resul = mysqli_query($conexion,"SELECT Count(id_herramienta) as faltantes FROM $tbherr_db7 WHERE cantidad < Cantidad_Minima");
+                                    while($consulta = mysqli_fetch_array($resul)){
+                                        echo "  <button type=\"button\" class=\"btn btn-danger btn-sm\">
+                                                    <strong>Agotadas:</strong> <span class=\"badge badge-light\">".$consulta['faltantes']."</span>
+                                                </button>
+                                            ";
+                                    }
+                                    include("php/cerrar_conexion.php");
+                                ?></a>
+                            </li>
+                        </ul>
+                    </div>
+                </article>
             </div>
             <div class="tb-herramientas">
                 <div class="container_herramientas">
@@ -162,7 +165,7 @@
                             //Unimos tabla Herramientas con categorias y medidas
                             echo "
                                 <table class=\"table table-striped table-bordered table-hover table-sm table-dark\" id=\"herramientas\">
-                                    <thead class=\"sticky-top thead-dark\">
+                                    <thead class=\"sticky-top headtableline thead-dark\">
                                         <tr>
                                             <th scope=\"col\">#</th>
                                             <th scope=\"col\">Nombre</th>

@@ -26,6 +26,9 @@ function obtener(e) {
             processData: false,
             Cache: false,
             contentType: false,
+            beforeSend : function () {
+                $('load1').html("<div class='spinner-border' role='status'><span class='sr-only'>Loading...</span></div>");
+            },
             success: function(mensaje) {
                 switch (mensaje) {
                     case "campos vacios":

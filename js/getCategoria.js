@@ -94,26 +94,26 @@ function getCategoria_d(material,descripcion) {
     let select= document.getElementById('descripcionmodal_d')
     $('#descripcionmodal_d').empty()
     $("#descripcionmodal_d").prepend('<option selected>Choose...</option>')
-        $.ajax({
-            type: "POST",
-            url: "php/funcionesModalH.php",
-            data: data,
-            dataType: "json",
-            success: function (data) {
-                if (data !=='') {
-                    for (let i = 0; i < data.length; i++) {
-                    var option = document.createElement('option')
-                    option.value = data[i].id_Categoria
-                    option.textContent = `${data[i].Material} ${data[i].Descripcion}`
-                    if (data[i].Material == material && data[i].Descripcion == descripcion) {
-                        option.selected = true
-                    }
-                    select.add(option)
-                    }
+    $.ajax({
+        type: "POST",
+        url: "php/funcionesModalH.php",
+        data: data,
+        dataType: "json",
+        success: function (data) {
+            if (data !=='') {
+                for (let i = 0; i < data.length; i++) {
+                var option = document.createElement('option')
+                option.value = data[i].id_Categoria
+                option.textContent = `${data[i].Material} ${data[i].Descripcion}`
+                if (data[i].Material == material && data[i].Descripcion == descripcion) {
+                    option.selected = true
+                }
+                select.add(option)
                 }
             }
-        })
-    }
+        }
+    })
+}
     function getMedidas_d(ancho,largo) {
     let option = 2
     let data = JSON.stringify({'option':option})
