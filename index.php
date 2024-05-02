@@ -12,6 +12,7 @@
 
         if (mysqli_num_rows($loginUser) > 0 && password_verify($_POST['pass'],$result['pass'])) {
             $_SESSION ['id'] = $result['id_us'];
+            $_SESSION ['user'] = $result['user'];
             header('Location: pagina_principal.php');
         } else {
             $message = 'Lo siento, las credenciales no coinciden';
@@ -31,36 +32,35 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body class="cuerpo">
-    <div class="row" style="margin: 5px;">
-        <div class="col-md-4" style="padding: 0px; width: 30%;"></div>
-            <div class="col-md-4 " id="login">
-                <center><h1 style="margin-top: 5px;" class="titulo1">Inicio de Sesion</h1>
-                    <div class="">
-                        <img class="" src="img/login_profile.png" alt="imagen no disponible">
-                    </div>
-                </center>
-                <?php if (!empty($message)):?>
-                    <p class="d-flex justify-content-center"><span class="badge badge-danger"><?= $message ?></span></p>
-                <?php endif;?>
-                <form method="POST" action="index.php" style="margin: 8px 8px">
-                    <div class="formulario" style="text-align: center; ">
-                        <div class="form-group">
-                            <label for="user" class="usuariola">Nombre de usuario:</label>
-                            <input type="text" name="user" placeholder="name-user" class="form-control" id="user" style="width: 55%; display:flex;  margin:auto;">
+    <main>
+        <article class="container d-flex justify-content-center">
+                <div id="login">
+                    <center><h1 style="margin-top: 5px;" class="titulo1">Sign In</h1>
+                        <div class="">
+                            <img class="img-user"  src="img/login_profile.png"  alt="imagen no disponible">
                         </div>
-                        <div class="form-group">
-                            <label for="pass" class="passla">Contraseña:</label>
-                            <input type="password" name="pass" placeholder="********" class="form-control" id="pass" style="width: 55%; display:flex; margin:auto;">
-                            
+                    </center>
+                    <?php if (!empty($message)):?>
+                        <p class="d-flex justify-content-center"><span class="badge badge-danger"><?= $message ?></span></p>
+                    <?php endif;?>
+                    <form method="POST" action="index.php" style="margin: 8px 8px">
+                        <div class="formulario" >
+                            <div class="form-group">
+                                <label for="user" class="usuariola">Nombre de usuario:</label>
+                                <input type="text" name="user" placeholder="name user " class="form-control form-control-sm" id="user" style="width: 100%; display:flex;">
+                            </div>
+                            <div class="form-group">
+                                <label for="pass" class="passla">Contraseña:</label>
+                                <input type="password" name="pass" placeholder="********" class="form-control form-control-sm" id="pass" style="width: 100%; display:flex;">
+                            </div>
                         </div>
-                    </div>
-                <center>
-                    <input type="submit" value="Iniciar Sesion" class="btn btn-dark" name="btn1">
-                </center>
-                </form>
-            </div>
-        <div class="col-md-4" style="padding: 0px; width: 30%;"></div>
-    </div>
+                    <center>
+                        <input type="submit" value="Iniciar Sesion" class="btn btn-sm btn-block btn-dark" name="btn1">
+                    </center>
+                    </form>
+                </div>
+            </section>
+        </article>
     <center><p class="ley">Aluminios Xalatlaco S.A de C.V. Software v0.1</p></center>
 </body>
 </html>

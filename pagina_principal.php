@@ -6,7 +6,6 @@
         $id = $_SESSION['id'];
         $queryUser = mysqli_query($conexion,"SELECT user FROM $tbu_db1 WHERE id_us = $id");
         $result = mysqli_fetch_assoc($queryUser);
-
         $user = null;
         if (mysqli_num_rows($queryUser) > 0) {
             $user = $result;

@@ -2,7 +2,7 @@
 //importante
     session_start();
     include("php/abrir_conexion.php");
-    if (isset($_SESSION['id'])) {
+    if (isset($_SESSION['id']) && $_SESSION['user'] == '@admin06') {
         $id = $_SESSION['id'];
         $queryUser = mysqli_query($conexion,"SELECT user FROM $tbu_db1 WHERE id_us = $id");
         $result = mysqli_fetch_assoc($queryUser);

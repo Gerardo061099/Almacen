@@ -15,8 +15,6 @@
     } else {
         header('Location: index.php');
     }
-
-    
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -43,7 +41,7 @@
                 <img src="img/login_profile_user.png" alt="">
             </div>
             <p class="mb-0 px-1">
-                <span class="text-white"><?php echo $_SESSION['usuario'];?></span>
+                <span class="text-white" id="usuario"><?php echo $_SESSION['usuario'];?></span>
             </p>
             <button class="btn btn-dark" type="button" data-toggle="dropdown" aria-expanded="false">
                 <i class="fa-solid fa-ellipsis-vertical"></i>
@@ -66,7 +64,10 @@
         <section class="row">
             <div class="col-lg-12 col-xl-12">
                 <div class="card text-white bg-dark mb-3">
-                    <header class="card-header">Salidas del almacen</header>
+                    <header class="card-header d-flex justify-content-between">
+                        <h5>Salidas del almacen</h5>
+                        <h5><a type="button" id="btn-reportes-out" class="btn btn-sm btn-info" href="php/reporte_salidas.php" target="_blank">Imprimir reporte</a></h5>
+                    </header>
                     <section class="card-body tb_h table-responsive">
                         <?php
                             include("php/abrir_conexion.php");// conexion con la BD
@@ -152,5 +153,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
     <script src="js/app.js"></script>
+    <script src="assets/restricted.js"></script>
 </body>
 </html>
