@@ -1,23 +1,24 @@
 <?php
 //importante
-    session_start();
-    include("php/abrir_conexion.php");
-    if (isset($_SESSION['id'])) {
-        $id = $_SESSION['id'];
-        $queryUser = mysqli_query($conexion,"SELECT user FROM $tbu_db1 WHERE id_us = $id");
-        $result = mysqli_fetch_assoc($queryUser);
+session_start();
+include("php/abrir_conexion.php");
+if (isset($_SESSION['id'])) {
+    $id = $_SESSION['id'];
+    $queryUser = mysqli_query($conexion, "SELECT user FROM $tbu_db1 WHERE id_us = $id");
+    $result = mysqli_fetch_assoc($queryUser);
 
-        $user = null;
-        if (mysqli_num_rows($queryUser) > 0) {
-            $user = $result;
-            $_SESSION['usuario'] = $user['user'];
-        }
-    } else {
-        header('Location: index.php');
+    $user = null;
+    if (mysqli_num_rows($queryUser) > 0) {
+        $user = $result;
+        $_SESSION['usuario'] = $user['user'];
     }
+} else {
+    header('Location: index.php');
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -28,6 +29,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script><!--CDN swal(sweatalert)-->
 </head>
+
 <body style="background: #17202A;">
     <!-- Image and text -->
     <nav class="navbar sticky-top navbar-dark bg-dark">
@@ -39,7 +41,7 @@
                 <img src="img/login_profile_user.png" alt="">
             </div>
             <p class="mb-0 px-1">
-                <span class="text-white"><?php echo $_SESSION['usuario'];?></span>
+                <span class="text-white"><?php echo $_SESSION['usuario']; ?></span>
             </p>
             <button class="btn btn-dark" type="button" data-toggle="dropdown" aria-expanded="false">
                 <i class="fa-solid fa-ellipsis-vertical"></i>
@@ -61,7 +63,7 @@
         <article class="contenedor w-auto h-25 bg-dark text-white p-2 mb-2" style="border-left: #5DADE2 7px solid;">
             <div class="">
                 <form enctype="multipart/form-data">
-                <h2 class="text-center">Registrar:</h2>
+                    <h2 class="text-center">Registrar</h2>
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="nombre">Nombre:</label>
@@ -79,15 +81,15 @@
                     <div class="form-row">
                         <div class="form-group col-md-2">
                             <label for="gavilanes">Gavilanes:</label>
-                                <select id="gavilanes" class="form-control form-control-sm">
-                                    <option selected>Choose...</option>
-                                </select>
+                            <select id="gavilanes" class="form-control form-control-sm">
+                                <option selected>Choose...</option>
+                            </select>
                         </div>
                         <div class="form-group col-md-3">
                             <label for="medidas">Medidas:</label>
-                                <select id="medidas" class="form-control form-control-sm">
-                                    <option selected>Choose...</option>
-                                </select>
+                            <select id="medidas" class="form-control form-control-sm">
+                                <option selected>Choose...</option>
+                            </select>
                         </div>
                         <div class="form-group col-md-7">
                             <label for="categoria">Categoria:</label>
@@ -150,6 +152,7 @@
     <script src="js/eliminar.js"></script>
     <script src="js/img.js"></script>
     <script src="js/app.js"></script>
-    <script src="js/funciones_registro_h.js" type="module" ></script>
+    <script src="js/funciones_registro_h.js" type="module"></script>
 </body>
+
 </html>

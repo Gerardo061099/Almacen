@@ -1,9 +1,9 @@
 <?php
 //datos del servidor
-$host = "localhost";//servidor
-$userdb = "stacks";//usuario
-$claveus = "stacks147852369";//clavepass
-$nombredb = "almacen";//db bodega
+$host = "localhost"; //servidor
+$userdb = "stacks"; //usuario
+$claveus = "stacks147852369"; //clavepass
+$nombredb = "almacen"; //db bodega
 //tablas BD
 $tbu_db1 = "usuarios";
 $tbcat_db3 = "categorias";
@@ -14,11 +14,13 @@ $tbherr_db7 = "herramientas";
 $tbmaq_db8 = "maquinaria";
 $tbmed_db9 = "medidas";
 $tbsoli_db10 = "solicitud";
+$tbfact_db11 = "facturas";
+$tbdetfact_db12 = "detalle_factura";
 //conexion
-$conexion = new mysqli($host,$userdb,$claveus,$nombredb);
+$conexion = new mysqli($host, $userdb, $claveus, $nombredb);
 
-$charset = mysqli_set_charset( $conexion, 'utf8' );
+$charset = mysqli_set_charset($conexion, 'utf8');
 //En caso de haber datos erroneos del servidor
 if ($conexion->connect_errno) {
     echo "Problemas de conexion con el servidor...";
-} 
+}

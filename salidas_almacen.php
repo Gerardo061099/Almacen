@@ -74,7 +74,7 @@
                             $resultados = mysqli_query($conexion,"SELECT s.id_solicitud,e.nombre as solicitante,e.apellidos,h.Nombre as herramienta,c.Descripcion,c.Material,g.Num_gavilanes AS Gav,m.Largo,m.Ancho,d.cantidad,s.Fecha from $tbsoli_db10 s inner join $tbdet_db4 d on s.id_solicitud = d.id_solicitud inner join $tbherr_db7 h on d.id_herramientas = h.id_herramienta inner join $tbcat_db3 c on h.id_categoria = c.id_categoria inner join $tbgav_db6 g on h.id_gavilanes = g.id_gav inner join $tbmed_db9 m on h.id_medidas = m.id_medidas inner join $tbem_db5 e on s.id_empleado = e.id_empleado ORDER BY s.id_solicitud DESC");
                             //Unimos tabla Herramientas con categorias y medidas
                             echo "
-                        <table class=\"table table-dark table-striped table-hover\" id=\"h\">
+                        <table class=\"table table-dark table-striped table-hover table-sm\" id=\"h\">
                             <thead class=\"\">
                                 <tr>
                                     <th>ID</th>

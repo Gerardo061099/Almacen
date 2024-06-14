@@ -99,6 +99,13 @@
                 <p class="card-text"><center><a href="salidas_almacen.php"><img src="img/out.png" alt=""></center></a></p>
             </div>
         </div>
+        <div class="card text-white bg-warning mb-3" id="card1" style="max-width: 18rem;">
+            <div class="card-header">Registro de factura</div>
+            <div class="card-body">
+                <h5 class="card-title">Entradas con factura</h5>
+                <p class="card-text"><center><a href="registro_facturas.php"><img src="img/invoice.png" alt=""></center></a></p>
+            </div>
+        </div>
     </div>
     </center>
     

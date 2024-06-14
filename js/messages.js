@@ -10,20 +10,20 @@
  */
 // Funcion que imprime un mensaje con Sweet Alert2 
 export function messageSWA(message,type) {
-    const Toast = Swal.mixin({
-        toast: true,
-        position: 'top-start',
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-          toast.addEventListener('mouseenter', Swal.stopTimer)
-          toast.addEventListener('mouseleave', Swal.resumeTimer)
-        }
-      })
-      
-      Toast.fire({
-        icon: type,
-        title: message
-      })
+  const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-start',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer)
+      toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+  })
+    
+  Toast.fire({
+    icon: type,
+    title: message
+  })
 }
