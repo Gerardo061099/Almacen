@@ -1,7 +1,7 @@
 <?php
 //importante
 session_start();
-include("php/abrir_conexion.php");
+include "php/abrir_conexion.php";
 if (isset($_SESSION['id'])) {
     $id = $_SESSION['id'];
     $queryUser = mysqli_query($conexion, "SELECT user FROM $tbu_db1 WHERE id_us = $id");
@@ -14,6 +14,7 @@ if (isset($_SESSION['id'])) {
 } else {
     header('Location: index.php');
 }
+include "php/cerrar_conexion.php";
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -24,407 +25,364 @@ if (isset($_SESSION['id'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Herramientas</title>
     <link rel="shortcut icon" href="img/pie-chart.png">
-    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <!-- Bootstrap  v5.3-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+    <!-- Icons Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Datatables -->
+    <link href="https://cdn.datatables.net/v/dt/dt-2.2.2/b-3.2.3/b-colvis-3.2.3/b-html5-3.2.3/b-print-3.2.3/r-3.0.4/datatables.min.css" rel="stylesheet" integrity="sha384-82g2Ku/PYsKjzsW7eA4hbCXzIcYsdJC7FIcyCjrz4yB8sR3lKcDE4cGhxCuzw3AZ" crossorigin="anonymous">
+    <!-- Personal CSS -->
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/stylesBootstrap.css">
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 
-<body style="background: #17202A;">
+<body>
     <!-- Image and text -->
-    <nav class="navbar sticky-top headline navbar-dark bg-dark ">
-        <div class="navbar-brand">
-            ALUXSA S.A de C.V
-        </div>
-        <div class="dropdown d-flex align-items-center pr-4">
-            <div class="px-2">
-                <img src="img/login_profile_user.png" alt="">
+    <?php include "nav/navbar.php" ?>
+    <main class="container">
+        <nav style="--bs-breadcrumb-divider: '>'; color: white;" aria-label="breadcrumb" class="mt-3">
+            <ol class="breadcrumb text-white">
+                <li class="breadcrumb-item"><a href="pagina_principal.php">Dashboard</a></li>
+                <li class="breadcrumb-item" aria-current="page">Herramientas</li>
+            </ol>
+        </nav>
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5>Listado de herramientas</h5><button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modalNewH"><i class="bi bi-plus-square-dotted"></i></button></span>
             </div>
-            <p class="mb-0 px-1">
-                <span class="text-white"><?php echo $_SESSION['usuario']; ?></span>
-            </p>
-            <button class="btn btn-dark btn-sm" type="button" data-toggle="dropdown" aria-expanded="false">
-                <i class="fa-solid fa-ellipsis-vertical"></i>
-            </button>
-            <div class="dropdown-menu dropdown-menu-right">
-                <a class="dropdown-item" href="pagina_principal.php"><i class="fa-solid fa-house"></i> Inicio</a>
-                <a class="dropdown-item" href="add_user.php"><i class="fa-solid fa-user-plus"></i> Agregar usuario</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="php/cerrar_sesion.php"><i class="fa-solid fa-right-from-bracket"></i> Cerrar sesion</a>
+            <div class="card-body">
+                <table class="table table-striped table-borderless table-hover table-sm table-dark" id="herramientas">
+                    <thead class="sticky-top headtableline thead-dark">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Material</th>
+                            <th scope="col">Descripcion</th>
+                            <th scope="col">Gavilanes</th>
+                            <th scope="col">Ancho</th>
+                            <th scope="col">Largo</th>
+                            <th scope="col">Stock min</th>
+                            <th scope="col">Stock</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Fecha</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody class="body-tb">
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Material</th>
+                            <th scope="col">Descripcion</th>
+                            <th scope="col">Gavilanes</th>
+                            <th scope="col">Ancho</th>
+                            <th scope="col">Largo</th>
+                            <th scope="col">Stock min</th>
+                            <th scope="col">Stock</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Fecha</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                    </tfoot>
+                </table>
             </div>
         </div>
-    </nav>
-    <center>
-        <main class="px-3 py-3">
-            <header class="encabesado p-2 text-white">
-                <h1 class=" text-center">Herramientas</h1>
-            </header>
-            <div class="d-flex flex-wrap justify-content-around">
-                <div class="botones bg-dark text-white p-3">
-                    <form method="POST" action="inventario.php">
-                        <h1 id="titulos-form">Buscar</h1>
-                        <div class="form-row align-items-center">
-                            <div class="col-md-6 my-1">
-                                <label for="herra_b">Herramienta:</label>
-                                <select class="form-control form-control-sm" id="herra_b" name="herramienta">
+        <!-- Modal -->
+        <div class="modal fade" id="modalNewH" tabindex="-1" aria-labelledby="modalNewHLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="modalNewHLabel">Nueva herramienta</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <header>
+                            <h5>Registro de una nueva herramienta</h5>
+                        </header>
+                        <div class="row g-3">
+                            <div class="col-md-2">
+                                <label for="nombre">Nombre:</label>
+                                <input type="text" class="form-control form-control-sm" id="nombre" name="nombre" placeholder="Cortador, Broca, Machuelo, Avellanador...">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="categoria">Categoria:</label>
+                                <select id="categoria" class="form-select form-select-sm">
                                     <option selected>Choose...</option>
-                                    <?php
-                                    include("php/abrir_conexion.php");
-                                    $queryH = mysqli_query($conexion, "SELECT nombre FROM $tbherr_db7 GROUP BY nombre");
-                                    while ($res = mysqli_fetch_array($queryH)) {
-                                        echo '<option value="' . $res['nombre'] . '">' . $res['nombre'] . '</option>';
-                                    }
-                                    include("php/cerrar_conexion.php");
-                                    ?>
                                 </select>
                             </div>
-                            <div class="col-md-6 my-1">
-                                <label for="medida_b">Medida:</label>
-                                <select class="form-control form-control-sm" id="medida_b" name="medida">
+                            <div class="col-md-3">
+                                <label for="medidas">Medidas:</label>
+                                <select id="medidas" class="form-select form-select-sm">
                                     <option selected>Choose...</option>
                                 </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="gavilanes">Gavilanes:</label>
+                                <select id="gavilanes" class="form-select form-select-sm">
+                                    <option selected>Choose...</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <label for="cantidad">Stock:</label>
+                                <input type="number" class="form-control form-control-sm" id="cantidad" min="1" name="cantidad1" placeholder="Stock...">
+                            </div>
+                            <div class="col-md-2">
+                                <label for="cantidadm">Stock (minimo):</label>
+                                <input type="number" class="form-control form-control-sm" id="cantidadm" min="1" name="cantidad2" placeholder="Stock minimo">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="subir_imagen">Agrega una imagen de referencia:</label>
+                                <input class="form-control form-control-sm" type="file" id="subir_imagen">
                             </div>
                         </div>
-                        <div class="col-auto my-1">
-                            <button class="btn btn-info btn-sm" type="submit" name="btn_buscar"><i class="fa-solid fa-magnifying-glass"></i> Buscar</button>
-                            <div id="cargando"></div>
+                        <header>
+                            <h5>Visualizacion de la imagen</h5>
+                        </header>
+                        <main>
+                            <section id="section-img"></section>
+                            <p id="nombre_img"></p>
+                            <p id="tamaño_img"></p>
+                            <a id="link_diss_img" href="https://www.iloveimg.com/es/comprimir-imagen" target="_blank" hidden>Debes comprimir la imagen</a>
+                        </main>
+                        <button type="button" class="btn btn-primary btn-sm" id="createNewTool">Guardar</button>
+                        <hr>
+                        <main class="row row-cols-1 row-cols-md-3 g-4">
+                            <article class="col">
+                                <div class="card " style="width: 27rem;">
+                                    <header class="card-header">
+                                        <h5>Gestion de Medidas</h5>
+                                    </header>
+                                    <main class="card-body">
+                                        <div class="row g-3">
+                                            <div class="col-auto">
+                                                <label for="ancho">Ancho:</label>
+                                                <input type="text" class="form-control form-control-sm" id="ancho" required>
+                                            </div>
+                                            <div class="col-auto">
+                                                <label for="unidad_ancho">Unidad de medida:</label>
+                                                <select class="form-control form-select form-select-sm" id="unidad_ancho" required>
+                                                    <option selected> Choose option...</option>
+                                                    <option value="in">pulgadas</option>
+                                                    <option value="mm">milimetros</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row g-3">
+                                            <div class="col-auto">
+                                                <label for="largo">Largo:</label>
+                                                <input type="text" class="form-control form-control-sm" id="largo" required>
+                                            </div>
+                                            <div class="col-auto">
+                                                <label for="unidad_largo">Unidad de medida:</label>
+                                                <select class="form-control form-select form-select-sm" id="unidad_largo" required>
+                                                    <option selected> Choose option...</option>
+                                                    <option value="in">pulgadas</option>
+                                                    <option value="mm">milimetros</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </main>
+                                    <footer class="card-footer">
+                                        <section class="d-flex justify-content-end align-items-center">
+                                            <button type="button" class="btn btn-success btn-sm" id="btn_add_medida">Agregar</button>
+                                            <div id="cargando_medida"></div>
+                                        </section>
+                                    </footer>
+                                </div>
+                            </article>
+                        </main>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <article class="d-flex flex-wrap my-3">
+            <article class="card bg-white text-black me-3" style="width: 18rem;">
+                <div class="card-body">
+                    <i class="fa-solid fa-circle-info"></i> Detalles
+                    <hr>
+                    <ul class="ps-0">
+                        <li>1.- Avellanadores de carburo: <span id="1" class="badge text-bg-dark"></span></li>
+                        <li>2.- Avellanadores <i>HSS</i>: <span id="2" class="badge text-bg-warning"></span></li>
+                        <li>3.- Brocas de carburo: <span id="3" class="badge text-bg-dark"></span></li>
+                        <li>4.- Brocas <i>HSS</i>: <span id="4" class="badge text-bg-warning"></span></li>
+                        <li>5.- Buriles de carburo <span id="5" class="badge text-bg-dark"></span></li>
+                        <li>6.- Buriles <i>HSS</i>: <span id="6" class="badge text-bg-warning"></span></li>
+                        <li>7.- Cortadores de carburo: <span id="7" class="badge text-bg-dark"></span></li>
+                        <li>8.- Cortadores <i>HSS</i>: <span id="8" class="badge text-bg-warning"></span></li>
+                        <li>9.- Machuelos de carburo: <span id="9" class="badge text-bg-dark"></span></li>
+                        <li>10.- Machuelos <i>HSS</i>: <span id="10" class="badge text-bg-warning"></span></li>
+                    </ul>
+                </div>
+            </article>
+            <article class="card bg-danger me-3 " style="width: 22rem;">
+                <div class="card-body">
+                    <i class="bi bi-patch-exclamation"></i> Sin stock
+                    <hr>
+                    <ul id="lista-Order-agotadas" class="ps-0">
+                    </ul>
+                    <div id="linkA"></div>
+                </div>
+            </article>
+            <article class="card bg-warning me-3" style="width: 22rem;">
+                <div class="card-body">
+                    <i class="bi bi-shield-fill-exclamation"></i> Por debajo del stock minimo
+                    <hr>
+                    <ul id="lista-Order-stockBajo" class="ps-0">
+                    </ul>
+                    <div id="linkS"></div>
+                </div>
+            </article>
+        </article>
+        <article class="card mb-3">
+            <div class="card-body">
+                <i class="bi bi-grid-3x2-gap-fill"></i> Articulos
+                <hr>
+                <aside class="card mb-3" style="width: 15rem;">
+                    <div class="card-body">
+                        <i class="bi bi-search"></i> Buscar
+                        <form id="frm_buscar" class="form-inline">
+                            <hr>
+                            <div class="form-row align-items-center">
+                                <div class="col-12 my-1">
+                                    <label for="herra_b">Herramienta:</label>
+                                    <select class="form-control form-control-sm" id="herra_b" name="herramienta">
+                                        <option selected>Choose...</option>
+                                        <?php
+                                        include "php/abrir_conexion.php";
+                                        $queryH = mysqli_query($conexion, "SELECT nombre FROM $tbherr_db7 GROUP BY nombre");
+                                        while ($res = mysqli_fetch_array($queryH)) {
+                                            echo '<option value="' . $res['nombre'] . '">' . $res['nombre'] . '</option>';
+                                        }
+                                        include "php/cerrar_conexion.php";
+                                        ?>
+                                    </select>
+                                </div>
+                                <div class="col-12 my-1">
+                                    <label for="medida_b">Medida:</label>
+                                    <select class="form-control form-control-sm" id="medida_b" name="medida">
+                                        <option selected>Choose...</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-auto my-1">
+                                <button class="btn btn-info btn-sm" type="button" id="btn_buscar"><i class="fa-solid fa-magnifying-glass"></i> Buscar</button>
+                                <div id="cargando"></div>
+                            </div>
+                            <div class="col-12 my-1">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="checkAll">
+                                    <label class="form-check-label" for="checkAll">
+                                        Todas las herramientas
+                                    </label>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </aside>
+                <main id="main-container-Cards">
+                    <div class="row row-cols-1 row-cols-md-3 g-4" id="card-container">
+                    </div>
+                </main>
+            </div>
+            <div class=""></div>
+        </article>
+        <div class="modal fade" id="modal101" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content bg-dark text-white">
+                    <div class="modal-header">
+                        <h5 class="modal-title title-modal"></h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form id="frm_update_h" enctype="multipart/form-data">
+                        <div class="modal-body">
+                            <div class="row g-3 mb-3">
+                                <div class="col-md-2">
+                                    <label for="idmodal">id: </label>
+                                    <input type="text" id="idmodal" class="form-control form-control-sm" disabled>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="nombremodal">Nombre:</label>
+                                    <input type="text" id="nombremodal" class="form-control form-control-sm">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="medidasmodal">Medidas:</label>
+                                    <select class="form-select form-select-sm" id="medidasmodal">
+                                        <option selected>Choose...</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row g-3 mb-3">
+                                <div class="col-md-9">
+                                    <label for="descripcionmodal">Categoria:</label>
+                                    <select class="form-select form-select-sm" id="descripcionmodal">
+                                        <option selected>Choose...</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="gavilanesmodal">Gavilanes:</label>
+                                    <select class="form-select form-select-sm" id="gavilanesmodal">
+                                        <option selected>Elije el numero de gavilanes</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row g-3 mb-3">
+                                <div class="col-md-3">
+                                    <label for="stock">Stock:</label>
+                                    <input type="text" id="stock" class="form-control form-control-sm">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="stockminimo">Stock minimo:</label>
+                                    <input type="text" id="stockminimo" class="form-control form-control-sm">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="status">Status:</label>
+                                    <input type="text" id="status" class="form-control form-control-sm " disabled>
+                                </div>
+                            </div>
+                            <div class="row g-3">
+                                <div class="col-md-12">
+                                    <div class="mb-3">
+                                        <label for="formFile" class="form-label">Default file input example</label>
+                                        <input class="form-control form-control-sm" type="file" id="file_img" accept="image/png,image/jpg,image/jpeg">
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="hidden" id="option">
+                            <img src="" class="rounded mx-auto d-block" id="previa" width="400">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-success btn-sm btnSendData">Actualizar</button>
                         </div>
                     </form>
                 </div>
-                <article class="p-2">
-                    <div class="card p-2" style="width: 15rem;">
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item list-group-item-action list-group-item-dark"><a href="registro_h.php" class="badge badge-success"><img src="img/playlist.png" alt=""> Nuevo registro</a></li>
-                            <li class="list-group-item list-group-item-action list-group-item-dark"><a class="navbar-brand" href="#">
-                                    <?php
-                                    //Contamos la cantidad que hay en el almacen
-                                    include("php/abrir_conexion.php");
-                                    $resul = mysqli_query($conexion, "SELECT Count(id_herramienta) as herramientas FROM $tbherr_db7");
-                                    while ($consulta = mysqli_fetch_array($resul)) {
-                                        echo "  <button type=\"button\" class=\"btn btn-primary btn-sm\">
-                                                    <strong>N° Piesa:</strong> <span class=\"badge badge-light\">" . $consulta['herramientas'] . "</span>
-                                                </button>
-                                            ";
-                                    }
-                                    include("php/cerrar_conexion.php");
-                                    ?>
-                                </a></li>
-                            <li class="list-group-item list-group-item-action list-group-item-dark"><a class="navbar-brand" href="herramienta_agotada.php">
-                                    <?php
-                                    //Contamos la cantidad que hay en el almacen
-                                    include("php/abrir_conexion.php");
-                                    $resul = mysqli_query($conexion, "SELECT Count(id_herramienta) as faltantes FROM $tbherr_db7 WHERE cantidad < Cantidad_Minima");
-                                    while ($consulta = mysqli_fetch_array($resul)) {
-                                        echo "  <button type=\"button\" class=\"btn btn-danger btn-sm\">
-                                                    <strong>Agotadas:</strong> <span class=\"badge badge-light\">" . $consulta['faltantes'] . "</span>
-                                                </button>
-                                            ";
-                                    }
-                                    include("php/cerrar_conexion.php");
-                                    ?></a>
-                            </li>
-                        </ul>
-                    </div>
-                </article>
             </div>
-            <div class="tb-herramientas">
-                <div class="container_herramientas">
-                    <div class="d-flex justify-content-between p-2 ">
-                        <h3 class="titulos text-white"><strong>Listado de herramientas</strong></h3>
-                        <div><a class="btn btn-danger btn-sm" href="php/reporte_Herramientas.php" target="_blank"><i class="fa-solid fa-file-pdf"></i></a></div>
-                    </div>
-                    <div class="tabla-herramientas table-responsive px-2">
-                        <?php
-                        include("php/abrir_conexion.php"); // conexion con la BD
-                        $resultados = mysqli_query($conexion, "SELECT h.id_herramienta,h.Nombre,c.material,c.descripcion,g.Num_gavilanes,m.Ancho,m.Largo,h.cantidad_minima,h.cantidad,h.fecha_hora FROM $tbherr_db7 h inner join $tbcat_db3 c on h.id_categoria = c.id_categoria inner join $tbgav_db6 g on h.id_gavilanes = g.id_gav inner join $tbmed_db9 m on h.id_medidas = m.id_medidas ORDER BY h.id_herramienta");
-                        //Unimos tabla Herramientas con categorias y medidas
-                        echo "
-                                <table class=\"table table-striped table-bordered table-hover table-sm table-dark\" id=\"herramientas\">
-                                    <thead class=\"sticky-top headtableline thead-dark\">
-                                        <tr>
-                                            <th scope=\"col\">#</th>
-                                            <th scope=\"col\">Nombre</th>
-                                            <th scope=\"col\">Material</th>
-                                            <th scope=\"col\">Descripcion</th>
-                                            <th scope=\"col\">Gavilanes</th>
-                                            <th scope=\"col\">Ancho</th>
-                                            <th scope=\"col\">Largo</th>
-                                            <th scope=\"col\">Stock</th>
-                                            <th scope=\"col\">Stock min</th>
-                                            <th scope=\"col\">Fecha</th>
-                                            <th scope=\"col\">Estado</th>
-                                            <th scope=\"col\">Borrar</th>
-                                            <th scope=\"col\">Editar</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class=\"body-tb\">
-                        ";
-                        while ($consulta = mysqli_fetch_array($resultados)) {
-                            $datos = $consulta[0] . "||" .
-                                $consulta[1] . "||" .
-                                $consulta[2] . "||" .
-                                $consulta[3] . "||" .
-                                $consulta[4] . "||" .
-                                $consulta[5] . "||" .
-                                $consulta[6] . "||" .
-                                $consulta[7] . "||" .
-                                $consulta[8] . "||" .
-                                $consulta[9];
-                            echo
-                            "
-                                    <tr>
-                                        <td><center>" . $consulta['id_herramienta'] . "</center></td>
-                                        <td><center>" . $consulta['Nombre'] . "</center></td>
-                                        <td><center>" . $consulta['material'] . "</center></td>
-                                        <td><center>" . $consulta['descripcion'] . "</center></td>
-                                        <td><center>" . $consulta['Num_gavilanes'] . "</center></td>
-                                        <td><center>" . $consulta['Ancho'] . "</center></td>
-                                        <td><center>" . $consulta['Largo'] . "</center></td>
-                                        <td><center>" . $consulta['cantidad'] . "</center></td>
-                                        <td><center>" . $consulta['cantidad_minima'] . "</center></td>
-                                        <td><center>" . $consulta['fecha_hora'] . "</center></td>
-                                        <th><center>"; ?>
-                            <?php
-                            //mostramos un aviso segun la cantidad de piezas 
-                            if ($consulta['cantidad'] < $consulta['cantidad_minima']) { //condicionamos var cantidad a 2 o menor para mostrar un mesaje 
-                                if ($consulta['cantidad'] != 0 && $consulta['cantidad'] < $consulta['cantidad_minima']) {
-                                    echo "<img src=\"img/warning.png\" alt=\"sin resultados\">";
-                                } else {
-                                    if ($consulta['cantidad'] == 0) {
-                                        echo "<img src=\"img/cancel.png\" alt=\"sin resultados\">";
-                                    }
-                                }
-                            } //si la cantidad es mayor a 2 no se requiere comprar más
-                            else {
-                                if ($consulta['cantidad'] >= $consulta['cantidad_minima']) {
-                                    echo "<img src=\"img/check.png\" alt=\"sin resultados\">";
-                                }
-                            }
-                            ?>
-    </center>
-    </th>
-    <th>
-        <center><a class="btn btn-danger btn-sm" role="button" onclick="getDataDeleteH('<?php echo $datos ?>')"><i class="fa-solid fa-trash"></i></a></center>
-    </th>
-    <th>
-        <center><a class="btn btn-light btn-sm" role="button" onclick="editarHerramienta('<?php echo $datos ?>')"><i class="fa-solid fa-square-pen"></i></a></center>
-    </th>
-    </tr>
-    </tbody>
-<?php
-                        }
-                        include("php/cerrar_conexion.php");
-?>
-</table><br>
-</div>
-</div>
-</div>
-<div class="modal fade" id="ModalEditar" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content bg-dark text-white">
-            <div class="modal-header">
-                <h5 class="modal-title">Editando...</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form id="frm_update_h">
-                <div class="modal-body">
-                    <div class="form-row mb-3">
-                        <div class="col-md-2">
-                            <label for="idmodal">id</label>
-                            <input type="text" id="idmodal" class="form-control form-control-sm" disabled>
-                        </div>
-                        <div class="col-md-4">
-                            <label for="nombremodal">Nombre:</label>
-                            <input type="text" id="nombremodal" class="form-control form-control-sm">
-                        </div>
-                        <div class="col-md-6">
-                            <label for="medidasmodal">Medidas:</label>
-                            <select class="form-control form-control-sm" id="medidasmodal">
-                                <option selected>Choose...</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-row mb-3">
-                        <div class="col-md-9">
-                            <label for="descripcionmodal">Categoria:</label>
-                            <select class="form-control form-control-sm" id="descripcionmodal">
-                                <option selected>Choose...</option>
-                            </select>
-                        </div>
-                        <div class="col-md-3">
-                            <label for="gavilanesmodal">Gavilanes:</label>
-                            <select class="form-control form-control-sm" id="gavilanesmodal">
-                                <option selected>Choose...</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="col-md-3">
-                            <label for="stock">Stock:</label>
-                            <input type="text" id="stock" class="form-control form-control-sm">
-                        </div>
-                        <div class="col-md-3">
-                            <label for="stockminimo">Stock minimo:</label>
-                            <input type="text" id="stockminimo" class="form-control form-control-sm">
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-success">Actualizar</button>
-                </div>
-            </form>
         </div>
-    </div>
-</div>
-<div class="modal fade" id="ModalEliminar" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content bg-danger text-white">
-            <div class="modal-header">
-                <h5 class="modal-title">Borrar...</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form id="frm_update_h">
-                <div class="modal-body">
-                    <div class="form-row mb-3">
-                        <div class="col-md-2">
-                            <label for="idmodal_d">id</label>
-                            <input type="text" id="idmodal_d" class="form-control form-control-sm" disabled>
-                        </div>
-                        <div class="col-md-4">
-                            <label for="nombremodal_d">Nombre:</label>
-                            <input type="text" id="nombremodal_d" class="form-control form-control-sm" disabled>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="medidasmodal_d">Medidas:</label>
-                            <select class="form-control form-control-sm" id="medidasmodal_d" disabled>
-                                <option selected>Choose...</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-row mb-3">
-                        <div class="col-md-9">
-                            <label for="descripcionmodal_d">Categoria:</label>
-                            <select class="form-control form-control-sm" id="descripcionmodal_d" disabled>
-                                <option selected>Choose...</option>
-                            </select>
-                        </div>
-                        <div class="col-md-3">
-                            <label for="gavilanesmodal_d">Gavilanes:</label>
-                            <select class="form-control form-control-sm" id="gavilanesmodal_d" disabled>
-                                <option selected>Choose...</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="col-md-3">
-                            <label for="stock_d">Stock:</label>
-                            <input type="text" id="stock_d" class="form-control form-control-sm" disabled>
-                        </div>
-                        <div class="col-md-3">
-                            <label for="stockminimo_d">Stock minimo:</label>
-                            <input type="text" id="stockminimo_d" class="form-control form-control-sm" disabled>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-danger btn-sm" onclick="deleteHerramienta(event)">Borrar</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-</main>
-<div class="contador-h bg-dark">
-    <div style="background: #2E4053; border-radius: 5px; ">
-        <center>
-            <h3 style="color: white;">Resultados</h3>
-        </center>
-    </div>
-    <div class="w-100">
-        <?php
-        include("php/abrir_conexion.php");
-        if (isset($_POST['btn_buscar'])) {
-            $her = $_POST['herramienta'];
-            $med = $_POST['medida'];
-            if ($her != 'Choose...' && $med != 'Choose...') {
-                $consultah = mysqli_query($conexion, "SELECT h.id_herramienta AS id,h.Nombre AS Nombre,c.Descripcion AS Descripcion,c.Material AS Material,g.Num_gavilanes AS Num_gavilanes,m.Ancho AS Ancho,m.Largo AS Largo,h.Cantidad AS Stock,h.Cantidad_Minima AS Stock_minimo,h.rutaimg AS rutaimg FROM $tbherr_db7 h inner join $tbcat_db3 c on h.id_categoria = c.id_categoria inner join $tbgav_db6 g on h.id_gavilanes = g.id_gav inner join $tbmed_db9 m on h.id_medidas = m.id_medidas WHERE h.Nombre LIKE '%$her%' AND m.Ancho LIKE '%$med%'");
-        ?>
-                <div class="d-flex flex-wrap justify-content-around" id="mensaje">
-                    <?php
-                    if (mysqli_num_rows($consultah) > 0) {
-                        while ($responsData = mysqli_fetch_assoc($consultah)) {
-                    ?>
-                            <div class="conten">
-                                <img class="text-white" src="<?php echo $responsData['rutaimg']; ?>" id="imgs" alt="imagen no encontrada">
-                                <div class="infor">
-                                    <h1 class="subt">Características</h1>
-                                    <p><?php echo "# " . $responsData['id']; ?></p>
-                                    <p><?php echo "Nombre: " . $responsData['Nombre'] . " de " . $responsData['Material'] . " " . $responsData['Descripcion']; ?></p>
-                                    </p>
-                                    <p><?php echo "Medidas: " . $responsData['Ancho'] . " Ancho x " . $responsData['Largo'] . " Largo"; ?></p>
-                                    <p><?php echo "Gavilanes: " . $responsData['Num_gavilanes'] . " Stock: " . $responsData['Stock'] . " Stock minimo: " . $responsData['Stock_minimo']; ?></p>
-                                </div>
-                            </div>
-            <?php
-                        }
-                        echo '
-                                    <script>
-                                    swal({
-                                        title: "Busqueda exitosa!!",
-                                        text: "Para ver los resultados deslice hacia arriba",
-                                        icon: "success"
-                                    });
-                                    </script>';
-                    } else {
-                        echo '
-                                <center><div class="alert alert-warning" role="alert"><strong>Sin resultados</strong></div></center>
-                                <script>
-                                    swal({
-                                        title: "Opciones no validas",
-                                        text: "Las medidas no coinciden con el tipo de herramienta en la base de datos",
-                                        icon: "error"
-                                    });
-                                </script>';
-                    }
-                } else {
-                    echo '
-                        <center><div class="alert alert-warning" role="alert"><strong>Sin resultados</strong></div></center>
-                        <script>
-                            swal({
-                                title: "Opciones no validas",
-                                text: "Selecciona los valores para realizar la busqueda",
-                                icon: "warning"
-                            });
-                        </script>';
-                }
-                include("php/cerrar_conexion.php");
-            } else {
-                echo '<center><div class="alert alert-warning d-inline-flex p-2" role="alert"><strong>Busqueda de herramientas</strong></div></center>';
-            }
-            ?>
-                </div>
-    </div>
-    </center>
-
-
+    </main>
+    <!--  -->
     <script src="https://kit.fontawesome.com/282ec8cabc.js" crossorigin="anonymous"></script>
+    <!-----------CDN Sweet Alert----------------------->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Javascript Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
     <!-----------CDN JQuery----------------------->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
-    <script src="js/getCategoria.js"></script>
-    <script src="js/app.js"></script>
-    <script src="js/funciones_herramientas.js"></script>
-    <script type="module" src="js/buscar_app.js"></script>
-    <script type="module" src="js/funciones_Modal_H.js"></script>
+    <!-- Datatables -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js" integrity="sha384-VFQrHzqBh5qiJIU0uGU5CIW3+OWpdGGJM9LBnGbuIH2mkICcFZ7lPd/AAtI7SNf7" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js" integrity="sha384-/RlQG9uf0M2vcTw3CX7fbqgbj/h8wKxw7C3zu9/GxcBPRKOEcESxaxufwRXqzq6n" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/v/dt/dt-2.2.2/b-3.2.3/b-colvis-3.2.3/b-html5-3.2.3/b-print-3.2.3/r-3.0.4/datatables.min.js" integrity="sha384-Qsz/vvFUQ4Klb555rHLCrjX94joA5yzYciiRBCdM86EPgxggPXiD1ARh8hY+XtZI" crossorigin="anonymous"></script>
+    <!-- Personal scripts  -->
+    <script src="js/tb_herramientas.js" type="module"></script>
+    <script src="js/funciones_herramientas.js" type="module"></script>
+    <script src="js/buscar_app.js" type="module"></script>
+    <script src="js/funciones_Modal_H.js" type="module"></script>
+    <script src="js/img.js"></script>
+    <script src="js/funciones_registro_h.js" type="module"></script>
 </body>
 
 </html>

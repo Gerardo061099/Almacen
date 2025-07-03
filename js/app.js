@@ -1,15 +1,29 @@
-function obtener(e) {
-  e.preventDefault();
+import { messageAimate } from "./messages.js";
+export async function obtener(categoriaText, gavilanesText, medidasText) {
   //obtenemos los valores ingresados por el usuario del documento registro_h.php
   //por su id incluyendo la imagen
-  var nom = document.getElementById("nombre").value;
-  var can = document.getElementById("cantidad").value;
-  var canm = document.getElementById("cantidadm").value;
-  var img = document.getElementById("subir_imagen").files[0]; //obtenemos un objeto
-  var select = document.getElementById("medidas").value;
-  var cate = document.getElementById("categoria").value;
-  var gav = document.getElementById("gavilanes").value;
-  var datos = new FormData();
+  let nom = document.getElementById("nombre").value;
+  let can = document.getElementById("cantidad").value;
+  let canm = document.getElementById("cantidadm").value;
+  let img = document.getElementById("subir_imagen").files[0]; //obtenemos un objeto
+  let select = document.getElementById("medidas").value;
+  let cate = document.getElementById("categoria").value;
+  let gav = document.getElementById("gavilanes").value;
+  if (
+    nom == "" ||
+    can == "" ||
+    canm == "" ||
+    select == "Choose..." ||
+    cate == "Choose..." ||
+    gav == "Choose..." ||
+    img == ""
+  ) {
+    return messageAimate("Debes llenar todos los campos", "warning");
+  }
+  let datos = new FormData();
+  datos.append("categoriaText", categoriaText);
+  datos.append("gavilanesText", gavilanesText);
+  datos.append("medidasText", medidasText);
   datos.append("nombre", nom);
   datos.append("cantidad", can);
   datos.append("cantidadm", canm);
@@ -32,54 +46,41 @@ function obtener(e) {
     },
     success: function (mensaje) {
       switch (mensaje) {
-        case "campos vacios":
-          swal({
-            title: "Campos Vacios",
-            text: "Debes llenar todos los campos",
-            icon: "warning",
-          });
+        case "La herramienta ya existe":
+          messageAimate("La herramienta ya existe", "warning");
           break;
         case "Insercion exitosa":
-          swal({
-            title: "Insercion exitosa",
-            text: "Puedes consultar la informacion en la lista de herramientas",
-            icon: "success",
-          });
+          messageAimate(
+            "Puedes consultar la informacion en la lista de herramientas",
+            "success"
+          );
           break;
         case "Error al insertar la informacion":
-          swal({
-            title: "Error de insercion",
-            text: "Lo sentimos, ocurrio un problema al insertar la información",
-            icon: "error",
-          });
+          messageAimate(
+            "Lo sentimos, ocurrio un problema al insertar la información",
+            "error"
+          );
           break;
         case "Error al subir la imagen al servidor":
-          swal({
-            title: "Error con la imagen",
-            text: "La imagen capturada no se pudo subir al servidor",
-            icon: "error",
-          });
+          messageAimate(
+            "La imagen capturada no se pudo subir al servidor",
+            "error"
+          );
           break;
         case "La imagen pesa demasiado":
-          swal({
-            title: "Problemas con la imagen",
-            text: "La imagen pesa demasiado, redusca su peso",
-            icon: "info",
-          });
+          messageAimate("La imagen pesa demasiado, reduzca su peso", "info");
           break;
         case "La extencion del archivo no es permitida":
-          swal({
-            title: "Error de archivo",
-            text: "Al parecer el archivo no es una imagen",
-            icon: "error",
-          });
+          messageAimate(
+            "La extencion del archivo no es permitida, solo se permiten archivos .jpg, .jpeg, .png",
+            "info"
+          );
           break;
         default:
-          swal({
-            title: "Error de insercion",
-            text: "Lo sentimos, ocurrio un problema al insertar la información",
-            icon: "error",
-          });
+          messageAimate(
+            "Ocurrio un error inesperado, intente de nuevo mas tarde",
+            "error"
+          );
           break;
       }
     },
@@ -145,9 +146,10 @@ async function getDataDeleteH(data) {
 }
 
 function deleteHerramienta(e) {
-  var id_delete = $("#idmodal_d").val();
+  e.preventDefault();
+  var id_delete = parseInt($("#idmodal_d").val());
   var data;
-  var x = confirm(`¿La siguiente herramientas se va a eliminar?`);
+  var x = confirm(`¿La siguiente herramientas se va a eliminar? ${id_delete}`);
   data = JSON.stringify({ id_delete: id_delete });
   if (x) {
     alert("Eliminando...");
@@ -155,29 +157,23 @@ function deleteHerramienta(e) {
       type: "POST",
       url: "php/eliminar.php",
       data: data,
-      dataType: "json",
+      dataType: "JSON",
       success: function (response) {
-        switch (response) {
+        console.log(response);
+        switch (response.response) {
           case "1":
-            swal({
-              title: "Herramienta eliminada",
-              text: "La herramienta se borro de manera exitosa",
-              icon: "success",
-            });
+            alert("La herramienta se borro de manera exitosa");
+            window.location.href = "inventario.php";
             break;
           case "0":
             swal({
               title: "Error",
               text: "La herramienta no se pudo borrar",
-              icon: "success",
+              icon: "error",
             });
             break;
           default:
-            swal({
-              title: "Error",
-              text: "La herramienta no se pudo borrar",
-              icon: "success",
-            });
+            swal({ title: "Error", text: response.response, icon: "info" });
             break;
         }
       },
@@ -243,12 +239,10 @@ function subirsolicitud(e) {
   var nombre = document.getElementById("nombre").value;
   var apellidos = document.getElementById("ap").value;
   var n_empleado = document.getElementById("n_empleado").value;
-  var genero = document.getElementById("genero").value;
   var datos = new FormData();
   datos.append("Nombre", nombre);
   datos.append("Apellidos", apellidos);
   datos.append("N_empleado", n_empleado);
-  datos.append("Genero", genero);
   $.ajax({
     url: "add_solicitante.php",
     type: "POST",
@@ -277,12 +271,10 @@ function subirsolicitud(e) {
 function RegistrarSoli(e) {
   e.preventDefault();
   var herramienta = document.getElementById("id-herramienta").value;
-  var maquina = document.getElementById("maquina").value;
   var cantidad = document.getElementById("cantidad").value;
-  if (herramienta != "" && maquina != "Choose..." && cantidad != "") {
+  if (herramienta != "" && cantidad != "") {
     var data = new FormData();
     data.append("N_herramienta", herramienta);
-    data.append("N_maquina", maquina);
     data.append("cantidad", cantidad);
     $.ajax({
       url: "fin_solicitud.php",
@@ -324,4 +316,43 @@ function RegistrarSoli(e) {
       icon: "warning",
     });
   }
+}
+
+//********************************************** New code ******************************************/
+
+export async function getDataFormUpdate(option) {
+  const formData = new FormData();
+  formData.append("option", option);
+  let idHerramienta = parseInt($("#idmodal").val());
+  formData.append("id", idHerramienta);
+  let nombreH = $("#nombremodal").val();
+  formData.append("nombreH", nombreH);
+  let idMedidas = parseInt($("#medidasmodal").val());
+  formData.append("idMedidas", idMedidas);
+  let idGavilanes = parseInt($("#gavilanesmodal").val());
+  formData.append("idGavilanes", idGavilanes);
+  let idCategoria = parseInt($("#descripcionmodal").val());
+  formData.append("idCategoria", idCategoria);
+  let stock = parseInt($("#stock").val());
+  formData.append("stock", stock);
+  let stockMinimo = parseInt($("#stockminimo").val());
+  formData.append("stockMinimo", stockMinimo);
+  let idStatus = $("#status").val();
+  formData.append("idStatus", idStatus);
+  //? Validando si el input file tiene un archivo seleccionado
+  //? si no tiene un archivo seleccionado se le asigna null
+  $("#file_img").prop("files").length
+    ? formData.append("fileImage", $("#file_img").prop("files")[0])
+    : formData.append("fileImage", null);
+  $.ajax({
+    type: "POST",
+    url: "php/herramientas.php",
+    data: formData,
+    dataType: "json",
+    processData: false,
+    contentType: false,
+    success: function (res) {
+      alert(res.status + " " + res.message);
+    },
+  });
 }

@@ -16,6 +16,7 @@ $tbmed_db9 = "medidas";
 $tbsoli_db10 = "solicitud";
 $tbfact_db11 = "facturas";
 $tbdetfact_db12 = "detalle_factura";
+$roles = 'roles';
 //conexion
 $conexion = new mysqli($host, $userdb, $claveus, $nombredb);
 

@@ -32,28 +32,7 @@ if (isset($_SESSION['id'])) {
 
 <body style="background: #17202A;">
     <!-- Image and text -->
-    <nav class="navbar sticky-top navbar-dark bg-dark">
-        <div class="navbar-brand">
-            ALUXSA S.A de C.V
-        </div>
-        <div class="dropdown d-flex align-items-center pr-4">
-            <div class="px-2">
-                <img src="img/login_profile_user.png" alt="">
-            </div>
-            <p class="mb-0 px-1">
-                <span class="text-white"><?php echo $_SESSION['usuario']; ?></span>
-            </p>
-            <button class="btn btn-dark" type="button" data-toggle="dropdown" aria-expanded="false">
-                <i class="fa-solid fa-ellipsis-vertical"></i>
-            </button>
-            <div class="dropdown-menu dropdown-menu-right">
-                <a class="dropdown-item" href="pagina_principal.php"><i class="fa-solid fa-house"></i> Inicio</a>
-                <a class="dropdown-item" href="add_user.php"><i class="fa-solid fa-user-plus"></i> Agregar usuario</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="php/cerrar_sesion.php"><i class="fa-solid fa-right-from-bracket"></i> Cerrar sesion</a>
-            </div>
-        </div>
-    </nav>
+    <?php include "nav/navbar.php" ?>
     <header class="px-3 py-3">
         <div class="encabesado text-white p-2 text-center">
             <h3 class="">Registro de Herramientas</h3>
