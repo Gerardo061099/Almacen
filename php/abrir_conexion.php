@@ -1,9 +1,9 @@
 <?php
 //datos del servidor
-$host = "localhost"; //servidor
-$userdb = "stacks"; //usuario
-$claveus = "stacks147852369"; //clavepass
-$nombredb = "almacen"; //db bodega
+$host = "sqlc75f.carrierzone.com"; //servidor
+$userdb = "aluxsacomm742625"; //usuario
+$claveus = "Admin061099@"; //clavepass
+$nombredb = "bodega_aluxsacomm742625"; //db bodega
 //tablas BD
 $tbu_db1 = "usuarios";
 $tbcat_db3 = "categorias";
