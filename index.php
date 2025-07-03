@@ -71,7 +71,7 @@ if (isset($_POST['btn1'])) {
                 </form>
             </div>
         </article>
-        <p class="ley text-center">Aluminios Xalatlaco S.A de C.V. Software v2.1.0</p>
+        <p class="ley text-center">Aluminios Xalatlaco S.A de C.V. Software v3.0.1</p>
     </main>
 
     <script src="https://kit.fontawesome.com/282ec8cabc.js" crossorigin="anonymous"></script>

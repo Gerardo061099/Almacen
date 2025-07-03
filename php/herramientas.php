@@ -38,11 +38,14 @@ switch ($option) {
             include './abrir_conexion.php';
             if ($tmp != "") {
                 saveImage($tmp, $path, $imagen) ? true : false;
+                $imagen = "img2/{$imagen}";
                 $stmt = $conexion->prepare("UPDATE $tbherr_db7 SET Nombre = ?, id_categoria = ?, id_gavilanes = ?, id_medidas = ?, cantidad_minima = ?, cantidad = ?, rutaimg = ? WHERE id_herramienta = ?");
                 $stmt->bind_param("siiiiisi", $nombre, $idCategoria, $idGavilanes, $idMedidas, $cantidadMinima, $cantidad, $imagen, $id);
+                $stmt->execute();
             } else {
                 $stmt = $conexion->prepare("UPDATE $tbherr_db7 SET Nombre = ?, id_categoria = ?, id_gavilanes = ?, id_medidas = ?, cantidad_minima = ?, cantidad = ? WHERE id_herramienta = ?");
                 $stmt->bind_param("siiiiii", $nombre, $idCategoria, $idGavilanes, $idMedidas, $cantidadMinima, $cantidad, $id);
+                $stmt->execute();
             }
             $data['status'] = 'ok';
             $data['message'] = "Herramienta actualizada correctamente. {$nombre} {$imagen}";

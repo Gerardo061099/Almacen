@@ -344,7 +344,7 @@ export async function getDataFormUpdate(option) {
   $("#file_img").prop("files").length
     ? formData.append("fileImage", $("#file_img").prop("files")[0])
     : formData.append("fileImage", null);
-  $.ajax({
+  await $.ajax({
     type: "POST",
     url: "php/herramientas.php",
     data: formData,
