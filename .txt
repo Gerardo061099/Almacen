@@ -1,0 +1,69 @@
+<?php
+                    include "php/abrir_conexion.php"; // conexion con la BD
+                    $resultados = mysqli_query($conexion, "SELECT h.id_herramienta,h.Nombre,c.material,c.descripcion,g.Num_gavilanes,m.Ancho,m.Largo,h.cantidad_minima,h.cantidad,h.fecha_hora,h.rutaimg FROM $tbherr_db7 h inner join $tbcat_db3 c on h.id_categoria = c.id_categoria inner join $tbgav_db6 g on h.id_gavilanes = g.id_gav inner join $tbmed_db9 m on h.id_medidas = m.id_medidas ORDER BY h.id_herramienta");
+                    //Unimos tabla Herramientas con categorias y medidas
+                    echo "";
+                    if ($_SESSION['usuario'] == "@admin06") {
+                    ?>
+
+                    <?php } ?>
+
+                    <?php
+                    while ($consulta = mysqli_fetch_array($resultados)) {
+                        $datos = $consulta[0] . "||" .
+                            $consulta[1] . "||" .
+                            $consulta[2] . "||" .
+                            $consulta[3] . "||" .
+                            $consulta[4] . "||" .
+                            $consulta[5] . "||" .
+                            $consulta[6] . "||" .
+                            $consulta[7] . "||" .
+                            $consulta[8] . "||" .
+                            $consulta[9] . "||" .
+                            $consulta[10];
+                        echo
+                        "
+                                <tr>
+                                    <td><center>" . $consulta['id_herramienta'] . "</center></td>
+                                    <td><center>" . $consulta['Nombre'] . "</center></td>
+                                    <td><center>" . $consulta['material'] . "</center></td>
+                                    <td><center>" . $consulta['descripcion'] . "</center></td>
+                                    <td><center>" . $consulta['Num_gavilanes'] . "</center></td>
+                                    <td><center>" . $consulta['Ancho'] . "</center></td>
+                                    <td><center>" . $consulta['Largo'] . "</center></td>
+                                    <td><center>" . $consulta['cantidad'] . "</center></td>
+                                    <td><center>" . $consulta['cantidad_minima'] . "</center></td>
+                                    <td><center>" . $consulta['fecha_hora'] . "</center></td>
+                                    <th><center>"; ?>
+                        <?php
+                        //mostramos un aviso segun la cantidad de piezas 
+                        if ($consulta['cantidad'] < $consulta['cantidad_minima']) { //condicionamos var cantidad a 2 o menor para mostrar un mesaje 
+                            if ($consulta['cantidad'] != 0 && $consulta['cantidad'] < $consulta['cantidad_minima']) {
+                                echo "<img src=\"img/warning.png\" alt=\"sin resultados\">";
+                            } else {
+                                if ($consulta['cantidad'] == 0) {
+                                    echo "<img src=\"img/cancel.png\" alt=\"sin resultados\">";
+                                }
+                            }
+                        } //si la cantidad es mayor a 2 no se requiere comprar más
+                        else {
+                            if ($consulta['cantidad'] >= $consulta['cantidad_minima']) {
+                                echo "<img src=\"img/check.png\" alt=\"sin resultados\">";
+                            }
+                        }
+                        ?>
+                        </th>
+                        <?php if ($_SESSION['usuario'] == "@admin06") {
+                        ?>
+                            <th>
+                                <center><a class="btn btn-danger btn-sm" role="button" onclick="getDataDeleteH('<?php echo $datos ?>')"><i class="fa-solid fa-trash"></i></a></center>
+                            </th>
+                            <th>
+                                <center><a class="btn btn-light btn-sm" role="button" onclick="editarHerramienta('<?php echo $datos ?>')"><i class="fa-solid fa-square-pen"></i></a></center>
+                            </th>
+                            </tr>
+                        <?php } ?>
+                    <?php
+                    }
+                    include "php/cerrar_conexion.php";
+                    ?>
