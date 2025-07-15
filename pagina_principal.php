@@ -68,7 +68,7 @@ if (isset($_SESSION['id'])) {
     </nav>
     <main class="container">
         <nav style="--bs-breadcrumb-divider: '>'; color: white;" aria-label="breadcrumb" class=" mt-3 m-2">
-            <ol class="breadcrumb ">
+            <ol class="breadcrumb">
                 <li class="breadcrumb-item">Dashboard</li>
             </ol>
         </nav>
@@ -122,7 +122,7 @@ if (isset($_SESSION['id'])) {
                 echo "
                     <div class='col'>
                         <div class='card text-white bg-dark mb-3' id='' style='max-width: 18rem;'>
-                            <div class='card-header text-center'>Usuraios</div>
+                            <div class='card-header text-center'>Usuarios</div>
                             <div class='card-body'>
                                 <h5 class='card-title text-center'>Gestion de usuarios</h5>
                                 <p class='card-text'>
