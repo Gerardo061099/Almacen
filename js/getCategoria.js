@@ -74,6 +74,17 @@ export async function getStatus(stock, stock_minimo) {
     $("#status").addClass("text-warning");
   }
 }
+export async function getIsAvailable(isAvailable) {
+  const selectAvailable = $("#isavailable");
+  switch (isAvailable) {
+    case "1":
+      selectAvailable.val("available");
+      break;
+    default:
+      return alert("Sin estatus de la disponibilidad");
+      break;
+  }
+}
 
 export async function getGavilanes(gavilanes) {
   let option = 3;

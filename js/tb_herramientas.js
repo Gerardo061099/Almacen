@@ -7,6 +7,7 @@ import {
   getGavilanes,
   getStatus,
   createList,
+  getIsAvailable,
 } from "./getCategoria.js";
 import { getDataFormUpdate, obtener } from "./app.js";
 import { createCard } from "./cards.js";
@@ -57,6 +58,13 @@ $(document).ready(async function () {
       { data: "Largo" },
       { data: "cantidad_minima" },
       { data: "cantidad" },
+      {
+        data: "isAvailable",
+        render: function (data) {
+          if (data == 1)
+            return `<span class="badge bg-success">Disponible</span>`;
+        },
+      },
       {
         data: "cantidad_minima",
         render: function (data, type, row) {
@@ -135,6 +143,7 @@ $(document).ready(async function () {
     await getCategoria(row.material, row.descripcion);
     await getStatus(row.cantidad, row.cantidad_minima);
     $("#stock").val(row.cantidad);
+    await getIsAvailable(row.isAvailable);
     $("#stockminimo").val(row.cantidad_minima);
     $("#modal101").modal("show");
   });

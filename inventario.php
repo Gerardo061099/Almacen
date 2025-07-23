@@ -63,6 +63,7 @@ include "php/cerrar_conexion.php";
                             <th scope="col">Largo</th>
                             <th scope="col">Stock min</th>
                             <th scope="col">Stock</th>
+                            <th scope="col">Disponibilidad</th>
                             <th scope="col">Status</th>
                             <th scope="col">Fecha</th>
                             <th scope="col">Acciones</th>
@@ -81,6 +82,7 @@ include "php/cerrar_conexion.php";
                             <th scope="col">Largo</th>
                             <th scope="col">Stock min</th>
                             <th scope="col">Stock</th>
+                            <th scope="col">Disponibilidad</th>
                             <th scope="col">Status</th>
                             <th scope="col">Fecha</th>
                             <th scope="col">Acciones</th>
@@ -338,6 +340,14 @@ include "php/cerrar_conexion.php";
                                 <div class="col-md-3">
                                     <label for="stockminimo">Stock minimo:</label>
                                     <input type="text" id="stockminimo" class="form-control form-control-sm">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="isavailable">Disponibilidad:</label>
+                                    <select class="form-select form-select-sm" id="isavailable">
+                                        <option></option>
+                                        <option value="available">Disponible</option>
+                                        <option value="soldOut">No disponible</option>
+                                    </select>
                                 </div>
                                 <div class="col-md-3">
                                     <label for="status">Status:</label>
