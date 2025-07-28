@@ -58,10 +58,31 @@ if (isset($_SESSION['id'])) {
                         <th scope="col">Stock</th>
                         <th scope="col">Stock Minimo</th>
                         <th scope="col">A Comprar</th>
+                        <th scope="col">Priorizar</th>
                     </tr>
                 </thead>
                 <tbody>
                 </tbody>
+            </table>
+        </section>
+        <section class="mt-5">
+            <table class="table table-striped table-dark" id="tbArticlesPriorityHigh">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Material</th>
+                        <th scope="col">Descripcion</th>
+                        <th scope="col">Gavilanes</th>
+                        <th scope="col">Ancho</th>
+                        <th scope="col">Largo</th>
+                        <th scope="col">Stock</th>
+                        <th scope="col">Stock Minimo</th>
+                        <th scope="col">A Comprar</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
             </table>
         </section>
     </main>

@@ -344,7 +344,6 @@ include "php/cerrar_conexion.php";
                                 <div class="col-md-3">
                                     <label for="isavailable">Disponibilidad:</label>
                                     <select class="form-select form-select-sm" id="isavailable">
-                                        <option></option>
                                         <option value="available">Disponible</option>
                                         <option value="soldOut">No disponible</option>
                                     </select>
@@ -357,7 +356,7 @@ include "php/cerrar_conexion.php";
                             <div class="row g-3">
                                 <div class="col-md-12">
                                     <div class="mb-3">
-                                        <label for="formFile" class="form-label">Default file input example</label>
+                                        <label for="formFile" class="form-label">Imagen de la herramienta:</label>
                                         <input class="form-control form-control-sm" type="file" id="file_img" accept="image/png,image/jpg,image/jpeg">
                                     </div>
                                 </div>
