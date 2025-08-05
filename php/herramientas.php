@@ -21,12 +21,13 @@ $imagen = $_FILES['fileImage']['name'];
 $tmp = $_FILES['fileImage']['tmp_name'];
 $her = $_POST['herramienta'];
 $med = $_POST['medida'];
+$available = $_POST['available'];
 $path = "../img2/";
 
 switch ($option) {
     case 1:
         include './abrir_conexion.php';
-        $stmt = $conexion->prepare("SELECT h.id_herramienta,h.Nombre,c.material,c.descripcion,g.Num_gavilanes,m.Ancho,m.Largo,h.cantidad_minima,h.cantidad,h.fecha_hora FROM $tbherr_db7 h inner join $tbcat_db3 c on h.id_categoria = c.id_categoria inner join $tbgav_db6 g on h.id_gavilanes = g.id_gav inner join $tbmed_db9 m on h.id_medidas = m.id_medidas ORDER BY h.id_herramienta");
+        $stmt = $conexion->prepare("SELECT h.id_herramienta,h.Nombre,c.material,c.descripcion,g.Num_gavilanes,m.Ancho,m.Largo,h.cantidad_minima,h.cantidad,h.available AS isAvailable,h.fecha_hora FROM $tbherr_db7 h inner join $tbcat_db3 c on h.id_categoria = c.id_categoria inner join $tbgav_db6 g on h.id_gavilanes = g.id_gav inner join $tbmed_db9 m on h.id_medidas = m.id_medidas WHERE h.available = 1 ORDER BY h.id_herramienta");
         $stmt->execute();
         $result = $stmt->get_result();
         $data = $result->fetch_all(MYSQLI_ASSOC);
@@ -36,15 +37,16 @@ switch ($option) {
     case 2:
         try {
             include './abrir_conexion.php';
+            $available == "available" ? $available = 1 : $available = 0;
             if ($tmp != "") {
                 saveImage($tmp, $path, $imagen) ? true : false;
                 $imagen = "img2/{$imagen}";
-                $stmt = $conexion->prepare("UPDATE $tbherr_db7 SET Nombre = ?, id_categoria = ?, id_gavilanes = ?, id_medidas = ?, cantidad_minima = ?, cantidad = ?, rutaimg = ? WHERE id_herramienta = ?");
-                $stmt->bind_param("siiiiisi", $nombre, $idCategoria, $idGavilanes, $idMedidas, $cantidadMinima, $cantidad, $imagen, $id);
+                $stmt = $conexion->prepare("UPDATE $tbherr_db7 SET Nombre = ?, id_categoria = ?, id_gavilanes = ?, id_medidas = ?, cantidad_minima = ?, cantidad = ?, rutaimg = ?, available = ? WHERE id_herramienta = ?");
+                $stmt->bind_param("siiiiisii", $nombre, $idCategoria, $idGavilanes, $idMedidas, $cantidadMinima, $cantidad, $imagen, $available, $id);
                 $stmt->execute();
             } else {
-                $stmt = $conexion->prepare("UPDATE $tbherr_db7 SET Nombre = ?, id_categoria = ?, id_gavilanes = ?, id_medidas = ?, cantidad_minima = ?, cantidad = ? WHERE id_herramienta = ?");
-                $stmt->bind_param("siiiiii", $nombre, $idCategoria, $idGavilanes, $idMedidas, $cantidadMinima, $cantidad, $id);
+                $stmt = $conexion->prepare("UPDATE $tbherr_db7 SET Nombre = ?, id_categoria = ?, id_gavilanes = ?, id_medidas = ?, cantidad_minima = ?, cantidad = ?, available = ? WHERE id_herramienta = ?");
+                $stmt->bind_param("siiiiiii", $nombre, $idCategoria, $idGavilanes, $idMedidas, $cantidadMinima, $cantidad, $available, $id);
                 $stmt->execute();
             }
             $data['status'] = 'ok';
@@ -67,7 +69,7 @@ switch ($option) {
     case 7:
         include './abrir_conexion.php';
         try {
-            $stmt = mysqli_query($conexion, "SELECT h.id_herramienta AS id,h.Nombre AS Nombre,c.Descripcion AS Descripcion,c.Material AS Material,g.Num_gavilanes AS Num_gavilanes,m.Ancho AS Ancho,m.Largo AS Largo,h.Cantidad AS Stock,h.Cantidad_Minima AS Stock_minimo,h.rutaimg AS rutaimg FROM $tbherr_db7 h inner join $tbcat_db3 c on h.id_categoria = c.id_categoria inner join $tbgav_db6 g on h.id_gavilanes = g.id_gav inner join $tbmed_db9 m on h.id_medidas = m.id_medidas ORDER BY h.Nombre");
+            $stmt = mysqli_query($conexion, "SELECT h.id_herramienta AS id,h.Nombre AS Nombre,c.Descripcion AS Descripcion,c.Material AS Material,g.Num_gavilanes AS Num_gavilanes,m.Ancho AS Ancho,m.Largo AS Largo,h.Cantidad AS Stock,h.Cantidad_Minima AS Stock_minimo,h.rutaimg AS rutaimg FROM $tbherr_db7 h inner join $tbcat_db3 c on h.id_categoria = c.id_categoria inner join $tbgav_db6 g on h.id_gavilanes = g.id_gav inner join $tbmed_db9 m on h.id_medidas = m.id_medidas WHERE h.available = 1 ORDER BY h.Nombre");
             $data = mysqli_fetch_all($stmt, MYSQLI_ASSOC);
         } catch (Exception $e) {
             $data['status'] = 'error';

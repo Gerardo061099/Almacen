@@ -1,18 +1,6 @@
 <?php
-//importante
 session_start();
-include "php/abrir_conexion.php";
-if (isset($_SESSION['id'])) {
-    $id = $_SESSION['id'];
-    $queryUser = mysqli_query($conexion, "SELECT user FROM $tbu_db1 WHERE id_us = $id");
-    $result = mysqli_fetch_assoc($queryUser);
-
-    $user = null;
-    if (mysqli_num_rows($queryUser) > 0) {
-        $user = $result;
-        $_SESSION['usuario'] = $user['user'];
-    }
-} else {
+if (!$_SESSION['logueado']) {
     header('Location: index.php');
 }
 ?>
@@ -58,10 +46,31 @@ if (isset($_SESSION['id'])) {
                         <th scope="col">Stock</th>
                         <th scope="col">Stock Minimo</th>
                         <th scope="col">A Comprar</th>
+                        <th scope="col">Priorizar</th>
                     </tr>
                 </thead>
                 <tbody>
                 </tbody>
+            </table>
+        </section>
+        <section class="mt-5">
+            <table class="table table-striped table-dark" id="tbArticlesPriorityHigh">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Material</th>
+                        <th scope="col">Descripcion</th>
+                        <th scope="col">Gavilanes</th>
+                        <th scope="col">Ancho</th>
+                        <th scope="col">Largo</th>
+                        <th scope="col">Stock</th>
+                        <th scope="col">Stock Minimo</th>
+                        <th scope="col">A Comprar</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
             </table>
         </section>
     </main>

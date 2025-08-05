@@ -1,18 +1,6 @@
 <?php
-//importante
 session_start();
-include "php/abrir_conexion.php";
-if (isset($_SESSION['id'])) {
-    $id = $_SESSION['id'];
-    $queryUser = mysqli_query($conexion, "SELECT user FROM $tbu_db1 WHERE id_us = $id");
-    $result = mysqli_fetch_assoc($queryUser);
-
-    $user = null;
-    if (mysqli_num_rows($queryUser) > 0) {
-        $user = $result;
-        $_SESSION['usuario'] = $user['user'];
-    }
-} else {
+if (!$_SESSION['logueado']) {
     header('Location: index.php');
 }
 ?>
@@ -45,9 +33,8 @@ if (isset($_SESSION['id'])) {
                     <div class="px-2">
                         <img src="img/login_profile_user.png" alt="">
                     </div>
-
                     <p class="mb-0 px-1">
-                        <span class="text-white"><?php echo $_SESSION['usuario']; ?></span>
+                        <span class="text-white"><?php echo $_SESSION['user']; ?></span>
                     </p>
                     <button class="btn btn-dark" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="fa-solid fa-ellipsis-vertical"></i>
@@ -55,7 +42,7 @@ if (isset($_SESSION['id'])) {
                     <div class="dropdown-menu dropdown-menu-end">
                         <a class="dropdown-item" href="pagina_principal.php"><i class="fa-solid fa-house"></i> Inicio</a>
                         <?php
-                        if ($_SESSION['usuario'] == "@admin06") {
+                        if ($_SESSION['roleUser'] == "Administrador") {
                             echo "<a class='dropdown-item active' href='#'><i class='fa-solid fa-user-gear'></i> Administrar usuarios</a>";
                         }
                         ?>

@@ -8,7 +8,7 @@
                 <img src="img/login_profile_user.png" alt="">
             </div>
             <p class="mb-0 px-1">
-                <span class="text-white"><?php echo $_SESSION['usuario']; ?></span>
+                <span class="text-white"><?= $_SESSION['user']; ?></span>
             </p>
             <div class="btn-group">
                 <button class=" btn btn-dark btn-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false">

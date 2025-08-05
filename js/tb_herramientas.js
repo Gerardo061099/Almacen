@@ -7,6 +7,7 @@ import {
   getGavilanes,
   getStatus,
   createList,
+  getIsAvailable,
 } from "./getCategoria.js";
 import { getDataFormUpdate, obtener } from "./app.js";
 import { createCard } from "./cards.js";
@@ -58,24 +59,28 @@ $(document).ready(async function () {
       { data: "cantidad_minima" },
       { data: "cantidad" },
       {
+        data: "isAvailable",
+        render: function (data) {
+          if (data == 1)
+            return `<span class="badge bg-success">Disponible</span>`;
+        },
+      },
+      {
         data: "cantidad_minima",
         render: function (data, type, row) {
           if (row.cantidad == 0) {
             return `<span class="badge bg-danger">sin stock</span>`;
           } else if (row.cantidad < row.cantidad_minima) {
-            return `<span class="badge bg-warning">insuficiente</span>`;
+            return `<span class="badge bg-warning">Insuficiente</span>`;
           } else {
-            return `<span class="badge bg-success">suficiente</span>`;
+            return `<span class="badge bg-success">Suficiente</span>`;
           }
         },
       },
       { data: "fecha_hora" },
       {
         defaultContent: `
-        <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-          <button type="button" class="btn btn-warning btnEditar"><i class="bi bi-pencil-square"></i></button>
-          <button type="button" class="btn btn-danger"><i class="bi bi-trash-fill"></i></button>
-        </div>`,
+          <button type="button" class="btn btn-warning btn-sm btnEditar"><i class="bi bi-pencil-square"> Editar</i></button>`,
       },
     ],
     layout: {
@@ -94,7 +99,7 @@ $(document).ready(async function () {
     },
     columnDefs: [
       {
-        targets: -1,
+        targets: [-2, -4, -7, -8],
         visible: false,
       },
     ],
@@ -135,6 +140,7 @@ $(document).ready(async function () {
     await getCategoria(row.material, row.descripcion);
     await getStatus(row.cantidad, row.cantidad_minima);
     $("#stock").val(row.cantidad);
+    await getIsAvailable(row.isAvailable);
     $("#stockminimo").val(row.cantidad_minima);
     $("#modal101").modal("show");
   });
@@ -147,6 +153,8 @@ $(document).ready(async function () {
     let herramienta = $("#herra_b").val();
     let medida = $("#medida_b").val();
     let sendData = { option, herramienta, medida };
+    if (herramienta === "Choose..." || medida === "Choose...")
+      return alert("Informacion incompleta, verifica el formulario.");
     $.ajax({
       type: "POST",
       url: "php/herramientas.php",

@@ -1,20 +1,9 @@
 <?php
-//importante
 session_start();
-include "php/abrir_conexion.php";
-if (isset($_SESSION['id'])) {
-    $id = $_SESSION['id'];
-    $queryUser = mysqli_query($conexion, "SELECT user FROM $tbu_db1 WHERE id_us = $id");
-    $result = mysqli_fetch_assoc($queryUser);
-    $user = null;
-    if (mysqli_num_rows($queryUser) > 0) {
-        $user = $result;
-        $_SESSION['usuario'] = $user['user'];
-    }
-} else {
+if (!$_SESSION['logueado']) {
     header('Location: index.php');
 }
-include "php/cerrar_conexion.php";
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -63,6 +52,7 @@ include "php/cerrar_conexion.php";
                             <th scope="col">Largo</th>
                             <th scope="col">Stock min</th>
                             <th scope="col">Stock</th>
+                            <th scope="col">Disponibilidad</th>
                             <th scope="col">Status</th>
                             <th scope="col">Fecha</th>
                             <th scope="col">Acciones</th>
@@ -81,6 +71,7 @@ include "php/cerrar_conexion.php";
                             <th scope="col">Largo</th>
                             <th scope="col">Stock min</th>
                             <th scope="col">Stock</th>
+                            <th scope="col">Disponibilidad</th>
                             <th scope="col">Status</th>
                             <th scope="col">Fecha</th>
                             <th scope="col">Acciones</th>
@@ -340,6 +331,13 @@ include "php/cerrar_conexion.php";
                                     <input type="text" id="stockminimo" class="form-control form-control-sm">
                                 </div>
                                 <div class="col-md-3">
+                                    <label for="isavailable">Disponibilidad:</label>
+                                    <select class="form-select form-select-sm" id="isavailable">
+                                        <option value="available">Disponible</option>
+                                        <option value="soldOut">No disponible</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
                                     <label for="status">Status:</label>
                                     <input type="text" id="status" class="form-control form-control-sm " disabled>
                                 </div>
@@ -347,7 +345,7 @@ include "php/cerrar_conexion.php";
                             <div class="row g-3">
                                 <div class="col-md-12">
                                     <div class="mb-3">
-                                        <label for="formFile" class="form-label">Default file input example</label>
+                                        <label for="formFile" class="form-label">Imagen de la herramienta:</label>
                                         <input class="form-control form-control-sm" type="file" id="file_img" accept="image/png,image/jpg,image/jpeg">
                                     </div>
                                 </div>

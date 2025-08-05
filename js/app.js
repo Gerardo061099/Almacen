@@ -339,6 +339,8 @@ export async function getDataFormUpdate(option) {
   formData.append("stockMinimo", stockMinimo);
   let idStatus = $("#status").val();
   formData.append("idStatus", idStatus);
+  let selectAvailable = $("#isavailable").val();
+  formData.append("available", selectAvailable);
   //? Validando si el input file tiene un archivo seleccionado
   //? si no tiene un archivo seleccionado se le asigna null
   $("#file_img").prop("files").length

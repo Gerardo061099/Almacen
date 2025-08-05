@@ -1,18 +1,36 @@
 <?php
-//importante
+ini_set("session.gc_maxlifetime", 3600); // Set session timeout to 1 hour
 session_start();
+//importante
 include "php/abrir_conexion.php";
-if (isset($_SESSION['id'])) {
-    $id = $_SESSION['id'];
-    $queryUser = mysqli_query($conexion, "SELECT u.user AS user,r.nombre_role AS roleUser FROM $tbu_db1 u INNER JOIN $roles r ON u.id_role = r.id WHERE u.id_us = $id");
-    $result = mysqli_fetch_assoc($queryUser);
-    $user = null;
-    if (mysqli_num_rows($queryUser) > 0) {
-        $user = $result;
-        $_SESSION['usuario'] = $user['user'];
-        $_SESSION['roleUser'] = $user['roleUser'];
+$user = $_POST['user'];
+$pwd = $_POST['pass'];
+if (isset($_POST['btn1'])) {
+    $message = '';
+    if (!empty($user) && !empty($pwd)) {
+        $loginUser = $conexion->prepare("SELECT u.id_us AS id_us,u.user AS user,u.pass AS pass,r.nombre_role AS roleUser FROM $tbu_db1 u INNER JOIN $roles r ON u.id_role = r.id WHERE u.user = ?");
+        $loginUser->bind_param("s", $user);
+        $loginUser->execute();
+        $res = $loginUser->get_result();
+        $result = $res->fetch_assoc();
+        if ($res->num_rows > 0 && password_verify($pwd, $result['pass'])) {
+            $_SESSION['sessionId'] = session_id();
+            $_SESSION['id'] = $result['id_us'];
+            $_SESSION['user'] = $result['user'];
+            $_SESSION['roleUser'] = $result['roleUser'];
+            $_SESSION['logueado'] = true;
+        } else {
+            $message = 'Lo siento, las credenciales no coinciden';
+            $_SESSION['message'] = $message;
+            header('Location: index.php');
+        }
+    } else {
+        $message = 'Ingresa los datos completos de tu sesion';
+        $_SESSION['message'] = $message;
+        header('Location: index.php');
     }
-} else {
+}
+if (!$_SESSION['logueado']) {
     header('Location: index.php');
 }
 ?>
@@ -46,7 +64,7 @@ if (isset($_SESSION['id'])) {
                     <img src="img/login_profile_user.png" alt="">
                 </div>
                 <p class="mb-0 px-1">
-                    <span class="text-white"><?php echo $_SESSION['usuario']; ?></span>
+                    <span class="text-white"><?= $_SESSION['user'] ?></span>
                 </p>
                 <div class="btn-group">
                     <button class="btn btn-dark btn-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false">

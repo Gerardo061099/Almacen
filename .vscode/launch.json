@@ -9,7 +9,7 @@
       "type": "php",
       "request": "launch",
       "port": [9003, 9000],
-      "program": "C:/MAMP/htdocs/ALUXSA/add_h.php"
+      "program": "C:/MAMP/htdocs/ALUXSA/pagina_principal.php"
     }
   ]
 }
