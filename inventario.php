@@ -1,20 +1,9 @@
 <?php
-//importante
 session_start();
-include "php/abrir_conexion.php";
-if (isset($_SESSION['id'])) {
-    $id = $_SESSION['id'];
-    $queryUser = mysqli_query($conexion, "SELECT user FROM $tbu_db1 WHERE id_us = $id");
-    $result = mysqli_fetch_assoc($queryUser);
-    $user = null;
-    if (mysqli_num_rows($queryUser) > 0) {
-        $user = $result;
-        $_SESSION['usuario'] = $user['user'];
-    }
-} else {
+if (!$_SESSION['logueado']) {
     header('Location: index.php');
 }
-include "php/cerrar_conexion.php";
+
 ?>
 <!DOCTYPE html>
 <html lang="es">

@@ -1,25 +1,7 @@
 <?php
 session_start();
-include "php/abrir_conexion.php";
-if (isset($_POST['btn1'])) {
-    if (isset($_SESSION['id'])) {
-        header('Location: pagina_principal.php');
-    }
-    $message = '';
-    if (!empty($_POST['user']) && !empty($_POST['pass'])) {
-        $user = $_POST['user'];
-        $loginUser = mysqli_query($conexion, "SELECT id_us,user,pass FROM $tbu_db1 WHERE user = '$user'");
-        $result = mysqli_fetch_assoc($loginUser);
-        if (mysqli_num_rows($loginUser) > 0 && password_verify($_POST['pass'], $result['pass'])) {
-            $_SESSION['id'] = $result['id_us'];
-            $_SESSION['user'] = $result['user'];
-            header('Location: pagina_principal.php');
-        } else {
-            $message = 'Lo siento, las credenciales no coinciden';
-        }
-    } else {
-        $message = 'Ingresa los datos completos de tu sesion';
-    }
+if ($_SESSION['logueado']) {
+    header('Location: pagina_principal.php');
 }
 ?>
 <!DOCTYPE html>
@@ -45,7 +27,7 @@ if (isset($_POST['btn1'])) {
                 </header>
                 <hr>
                 <article class="d-flex justify-content-center"><img class="img-user rounded" src="img/aluxsaLogo2.png" alt="No se encontro la imagen"></article>
-                <form method="POST" action="index.php" style="margin: 8px 8px">
+                <form method="POST" action="pagina_principal.php" style="margin: 8px 8px">
                     <div class="formulario">
                         <div class="input-group input-group-sm my-3">
                             <div class="input-group-prepend">
@@ -65,8 +47,8 @@ if (isset($_POST['btn1'])) {
                         <label class="custom-control-label text-white" for="Check1">Show password</label>
                     </div>
                     <input type="submit" value="Iniciar Sesion" class="btn btn-sm btn-block btn-dark" name="btn1">
-                    <?php if (!empty($message)): ?>
-                        <p class="d-flex justify-content-center mt-2"><span class="badge badge-danger"><?= $message ?></span></p>
+                    <?php if (!empty($_SESSION['message'])): ?>
+                        <p class="d-flex justify-content-center mt-2"><span class="badge badge-danger"><?= $_SESSION['message'] ?></span></p>
                     <?php endif; ?>
                 </form>
             </div>
