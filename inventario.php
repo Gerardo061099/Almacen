@@ -19,7 +19,7 @@ if (!$_SESSION['logueado']) {
     <!-- Icons Bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <!-- Datatables -->
-    <link href="https://cdn.datatables.net/v/dt/dt-2.2.2/b-3.2.3/b-colvis-3.2.3/b-html5-3.2.3/b-print-3.2.3/r-3.0.4/datatables.min.css" rel="stylesheet" integrity="sha384-82g2Ku/PYsKjzsW7eA4hbCXzIcYsdJC7FIcyCjrz4yB8sR3lKcDE4cGhxCuzw3AZ" crossorigin="anonymous">
+    <link href="https://cdn.datatables.net/v/dt/jszip-3.10.1/dt-2.3.2/af-2.7.0/b-3.2.4/b-colvis-3.2.4/b-html5-3.2.4/b-print-3.2.4/datatables.min.css" rel="stylesheet" integrity="sha384-8bA5quMU5xs78spriHCZ6nGk4lg3lBjikGGxfUsHmsyjWRDHsOgj9STG9ulnx/AY" crossorigin="anonymous">
     <!-- Personal CSS -->
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/stylesBootstrap.css">
@@ -371,9 +371,11 @@ if (!$_SESSION['logueado']) {
     <!-----------CDN JQuery----------------------->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <!-- Datatables -->
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js" integrity="sha384-VFQrHzqBh5qiJIU0uGU5CIW3+OWpdGGJM9LBnGbuIH2mkICcFZ7lPd/AAtI7SNf7" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js" integrity="sha384-/RlQG9uf0M2vcTw3CX7fbqgbj/h8wKxw7C3zu9/GxcBPRKOEcESxaxufwRXqzq6n" crossorigin="anonymous"></script>
-    <script src="https://cdn.datatables.net/v/dt/dt-2.2.2/b-3.2.3/b-colvis-3.2.3/b-html5-3.2.3/b-print-3.2.3/r-3.0.4/datatables.min.js" integrity="sha384-Qsz/vvFUQ4Klb555rHLCrjX94joA5yzYciiRBCdM86EPgxggPXiD1ARh8hY+XtZI" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/v/dt/jszip-3.10.1/dt-2.3.2/af-2.7.0/b-3.2.4/b-colvis-3.2.4/b-html5-3.2.4/b-print-3.2.4/datatables.min.js" integrity="sha384-KdWfw7z/RopflOc+1QI3gvLEGN7oDTYTstM10ggdo9L2DOtALQxIClPKKg9oHNLX" crossorigin="anonymous"></script>
+
     <!-- Personal scripts  -->
     <script src="js/tb_herramientas.js" type="module"></script>
     <script src="js/funciones_herramientas.js" type="module"></script>
