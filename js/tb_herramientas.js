@@ -93,6 +93,17 @@ $(document).ready(async function () {
               columns: ":visible",
             },
           },
+          {
+            extend: "excelHtml5",
+            customize: function (xlsx) {
+              var sheet = xlsx.xl.worksheets["sheet1.xml"];
+
+              // Selector to add a border
+              sheet.querySelectorAll('row c[r*="10"]').forEach((el) => {
+                el.setAttribute("s", "25");
+              });
+            },
+          },
           "colvis",
         ],
       },
