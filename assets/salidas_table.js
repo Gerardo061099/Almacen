@@ -98,9 +98,6 @@ $(document).ready(async function () {
 
   $(document).on("click", "#btnShowModal", function () {
     $("#frm-solicitante").trigger("reset");
-    nombre = "";
-    apellidos = "";
-    n_emp = "";
     $("#modalSalidas").modal("show");
   });
 
@@ -196,7 +193,7 @@ $(document).ready(async function () {
     rows.splice(row.rowIndex - 1, 1);
   });
 
-  $(document).on("click", "#finalizar", function () {
+  $(document).on("click", "#finalizar", async function () {
     let data = JSON.stringify({
       listSolicitantes,
       nombre,
@@ -208,7 +205,7 @@ $(document).ready(async function () {
       alert("No hay herramientas seleccionadas");
       return false;
     }
-    $.ajax({
+    await $.ajax({
       url: "php/fin_solicitud.php",
       type: "POST",
       data: data,
@@ -235,5 +232,8 @@ $(document).ready(async function () {
         myTable.ajax.reload();
       },
     });
+    rows = [];
+    listSolicitantes = [];
+    dataRender = undefined;
   });
 });
