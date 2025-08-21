@@ -183,7 +183,7 @@ if (!$_SESSION['logueado']) {
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-dark btn-sm" data-bs-toggle="modal" data-bs-target="#modalSalidas">Regresar</button>
-                        <button type="button" class="btn btn-primary btn-sm" id="registrarSolicitud">Registrar</button>
+                        <button type="button" class="btn btn-primary btn-sm" id="registrarSolicitud">Agregar</button>
                         <button type="button" class="btn btn-success btn-sm" data-bs-dismiss="modal" id="finalizar">Finalizar Registro</button>
                     </div>
                 </div>
